@@ -6,7 +6,7 @@ http://thdev.tech/androiddev/2016/09/14/Android-AAR-Publish-Jit.html
 - Github 라이브러리 jitpack 추가하기
 https://jitpack.io/
 
-- Library 
+1. Library 
 root - build.gradle 추가 
 buildscript {
     repositories {
@@ -51,9 +51,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
 }
 
-- JitPack을 배포 https://jitpack.io/
+2. JitPack을 배포 https://jitpack.io/
 
-- app
+3. app
 root - build.gradle 추가
 buildscript {
     repositories {
