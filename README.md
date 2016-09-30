@@ -6,11 +6,12 @@ http://thdev.tech/androiddev/2016/09/14/Android-AAR-Publish-Jit.html
 - Github 라이브러리 jitpack 추가하기  
 https://jitpack.io/  
 
-----------
+
 
 > Library 
+----------
  
-root - build.gradle 추가  
+1-1. root - build.gradle 추가  
 buildscript {  
     repositories {  
         jcenter()  
@@ -22,18 +23,16 @@ buildscript {
     }  
 }  
   
-- Library - build.gradle 추가     
+1-2. Library - build.gradle 추가     
 // 추가하기  
 apply plugin: 'com.android.library'  
 apply plugin: 'android-maven'  
   
 // com.github.github ID  
 group='com.github.kiruya80' 
-  
 android {  
     compileSdkVersion 24  
     buildToolsVersion "24.0.2"  
-  
     defaultConfig {  
 //        applicationId "com.ulling.lib"  
         minSdkVersion 16  
@@ -47,7 +46,6 @@ android {
         }  
     }  
 }  
-  
 dependencies {  
     compile fileTree(include: ['*.jar'], dir: 'libs')  
     compile 'com.android.support:appcompat-v7:24.2.1'  
@@ -57,16 +55,14 @@ dependencies {
 
 ----------
 
-
 >  JitPack을 배포  https://jitpack.io/
-
 
 ----------
 
 
 > app  
 
-root - build.gradle 추가  
+1. root - build.gradle 추가  
 buildscript {  
     repositories {  
         jcenter()  
@@ -76,18 +72,15 @@ buildscript {
         classpath 'com.google.gms:google-services:3.0.0'   
     }  
 }  
-  
 allprojects {  
     repositories {  
         jcenter()  
-        // 추가하기  
         maven { url "https://jitpack.io" }  
     }  
 }  
   
-app - build.gradle 추가   
+2. app - build.gradle 추가   
 apply plugin: 'com.android.application'   
-  
 android {  
     compileSdkVersion 24  
     buildToolsVersion "24.0.2"  
@@ -107,7 +100,6 @@ android {
     productFlavors {  
     }  
 }  
-  
 dependencies {  
     compile 'com.android.support:appcompat-v7:24.2.1'  
     compile 'com.android.support:design:24.2.1'  
