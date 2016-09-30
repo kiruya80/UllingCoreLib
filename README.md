@@ -5,13 +5,14 @@ http://thdev.tech/androiddev/2016/09/14/Android-AAR-Publish-Jit.html
 
 - Github 라이브러리 jitpack 추가하기  
 https://jitpack.io/  
-
-
-
+ 
+ 
 > Library 
 ----------
  
 1-1. root - build.gradle 추가  
+
+<pre><code>
 buildscript {  
     repositories {  
         jcenter()  
@@ -22,8 +23,10 @@ buildscript {
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'  
     }  
 }  
+ </code></pre>
   
-1-2. Library - build.gradle 추가     
+1-2. Library - build.gradle 추가  
+<pre><code>   
 // 추가하기  
 apply plugin: 'com.android.library'  
 apply plugin: 'android-maven'  
@@ -51,63 +54,65 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'  
     compile 'com.google.code.gson:gson:2.2.4'  
 }  
+ </code></pre>
 
 
-----------
-
->  JitPack을 배포  https://jitpack.io/
-
-----------
+> JitPack을 배포  https://jitpack.io/
+---------- 
 
 
 > app  
+---------- 
 
 1. root - build.gradle 추가  
-buildscript {  
-    repositories {  
-        jcenter()  
-    }  
-    dependencies {  
-        classpath 'com.android.tools.build:gradle:2.2.0'  
-        classpath 'com.google.gms:google-services:3.0.0'   
-    }  
-}  
-allprojects {  
-    repositories {  
-        jcenter()  
-        maven { url "https://jitpack.io" }  
-    }  
-}  
+<pre><code>
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.google.gms:google-services:3.0.0' 
+    }
+}
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+</code></pre>
   
 2. app - build.gradle 추가   
-apply plugin: 'com.android.application'   
-android {  
-    compileSdkVersion 24  
-    buildToolsVersion "24.0.2"  
-    defaultConfig {  
-        applicationId "com.ulling.firebasetest"  
-        minSdkVersion 16  
-        targetSdkVersion 24  
-        versionCode 1  
-        versionName "1.0"  
-        multiDexEnabled true  
-    }  
-    buildTypes {  
-        release {  
-            minifyEnabled true   
-        }  
-    }  
-    productFlavors {  
-    }  
-}  
-dependencies {  
-    compile 'com.android.support:appcompat-v7:24.2.1'  
-    compile 'com.android.support:design:24.2.1'  
-    compile 'com.google.firebase:firebase-messaging:9.6.1'  
-    compile 'com.google.firebase:firebase-crash:9.6.1'  
-    compile 'com.google.firebase:firebase-config:9.6.1'  
-    compile 'com.github.{username}:{repository}:{tag}'  
-    compile 'com.github.kiruya80:UllingCoreLib:0.0.12'   
-}   
-apply plugin: 'com.google.gms.google-services'  
+<pre><code>
+apply plugin: 'com.android.application' 
+apply plugin: 'com.google.gms.google-services'
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+    defaultConfig {
+        applicationId "com.ulling.firebasetest"
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled true 
+        }
+    }
+    productFlavors {
+    }
+}
+dependencies {
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.google.firebase:firebase-messaging:9.6.1'
+    compile 'com.google.firebase:firebase-crash:9.6.1'
+    compile 'com.google.firebase:firebase-config:9.6.1'
+    compile 'com.github.kiruya80:UllingCoreLib:0.0.12' 
+} 
+</code></pre>
  
