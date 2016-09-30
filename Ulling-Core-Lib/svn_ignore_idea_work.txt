@@ -1,0 +1,7 @@
+<ignored path="local.properties" />
+<ignored path=".gradle/" />
+<ignored path=".idea/" />
+<ignored path="build/" />
+<ignored path="app/build/" />
+<ignored mask="*.iws" />
+<ignored mask="*.iml" />
