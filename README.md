@@ -57,9 +57,11 @@ dependencies {
  </code></pre>
 
 
-> JitPack을 배포  https://jitpack.io/
+> JitPack 배포  
 ---------- 
-
+1. https://jitpack.io/ 
+2. kiruya80/UllingCoreLib 입력 Look up 라이브러리 조회
+3. 라이브러리 Get it
 
 > app  
 ---------- 
