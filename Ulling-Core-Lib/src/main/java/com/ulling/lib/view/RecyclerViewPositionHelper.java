@@ -17,6 +17,12 @@ package com.ulling.lib.view;
  * compile 'com.android.support:recyclerview-v7:22.0.0'
  *
  * http://gogorchg.tistory.com/entry/Android-RecyclerView-last-position-listener
+ *
+ * RecyclerView position helper class for any LayoutManager.
+ *
+ * compile 'com.android.support:recyclerview-v7:22.0.0'
+ *
+ * http://gogorchg.tistory.com/entry/Android-RecyclerView-last-position-listener
  */
 /**
  * RecyclerView position helper class for any LayoutManager.

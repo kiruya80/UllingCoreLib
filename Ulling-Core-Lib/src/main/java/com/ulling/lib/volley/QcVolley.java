@@ -34,14 +34,10 @@ public class QcVolley {
   }
 
   /**
-   *
-   * @MethodName   : init
-   * @Date         : 2015. 3. 11.
-   * @author       : KILHO
-   * @param context
-   *
-   * @Method
-   *  ㄴ 발리 초기화
+   * @MethodName : init
+   * @Date : 2015. 3. 11.
+   * @author : KILHO
+   * @Method ㄴ 발리 초기화
    * @변경이력
    */
   public static void init(Context context, boolean debug) {
@@ -55,15 +51,10 @@ public class QcVolley {
   }
 
   /**
-   *
-   * @MethodName   : reSetRequestQueue
-   * @Date         : 2015. 3. 11.
-   * @author       : KILHO
-   * @return
-   *
-   * @Method
-   * RequestQueue 리셋
-   *
+   * @MethodName : reSetRequestQueue
+   * @Date : 2015. 3. 11.
+   * @author : KILHO
+   * @Method RequestQueue 리셋
    * @변경이력
    */
   public static synchronized RequestQueue reSetRequestQueue() {
@@ -72,14 +63,10 @@ public class QcVolley {
 
 
   /**
-   *
-   * @MethodName   : getRequestQueue
-   * @Date         : 2015. 3. 11.
-   * @author       : KILHO
-   * @return
-   *
+   * @MethodName : getRequestQueue
+   * @Date : 2015. 3. 11.
+   * @author : KILHO
    * @Method
-   *
    * @변경이력
    */
   public static synchronized RequestQueue getRequestQueue() {
