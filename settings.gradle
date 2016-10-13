@@ -1,1 +1,1 @@
-include ':Ulling-Core-Lib'
+include ':Ulling-Core-Lib', ':Sample', ':SampleFirebase'
