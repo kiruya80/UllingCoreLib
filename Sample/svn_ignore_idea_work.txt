@@ -1,8 +1,10 @@
-<ignored path="local.properties" />
-<ignored path=".gradle/" />
-<ignored path=".idea/" />
-<ignored path="build/" />
-<ignored path="SKT21_ITIS_Risk_1.0/build/" />
-<ignored path="Soft21-lib/build/" />
-<ignored mask="*.iws" />
-<ignored mask="*.iml" />
+
+    <ignored path="local.properties" />
+    <ignored path=".gradle/" />
+    <ignored path=".idea/" />
+    <ignored path="build/" />
+    <ignored path="Sample/build/" />
+    <ignored path="SampleFirebase/build/" />
+    <ignored path="Ulling-Core-Lib/build/" />
+    <ignored mask="*.iws" />
+    <ignored mask="*.iml" />    
