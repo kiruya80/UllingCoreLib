@@ -7,7 +7,7 @@ package com.ulling.lib.common;
 
 import android.Manifest;
 
-public class UllingDefine {
+public class QcDefine {
   /**
    * 상용/ 테스트용
    */

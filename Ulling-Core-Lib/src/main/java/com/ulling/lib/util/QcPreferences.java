@@ -13,7 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.ulling.lib.common.UllingDefine;
+import com.ulling.lib.common.QcDefine;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class QcPreferences {
    */
   private final SharedPreferences prefs;
   private final SharedPreferences.Editor editor;
-  public static final boolean PREFER_LOG_FLAG = UllingDefine.DEBUG_FLAG;
+  public static final boolean PREFER_LOG_FLAG = QcDefine.DEBUG_FLAG;
   private static Gson GSON;
 //	Type typeOfObject = new TypeToken<Object>(){}.getType();
 
@@ -51,10 +51,10 @@ public class QcPreferences {
   }
 
   private QcPreferences(Context context) {
-    prefs = context.getSharedPreferences(UllingDefine.SP_APP_NAME, Context.MODE_PRIVATE);
+    prefs = context.getSharedPreferences(QcDefine.SP_APP_NAME, Context.MODE_PRIVATE);
     editor = prefs.edit();
     GsonBuilder gsonGsonBuilder = new GsonBuilder();
-    gsonGsonBuilder.setDateFormat(UllingDefine.UTC_DATE_FORMAT);
+    gsonGsonBuilder.setDateFormat(QcDefine.UTC_DATE_FORMAT);
     gsonGsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
     gsonGsonBuilder.setPrettyPrinting();
     GSON = gsonGsonBuilder.create();

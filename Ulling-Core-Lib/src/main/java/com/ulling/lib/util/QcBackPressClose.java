@@ -10,13 +10,7 @@ import android.content.Context;
 import com.ulling.lib.R;
 
 /**
- * @author : KILHO
- * @ProjectName : ClosetCard
- * @FileName : BackPressCloseHandler.java
- * @FilePath : com.ullim.closetcard.util
- * @Date : 2016. 3. 19.
- * @프로그램
- * @변경이력
+ *
  */
 public class QcBackPressClose {
   private long backKeyPressedTime = 0;

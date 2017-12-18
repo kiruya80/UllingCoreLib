@@ -17,16 +17,10 @@ import android.content.Context;
 import java.io.IOException;
 
 /**
- * @author : KILHO
- * @ProjectName : BBuzzArt_Phase_2.740
- * @FileName : GsonBuilderHelper.java
- * @FilePath : net.bbuzzart.android.util
- * @Date : 2015. 10. 26.
- * @프로그램
- * @변경이력
+ *
  */
-public class GsonBuilderHelper {
-  private static GsonBuilderHelper gsonInstances = null;
+public class QcGsonBuilder {
+  private static QcGsonBuilder gsonInstances = null;
   private static Gson GSON;
   private static final String UTC_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 
@@ -35,7 +29,7 @@ public class GsonBuilderHelper {
     QcLog.e("GsonBuilderHelper init complete !");
   }
 
-  private GsonBuilderHelper(Context context) {
+  private QcGsonBuilder(Context context) {
     GsonBuilder gsonGsonBuilder = new GsonBuilder();
     gsonGsonBuilder.setDateFormat(UTC_DATE_FORMAT);
     //		gsonGsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
@@ -49,9 +43,9 @@ public class GsonBuilderHelper {
     GSON = gsonGsonBuilder.create();
   }
 
-  public static GsonBuilderHelper getInstance(Context mCtx_) {
+  public static QcGsonBuilder getInstance(Context mCtx_) {
     if (gsonInstances == null)
-      gsonInstances = new GsonBuilderHelper(mCtx_);
+      gsonInstances = new QcGsonBuilder(mCtx_);
     return gsonInstances;
   }
 
