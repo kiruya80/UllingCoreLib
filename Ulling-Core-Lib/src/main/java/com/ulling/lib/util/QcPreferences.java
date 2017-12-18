@@ -31,6 +31,7 @@ import java.util.logging.Logger;
  * @Date : 2015. 1. 12.
  * @프로그램 ㄴ 프리퍼런스 헬퍼 클래스
  * @변경이력
+ *
  */
 public class QcPreferences {
     /**
