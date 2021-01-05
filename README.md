@@ -2,6 +2,7 @@
 
 - Android Module을 JitPack을 이용하여 배포하기 참고 사이트  
 http://thdev.tech/androiddev/2016/09/14/Android-AAR-Publish-Jit.html  
+https://thdev.tech/androiddev/2016/09/14/Android-AAR-Publish-Jit/
 
 - Github 라이브러리 jitpack 추가하기  
 https://jitpack.io/  
