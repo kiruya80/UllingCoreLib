@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Base64;
 
 import com.ulling.lib.core.common.QcDefine;
+import com.ulling.lib.core.utils.QcCrashExceptionHandler;
 import com.ulling.lib.core.utils.QcLog;
 import com.ulling.lib.core.utils.QcPreferences;
 import com.ulling.lib.core.utils.QcToast;
@@ -96,6 +97,21 @@ public class QcBaseApplication extends Application {
         appExecutors = new AppExecutors();
         if (QcDefine.DEBUG_FLAG)
             getHashKey();
+
+        // 로그 저장등 관리
+//        QcLog.initialize(getString(R.string.app_name_eng), null);
+//        QcLog.deleteFile(QcLog.LOG_PATH);
+
+    }
+
+    /**
+     * 크래시 앱 저장용도
+     * "/.ulling/log/Crash/";
+     *
+     * @param filePath
+     */
+    public void saveCrash(String filePath) {
+        new QcCrashExceptionHandler(filePath);
     }
 
     private void getHashKey() {
@@ -183,6 +199,7 @@ public class QcBaseApplication extends Application {
 
     /**
      * 외장 메모리 사용 가능여부
+     *
      * @return
      */
     public boolean isExternalStorage() {

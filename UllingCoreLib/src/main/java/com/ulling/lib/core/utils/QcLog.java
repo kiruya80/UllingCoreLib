@@ -6,8 +6,11 @@
 package com.ulling.lib.core.utils;
 
 import android.os.Debug;
+import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.ulling.lib.core.BuildConfig;
 import com.ulling.lib.core.base.QcBaseApplication;
 import com.ulling.lib.core.common.QcDefine;
 
@@ -15,6 +18,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Log Class <p> 1. 디버그 모드 2. 파일저장 <p> option 3. 리스트, json
@@ -23,9 +28,9 @@ import java.io.IOException;
  */
 public class QcLog {
 
-    private static final String APP_NAME = "APP_NAME";
+    private static String APP_NAME = "APP_NAME";
     //    private static final int STACK_NUMBUER = 2;
-    public static boolean DEBUG_MODE = QcDefine.DEBUG_FLAG;    // 최종 릴리즈시 false로
+    public static boolean DEBUG_MODE = BuildConfig.DEBUG;    // 최종 릴리즈시 false로
     public static boolean WRITE_TO_FILE = false;    // 로그를 파일로 쓰거나 쓰지 않거나..
     /**
      * log TRUE , FALSE
@@ -34,6 +39,11 @@ public class QcLog {
 //    private static Logger logger = null;
     private static StringBuilder msgBuilder = new StringBuilder();
     private static final int MAX_LOG_LEN = 4000;
+    private static final int FILE_MAX_SIZE = 2 * 1024 * 1024;
+
+    public static String LOG_PATH = "/.ulling/" + APP_NAME + "/Logs/";
+    private static String fileLogDirPath;
+
     private static BufferedWriter bufferedWriter;
 
     private enum logType {
@@ -42,6 +52,22 @@ public class QcLog {
         debug,
         warn,
         error
+    }
+
+    public static void initialize(String appName, String logPath) {
+        if (fileLogDirPath != null)
+            return;
+
+        APP_NAME = appName;
+        LOG_PATH = "/.wjcommon2/log/" + appName + "/Logs/";
+        if (logPath != null && !"".equals(logPath)) {
+            LOG_PATH = logPath;
+        }
+        setFileLogDirPath(Environment.getExternalStorageDirectory().toString() + LOG_PATH);
+    }
+
+    public static void setFileLogDirPath(String path) {
+        fileLogDirPath = path;
     }
 
     /**
@@ -115,9 +141,6 @@ public class QcLog {
     }
 
     private static void log(logType type, String message) {
-        if (DEBUG_MODE == false) {
-            return;
-        }
         msgBuilder = new StringBuilder();
         try {
             /**
@@ -152,12 +175,43 @@ public class QcLog {
             e.printStackTrace();
             msgBuilder.append(message);
         }
-        print(type, msgBuilder.toString());
 
-        if (WRITE_TO_FILE && QcBaseApplication.getInstance().isExternalStorage()) {
+        if (DEBUG_MODE) {
+            print(type, msgBuilder.toString());
+        }
+
+        if (WRITE_TO_FILE && fileLogDirPath != null && !"".equals(fileLogDirPath)) {
+//        if (WRITE_TO_FILE && QcBaseApplication.getInstance().isExternalStorage()) {
             writeToFile(type.name(), msgBuilder.toString());
+//            writeToFile(msgBuilder.toString());
         }
     }
+
+    private static void print(logType type, String logText_) {
+        String logText = logText_;
+        if (logText.length() > MAX_LOG_LEN) {
+            logText = logText_.substring(0, MAX_LOG_LEN);
+        }
+        if (type == logType.verbose) {
+            Log.v(APP_NAME, logText);
+        } else if (type == logType.info) {
+            Log.i(APP_NAME, logText);
+        } else if (type == logType.warn) {
+            Log.w(APP_NAME, logText);
+        } else if (type == logType.error) {
+            Log.e(APP_NAME, logText);
+        } else {
+            Log.d(APP_NAME, logText);
+        }
+    }
+
+    private static void nativeHeap() {
+        String heapSize = " NativeHeapSize = " + Debug.getNativeHeapSize()
+                + " NativeHeapFreeSize = " + Debug.getNativeHeapFreeSize()
+                + " NativeHeapAllocatedSize() = " + Debug.getNativeHeapAllocatedSize();
+        log(logType.error, heapSize);
+    }
+
 
     /**
      * 파일 저장하기
@@ -188,28 +242,45 @@ public class QcLog {
         }
     }
 
-    private static void print(logType type, String logText_) {
-        String logText = logText_;
-        if (logText.length() > MAX_LOG_LEN) {
-            logText = logText_.substring(0, MAX_LOG_LEN);
+    private static void writeToFile(String logText) {
+        String status = Environment.getExternalStorageState();
+        if (!status.equals(Environment.MEDIA_MOUNTED)) {
+            Log.e(APP_NAME, "SDCard Status:$status");
+            return;
         }
-        if (type == logType.verbose) {
-            Log.v(APP_NAME, logText);
-        } else if (type == logType.info) {
-            Log.i(APP_NAME, logText);
-        } else if (type == logType.warn) {
-            Log.w(APP_NAME, logText);
-        } else if (type == logType.error) {
-            Log.e(APP_NAME, logText);
-        } else {
-            Log.d(APP_NAME, logText);
+
+        if (TextUtils.isEmpty(fileLogDirPath)) {
+            return;
+        }
+
+        File fileDir = new File(fileLogDirPath);
+        if (!fileDir.exists()) {
+            if (!fileDir.mkdirs()) {
+                Log.e(APP_NAME, "[saveLogToFile] Make Directory Error...");
+                return;
+            }
+        }
+
+        String fileName = getCurrentTime("yyyy_MM_dd_HH") + "_" + APP_NAME + ".txt";
+        String message = getCurrentTime("MM/dd HH:mm:ss:SSS") + "\t" + logText + "\n\r";
+
+        try {
+            bufferedWriter = new BufferedWriter(
+                    new FileWriter(fileDir + "/" + fileName, true));
+            bufferedWriter.write(message);
+            bufferedWriter.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private static void nativeHeap() {
-        String heapSize = " NativeHeapSize = " + Debug.getNativeHeapSize()
-                + " NativeHeapFreeSize = " + Debug.getNativeHeapFreeSize()
-                + " NativeHeapAllocatedSize() = " + Debug.getNativeHeapAllocatedSize();
-        log(logType.error, heapSize);
+    public static String getCurrentTime(String format) {
+        return getSimpleDateFormat(format, new Date());
     }
+
+    public static String getSimpleDateFormat(String format, Date date) {
+        return new SimpleDateFormat(format).format(date);
+    }
+
 }
