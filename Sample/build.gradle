@@ -1,34 +1,44 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-//    buildToolsVersion '26.1.0'
+    compileSdkVersion 28
+
     defaultConfig {
         applicationId "com.ulling.sample"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
-            minifyEnabled true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':Ulling-Core-Lib')
-}
-/*
- * Copyright (c) 2016. iUlling Corp.
- * Created By Kil-Ho Choi
- */
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':UllingCoreLib')
 
-// ADD THIS AT THE BOTTOM
-//apply plugin: 'com.google.gms.google-services'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+//    testImplementation 'junit:junit:4.+'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    /**
+     * joda time
+     * https://github.com/dlew/joda-time-android
+     */
+    implementation 'net.danlew:android.joda:2.10.3'
+}

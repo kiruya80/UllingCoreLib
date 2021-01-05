@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="StyledTextView">
+        <attr name="typeface" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="QcAutoSoftkeyView">
+        <attr name="visiableTime" format="integer" />
+        <attr name="orientation" format="enum">
+            <enum name="both" value="0" />
+            <enum name="portrait" value="1" />
+            <enum name="landscape" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="QcAttrsRecyclerView">
+        <!--<attr name="qcLayoutManager" format="enum">-->
+        <!--<enum name="LinearLayoutManager" value="0"/>-->
+        <!--<enum name="GridLayoutManager" value="1"/>-->
+        <!--<enum name="StaggeredGridLayoutManager" value="2"/>-->
+        <!--</attr>-->
+        <!--<attr name="qcOrientation" format="enum">-->
+        <!--<enum name="horizontal" value="0"/>-->
+        <!--<enum name="vertical" value="1"/>-->
+        <!--</attr>-->
+        <!--<attr name="qcReverseLayout" format="enum">-->
+        <!--<enum name="false" value="false"/>-->
+        <!--<enum name="true" value="true"/>-->
+        <!--</attr>-->
+        <attr name="qcReverseLayout" format="boolean" />
+        <attr name="qcCurrentPage" format="reference|integer" />
+        <!--<declare-styleable name="RecycleListView">-->
+        <!--<attr name="paddingBottomNoButtons" format="dimension"/>-->
+        <!--<attr name="paddingTopNoTitle" format="dimension"/>-->
+        <!--</declare-styleable>-->
+        <!--<declare-styleable name="RecyclerView">-->
+        <!--<attr name="layoutManager" format="string"/>-->
+        <!--<attr name="android:orientation"/>-->
+        <!--<attr name="android:descendantFocusability"/>-->
+        <!--<attr name="spanCount" format="integer"/>-->
+        <!--<attr name="reverseLayout" format="boolean"/>-->
+        <!--<attr name="stackFromEnd" format="boolean"/>-->
+        <!--</declare-styleable>-->
+
+    </declare-styleable>
+</resources>

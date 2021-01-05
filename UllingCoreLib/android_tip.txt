@@ -1,0 +1,83 @@
+
+// Recompile with -Xlint:unchecked for details.
+// root build.gradle 에서 추가
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:deprecation"
+        }
+    }
+}
+
+ConstraintLayout
+좌우 전체 잡기
+app:layout_constraintLeft_toLeftOf="parent"
+app:layout_constraintRight_toRightOf="parent"
+상하 중앙정렬
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintTop_toTopOf="parent"
+좌우 중앙정렬
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+중심에서 벗어나는
+app:layout_constraintVertical_bias="0.5"
+
+
+영역에 따라 텍스트 사이즈 조절
+https://github.com/grantland/android-autofittextview
+https://developer.android.com/guide/topics/ui/look-and-feel/autosizing-textview
+autofit
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:autoSizeTextType="uniform"
+    android:autoSizeMinTextSize="12sp"
+    android:autoSizeMaxTextSize="100sp"
+    android:autoSizeStepGranularity="2sp" />
+
+
+
+안드로이드 애니메이션
+https://developer.android.com/training/transitions/start-activity#java
+
+https://medium.com/@andkulikov/animate-all-the-things-transitions-in-android-914af5477d50
+
+https://www.androidauthority.com/using-shared-element-transitions-activities-fragments-631996/
+
+http://www.coderkatta.com/implement-shared-element-transition-android
+
+ android:transitionName="@string/movie_station_transition"
+
+  Intent intent = new Intent(activity, DetailDoodleActivity.class);
+         intent.putExtra(Define.INTENT_DOODLE_INFO, doodle);
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity,
+                     Pair.create(stationView, stationView.getTransitionName()),
+                     Pair.create(textView, textView.getTransitionName()),
+                     Pair.create(imageView, imageView.getTransitionName()));
+
+             activity.startActivity(intent, options.toBundle());
+ //            activity.overridePendingTransition(R.anim.fade_in, R.anim.hold);
+         } else {
+             activity.startActivity(intent);
+             activity.overridePendingTransition(R.anim.fade_in, R.anim.hold);
+         }
+
+
+WARNING: The option 'android.enableAapt2' is deprecated and should not be used anymore.
+- > http://g-y-e-o-m.tistory.com/105
+
+안드로이드 Bitbucket를 이용한 소스 관리(형상관리)
+https://dreamaz.tistory.com/333
+
+
+/**
+*
+* $PROJECT_NAME$
+* Class: $className$
+* Created by $user$ on $date$ $time$
+* @version 1.0.0
+*
+* Description:
+*
+**/

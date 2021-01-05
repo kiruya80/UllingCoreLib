@@ -1,44 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (c) 2016. iUlling Corp.
-  ~ Created By Kil-Ho Choi
-  -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".ui.MainActivity">
 
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-    <LinearLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        android:id="@+id/myLinearLayout"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:orientation="vertical">
-
-
-      <TextView
-          android:id="@+id/textView"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/app_name"/>
-
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="20dp"
-          android:text="다시 한번 말하지만 lineSpacingMultiplier 이런 것을 기억할 필요가 전혀 없다. "/>
-
-
-      <com.ulling.lib.view.LetterSpacingTextView
-          android:id="@+id/textView1"
-          android:layout_width="match_parent"
-          android:layout_marginTop="20dp"
-          android:layout_height="wrap_content"
-          android:text="다시 한번 말하지만 lineSpacingMultiplier 이런 것을 기억할 필요가 전혀 없다. "/>
-
-    </LinearLayout>
-  </ScrollView>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

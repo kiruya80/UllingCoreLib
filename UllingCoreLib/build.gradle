@@ -1,0 +1,72 @@
+apply plugin: 'com.android.library'
+apply plugin: 'android-maven'
+
+group = 'com.github.kiruya80'
+
+android {
+  compileSdkVersion 28
+
+  defaultConfig {
+    minSdkVersion 19 //kitkat
+    targetSdkVersion 28
+    versionCode 1
+    versionName "1.0.2"
+
+  }
+  dataBinding {
+    enabled = true
+  }
+}
+
+dependencies {
+  implementation 'com.android.support:appcompat-v7:28.0.0'
+  implementation 'com.android.support:support-v4:28.0.0'
+  implementation 'com.android.support:recyclerview-v7:28.0.0'
+  implementation 'com.android.support:design:28.0.0'
+  /**
+   * lifecycle
+   */
+  implementation 'android.arch.lifecycle:extensions:1.1.1'
+  annotationProcessor 'android.arch.lifecycle:compiler:1.1.1'
+  /**
+   * util
+   */
+  implementation 'com.google.code.gson:gson:2.8.5'
+//    implementation 'joda-time:joda-time:2.10.1'
+
+  /**
+   * joda time
+   * https://github.com/dlew/joda-time-android
+   */
+  implementation 'net.danlew:android.joda:2.10.3'
+}
+/*
+ * Copyright (c) 2016. iUlling Corp.
+ * Created By Kil-Ho Choi
+ */
+
+//apply plugin: 'com.google.gms.google-services'
+
+//// build a jar with source files
+//task sourcesJar(type: Jar) {
+//    from android.sourceSets.main.java.srcDirs
+//    classifier = 'sources'
+//}
+//
+//task javadoc(type: Javadoc) {
+//    failOnError  false
+//    source = android.sourceSets.main.java.sourceFiles
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//    classpath += configurations.compile
+//}
+//
+//// build a jar with javadoc
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+//
+//artifacts {
+//    archives sourcesJar
+//    archives javadocJar
+//}
