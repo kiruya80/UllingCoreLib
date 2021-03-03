@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ulling.lib.core.base.QcBaseApplication;
 import com.ulling.lib.core.utils.QcLog;
 
 import static android.app.Activity.RESULT_OK;
@@ -223,6 +224,7 @@ public abstract class QcBaseLifeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         QcLog.i("onResume == ");
+        QcBaseApplication.CLICK_LAST_RUN_TIME = 0;
     }
 
     /**

@@ -2,6 +2,7 @@ package com.ulling.lib.core.ui;
 
 import android.os.Bundle;
 
+import com.ulling.lib.core.base.QcBaseApplication;
 import com.ulling.lib.core.utils.QcLog;
 
 /**
@@ -70,10 +71,11 @@ public abstract class QcBaseShowLifeFragement extends QcBaseLifeFragment {
         }
     }
 
-
     private void lazyFetchDataIfPrepared() {
         QcLog.i("lazyFetchDataIfPrepared   === " +
                 getUserVisibleHint() + " , " + sectionPosition + " , " + isViewPrepared);
+        QcBaseApplication.CLICK_LAST_RUN_TIME = 0;
+
         if (getUserVisibleHint() && isViewPrepared) {
             // 최초 한번만 로딩하고 이후에는 그대로인 경우 플래그
             needOnShowToUser();

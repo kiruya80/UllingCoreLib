@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.ulling.lib.core.base.QcBaseApplication;
 import com.ulling.lib.core.utils.QcLog;
 
 /**
@@ -199,6 +200,7 @@ public abstract class QcBaseLifeActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         QcLog.i("onResume == ");
+        QcBaseApplication.CLICK_LAST_RUN_TIME = 0;
     }
 
     /**

@@ -59,6 +59,22 @@ public class QcBaseApplication extends Application {
     public static String APP_NAME = "";
     private AppExecutors appExecutors;
 
+    /**
+     * 중복클릭방지 시간
+     */
+    public static long CLICK_INTERVAL = 300;
+    /**
+     * 마지막 실행 클릭 시간
+     * 앱에서 공통으로 사용하며, 액티비티 & 프레그먼트 onResume 에서 리셋한다
+     *
+     */
+    public static long CLICK_LAST_RUN_TIME = 0;
+    /**
+     * 클릭이벤트에서 전체 버튼들의 중복방지 체크 플래그
+     */
+    public static boolean IS_CLICK_ALL = true;
+
+
     public static synchronized QcBaseApplication getInstance() {
         return SINGLE_U;
     }
@@ -112,6 +128,10 @@ public class QcBaseApplication extends Application {
      */
     public void saveCrash(String filePath) {
         new QcCrashExceptionHandler(filePath);
+    }
+
+    public void setClickInterval(long interval) {
+        CLICK_INTERVAL = interval;
     }
 
     private void getHashKey() {
