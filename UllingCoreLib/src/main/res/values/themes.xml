@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MyApplication" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.BaseQcApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_FF6200EE</item>
         <item name="colorPrimaryVariant">@color/color_FF3700B3</item>
@@ -13,4 +13,32 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Base application theme. -->
+    <style name="QappTheme" parent="Theme.BaseQcApp">
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="QappTheme.NoActionBar" parent="Theme.BaseQcApp">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="QappTheme.FullScreen" parent="Theme.BaseQcApp">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="QappTheme.AppBarOverlay" parent="Theme.BaseQcApp">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="QappTheme.PopupOverlay" parent="Theme.BaseQcApp">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

@@ -31,11 +31,10 @@ public class QcLog {
     private static String APP_NAME = "APP_NAME";
     //    private static final int STACK_NUMBUER = 2;
     public static boolean DEBUG_MODE = BuildConfig.DEBUG;    // 최종 릴리즈시 false로
-    public static boolean WRITE_TO_FILE = false;    // 로그를 파일로 쓰거나 쓰지 않거나..
+    public static boolean SAVE_FILE_LOG_MODE = false;    // 로그를 파일로 쓰거나 쓰지 않거나..
     /**
      * log TRUE , FALSE
      */
-//    public static final boolean LOG_FLAG = UllingDefine.DEBUG_FLAG;
 //    private static Logger logger = null;
     private static StringBuilder msgBuilder = new StringBuilder();
     private static final int MAX_LOG_LEN = 4000;
@@ -59,7 +58,7 @@ public class QcLog {
             return;
 
         APP_NAME = appName;
-        LOG_PATH = "/.wjcommon2/log/" + appName + "/Logs/";
+        LOG_PATH = "/.ulling/" + appName + "/Logs/";
         if (logPath != null && !"".equals(logPath)) {
             LOG_PATH = logPath;
         }
@@ -143,23 +142,6 @@ public class QcLog {
     private static void log(logType type, String message) {
         msgBuilder = new StringBuilder();
         try {
-            /**
-             *
-             */
-//            String temp = new Throwable().getStackTrace()[STACK_NUMBUER].getClassName();
-//            if (temp != null) {
-//                int lastDotPos = temp.lastIndexOf(".");
-//                className = temp.substring(lastDotPos + 1);
-//            }
-//            String methodName = new Throwable().getStackTrace()[STACK_NUMBUER].getMethodName();
-//            int lineNumber = new Throwable().getStackTrace()[STACK_NUMBUER].getLineNumber();
-//
-//            logText = "[" + className + "] " + methodName + "()" + "[" + lineNumber + "]" + " >> " + message
-//                    + "    (" + Thread.currentThread().getStackTrace()[4].getFileName() +
-//                    ":" + Thread.currentThread().getStackTrace()[4] .getLineNumber()+ ")";
-            /**
-             *
-             */
             msgBuilder
                     // move class line
                     .append(" (").append(Thread.currentThread().getStackTrace()[4].getFileName())
@@ -176,15 +158,42 @@ public class QcLog {
             msgBuilder.append(message);
         }
 
+        if (SAVE_FILE_LOG_MODE && fileLogDirPath != null && !"".equals(fileLogDirPath)) {
+//            writeToFile(type.name(), msgBuilder.toString());
+            writeToFile(msgBuilder.toString());
+        }
+
         if (DEBUG_MODE) {
             print(type, msgBuilder.toString());
         }
+    }
 
-        if (WRITE_TO_FILE && fileLogDirPath != null && !"".equals(fileLogDirPath)) {
-//        if (WRITE_TO_FILE && QcBaseApplication.getInstance().isExternalStorage()) {
-            writeToFile(type.name(), msgBuilder.toString());
-//            writeToFile(msgBuilder.toString());
+    public static String getLogStyleMsg(String message) {
+        return getLogStyleMsg(null, message);
+    }
+
+    public static String getLogStyleMsg(String title, String message) {
+        String codeLine = Thread.currentThread().getStackTrace()[4].getFileName() + ":" + Thread.currentThread().getStackTrace()[4].getLineNumber();
+        String logStyleMsg = codeLine;
+        if (title != null && !"".equals(title)) {
+            logStyleMsg = ""
+                    + "    ┌──── ■ " + codeLine + " ■ ────┐\n"
+                    + "    ┌──────────────────────────────────────────────────────────────────────────────────────────────────────\n"
+                    + "    │  " + title + "\n"
+                    + "    │  " + message + "\n"
+                    + "    └──────────────────────────────────────────────────────────────────────────────────────────────────────";
+
+        } else {
+            logStyleMsg = ""
+                    + "    ┌──── ■ " + codeLine + " ■ ────┐\n"
+                    + "    ┌──────────────────────────────────────────────────────────────────────────────────────────────────────\n"
+                    + "    │  " + message + "\n"
+                    + "    └──────────────────────────────────────────────────────────────────────────────────────────────────────";
         }
+
+//        print(logType.error, logStyleMsg);
+
+        return logStyleMsg;
     }
 
     private static void print(logType type, String logText_) {
@@ -212,36 +221,62 @@ public class QcLog {
         log(logType.error, heapSize);
     }
 
+    /**
+     * 로그 저장 파일 삭제
+     *
+     * @param dirName
+     */
+    public static void deleteFile(String dirName) {
+        String status = Environment.getExternalStorageState();
+        if (!status.equals(Environment.MEDIA_MOUNTED)) {
+            Log.e(APP_NAME, "SDCard Status:$status");
+            return;
+        }
+
+        String path = Environment.getExternalStorageDirectory().toString() + dirName;
+        File dir = new File(path);
+
+        File[] childFileList = dir.listFiles();
+        if (dir.exists()) {
+            for (File childFile : childFileList) {
+                if (childFile.isDirectory()) {
+                    deleteFile(childFile.getAbsolutePath()); //하위 디렉토리
+                } else {
+                    childFile.delete();
+                }
+            }
+            dir.delete();
+        }
+    }
 
     /**
      * 파일 저장하기
      */
-    private static void writeToFile(String name, String logText) {
-        String fileNameDetail = "";
-
-        if (fileNameDetail != null && !"".equals(fileNameDetail)) {
-            File fileDir = new File(QcDefine.LOG_CAT_ROOT);
-            if (!fileDir.exists()) {
-                fileDir.mkdir();
-            }
-
-            String fileName = QcDefine.DIRECTORY_LOG_CAT_NAME + "_"
-//                    + QcDateUtils.localtimeToUTC()
-                    + QcDateUtils.getCurrentTime()
-                    + "_" + fileNameDetail + QcDefine.FILE_TXT;
-
-            try {
-                bufferedWriter = new BufferedWriter(
-                        new FileWriter(QcDefine.LOG_CAT_ROOT + fileName, true));
-                bufferedWriter.write(QcDateUtils.getCurrentTime() + " " + logText + "\n");
-                bufferedWriter.flush();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
+//    private static void writeToFile(String name, String logText) {
+//        String fileNameDetail = "";
+//
+//        if (fileNameDetail != null && !"".equals(fileNameDetail)) {
+//            File fileDir = new File(QcDefine.LOG_CAT_ROOT);
+//            if (!fileDir.exists()) {
+//                fileDir.mkdir();
+//            }
+//
+//            String fileName = QcDefine.DIRECTORY_LOG_CAT_NAME + "_"
+////                    + QcDateUtils.localtimeToUTC()
+//                    + QcDateUtils.getCurrentTime()
+//                    + "_" + fileNameDetail + QcDefine.FILE_TXT;
+//
+//            try {
+//                bufferedWriter = new BufferedWriter(
+//                        new FileWriter(QcDefine.LOG_CAT_ROOT + fileName, true));
+//                bufferedWriter.write(QcDateUtils.getCurrentTime() + " " + logText + "\n");
+//                bufferedWriter.flush();
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
     private static void writeToFile(String logText) {
         String status = Environment.getExternalStorageState();
         if (!status.equals(Environment.MEDIA_MOUNTED)) {
