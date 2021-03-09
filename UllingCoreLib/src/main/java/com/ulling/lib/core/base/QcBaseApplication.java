@@ -12,7 +12,7 @@ import android.util.Base64;
 import androidx.core.content.ContextCompat;
 
 import com.ulling.lib.core.common.QcDefine;
-import com.ulling.lib.core.utils.QcCrashExceptionHandler;
+import com.ulling.lib.core.exception.QcCrashExceptionHandler;
 import com.ulling.lib.core.utils.QcLog;
 import com.ulling.lib.core.utils.QcPreferences;
 import com.ulling.lib.core.utils.QcToast;
