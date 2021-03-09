@@ -1,6 +1,7 @@
 package com.ulling.lib.core.utils;
 
-import android.app.Activity;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -12,10 +13,10 @@ import java.util.ArrayList;
  */
 public class QactivityManager {
     private static QactivityManager activityManager = null;
-    private ArrayList<Activity> activityList = null;
+    private ArrayList<AppCompatActivity> activityList = null;
 
     private QactivityManager() {
-        activityList = new ArrayList<Activity>();
+        activityList = new ArrayList<AppCompatActivity>();
     }
 
     public static QactivityManager getInstance() {
@@ -30,9 +31,9 @@ public class QactivityManager {
      *
      * @param activity
      */
-    public void addActivity(Activity activity) {
+    public void addActivity(AppCompatActivity activity) {
         if (activityList == null)
-            activityList = new ArrayList<Activity>();
+            activityList = new ArrayList<AppCompatActivity>();
         activityList.add(activity);
     }
 
@@ -42,7 +43,7 @@ public class QactivityManager {
      * @param activity
      * @return boolean
      */
-    public boolean removeActivity(Activity activity) {
+    public boolean removeActivity(AppCompatActivity activity) {
         if (activityList != null) {
             return activityList.remove(activity);
         } else {
@@ -55,7 +56,7 @@ public class QactivityManager {
      *
      * @return activityList
      */
-    public ArrayList<Activity> getActivityList() {
+    public ArrayList<AppCompatActivity> getActivityList() {
         if (activityList != null) {
             return activityList;
         } else {
@@ -68,13 +69,13 @@ public class QactivityManager {
      *
      * @param activity
      */
-    public void finishedActivity(Activity activity) {
+    public void finishedActivity(AppCompatActivity activity) {
         if (activityList == null) {
             return;
         }
         int index = activityList.indexOf(activity);
         if (index >= 0) {
-            Activity at = activityList.remove(index);
+            AppCompatActivity at = activityList.remove(index);
             at.finish();
         }
     }
@@ -85,12 +86,12 @@ public class QactivityManager {
      * @param className
      * @return
      */
-    public Activity findActivity(String className) {
+    public AppCompatActivity findActivity(String className) {
         if (activityList == null) {
             return null;
         }
-        Activity activity = null;
-        for (Activity at : activityList) {
+        AppCompatActivity activity = null;
+        for (AppCompatActivity at : activityList) {
             if (className.equals(at.getClass())) {
                 activity = at;
                 break;
@@ -106,7 +107,7 @@ public class QactivityManager {
         if (activityList == null) {
             return;
         }
-        for (Activity activity : activityList) {
+        for (AppCompatActivity activity : activityList) {
             activity.finish();
         }
         activityList.clear();

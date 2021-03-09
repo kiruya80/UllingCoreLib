@@ -3,9 +3,10 @@ package com.ulling.lib.core.viewutil.recyclerView;
 /**
  * Created by P100651 on 2017-07-03.
  */
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewPositionHelper {
 

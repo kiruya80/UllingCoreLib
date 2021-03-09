@@ -5,9 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
+import androidx.appcompat.widget.AppCompatEditText;
+
 import com.ulling.lib.core.R;
 
-public class StyledEditTextView extends android.support.v7.widget.AppCompatEditText {
+public class StyledEditTextView extends AppCompatEditText {
 
 	public StyledEditTextView(Context context) {
 		super(context);

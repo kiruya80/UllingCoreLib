@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
 import com.ulling.lib.core.R;
 
 /**
@@ -16,7 +18,7 @@ import com.ulling.lib.core.R;
  * @프로그램
  * @변경이력
  */
-public class StyledTextView extends android.support.v7.widget.AppCompatTextView {
+public class StyledTextView extends AppCompatTextView {
     //	public String TAG = getClass().getSimpleName();
 
     public StyledTextView(Context context) {

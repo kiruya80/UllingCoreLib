@@ -1,6 +1,5 @@
 package com.ulling.lib.core.utils;
 
-import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
 import android.content.Context;
@@ -11,8 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.KeyCharacterMap;
@@ -23,6 +20,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.ulling.lib.core.base.QcBaseApplication;
 
@@ -259,8 +260,8 @@ public class QcUtils {
      */
     public static int getScreenOrientation(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        if (context instanceof Activity) {
-            ((Activity) context).getWindowManager()
+        if (context instanceof AppCompatActivity) {
+            ((AppCompatActivity) context).getWindowManager()
                     .getDefaultDisplay().getMetrics(displayMetrics);
 
         } else if (context instanceof Application) {
@@ -333,7 +334,7 @@ public class QcUtils {
     /**
      * Status bar color 및 Icon 밝기 적용
      */
-    public static void setChangeStatusBar(Activity act, int colorId, boolean isDark) {
+    public static void setChangeStatusBar(AppCompatActivity act, int colorId, boolean isDark) {
         Window window = act.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -375,7 +376,7 @@ public class QcUtils {
      * @param activity
      * @param isFinish
      */
-    public static void startGoogleStore(Activity activity, boolean isFinish) {
+    public static void startGoogleStore(AppCompatActivity activity, boolean isFinish) {
         final String appPackageName = activity.getPackageName();
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(PLAY_STORE_MARKET_DETAIL + appPackageName));
@@ -396,7 +397,7 @@ public class QcUtils {
      * @param activity
      * @param appPackageName
      */
-    public static void startGoogleStore(Activity activity, String appPackageName, boolean isFinish) {
+    public static void startGoogleStore(AppCompatActivity activity, String appPackageName, boolean isFinish) {
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(PLAY_STORE_MARKET_DETAIL + appPackageName));
             activity.startActivity(intent);
@@ -432,7 +433,7 @@ public class QcUtils {
 //
 //        if (apiAvailability.isUserResolvableError(connectionStatusCode)) {
 //            Dialog dialog = apiAvailability.getErrorDialog(
-//                    (Activity) context,
+//                    (AppCompatActivity) context,
 //                    connectionStatusCode,
 //                    QcDefine.REQUEST_GOOGLE_PLAY_SERVICES
 //            );
@@ -441,7 +442,7 @@ public class QcUtils {
 //    }
 
 
-//    public static int getActionBarHeight(Activity activity) {
+//    public static int getActionBarHeight(AppCompatActivity activity) {
 //        int actionBarHeight = activity.getSupportActionBar().getHeight();
 //        if (actionBarHeight != 0)
 //            return actionBarHeight;
@@ -461,7 +462,7 @@ public class QcUtils {
      *
      * @param activity
      */
-    public static void killAppRemoveTask(Activity activity) {
+    public static void killAppRemoveTask(AppCompatActivity activity) {
         ActivityCompat.finishAffinity(activity);
         System.runFinalization();
         System.exit(0);

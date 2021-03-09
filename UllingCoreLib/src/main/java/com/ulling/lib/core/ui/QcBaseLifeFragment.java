@@ -2,19 +2,20 @@ package com.ulling.lib.core.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.Fragment;
+
 import com.ulling.lib.core.base.QcBaseApplication;
 import com.ulling.lib.core.utils.QcLog;
 
-import static android.app.Activity.RESULT_OK;
 
 /**
  * 기본 프레그먼트
@@ -291,7 +292,7 @@ public abstract class QcBaseLifeFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
+        if (resultCode == AppCompatActivity.RESULT_OK) {
             optOnActivityResultOk(requestCode, data);
         } else {
             optOnActivityResultCancle();

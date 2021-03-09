@@ -7,8 +7,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
 import android.util.Base64;
+
+import androidx.core.content.ContextCompat;
 
 import com.ulling.lib.core.common.QcDefine;
 import com.ulling.lib.core.utils.QcCrashExceptionHandler;

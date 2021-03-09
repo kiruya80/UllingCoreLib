@@ -1,11 +1,12 @@
 package com.ulling.lib.core.utils;
 
 import android.graphics.Paint;
-import android.support.annotation.NonNull;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 /**
  * 텍스트뷰 유틸들

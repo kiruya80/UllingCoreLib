@@ -1,8 +1,10 @@
 package com.ulling.lib.core.utils;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * Created by P100651 on 2017-07-11.

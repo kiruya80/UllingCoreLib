@@ -1,9 +1,10 @@
 package com.ulling.lib.core.utils;
 
-import android.app.Activity;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
 import android.view.Surface;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +24,7 @@ public class QcCameraUtils {
      * @param activity
      * @return
      */
-    public static int getDisplayOrientation(Activity activity) {
+    public static int getDisplayOrientation(AppCompatActivity activity) {
         int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
         int degrees = 0;
         switch (rotation) {

@@ -1,6 +1,7 @@
 package com.ulling.lib.core.viewutil.recyclerView;
 
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by P100651 on 2017-07-03.

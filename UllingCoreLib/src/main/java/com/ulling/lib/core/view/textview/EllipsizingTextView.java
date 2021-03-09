@@ -26,12 +26,14 @@ import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
 import java.util.regex.Pattern;
 
 /**
  * 말줄임 상태체크를 위한 커스텀 텍스트뷰
  */
-public class EllipsizingTextView extends android.support.v7.widget.AppCompatTextView {
+public class EllipsizingTextView extends AppCompatTextView {
     private static final String ELLIPSIS = "…";
     private static final Pattern DEFAULT_END_PUNCTUATION = Pattern.compile("[\\.,…;\\:\\s]*$", Pattern.DOTALL);
 

@@ -1,8 +1,9 @@
 package com.ulling.lib.core.viewmodel;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 
 /**
  * Created by P100651 on 2017-07-04.
