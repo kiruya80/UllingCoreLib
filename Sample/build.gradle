@@ -1,12 +1,15 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.ulling.sample"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -29,8 +32,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':UllingCoreLib')
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     implementation "androidx.appcompat:appcompat:1.2.0"
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+
+    implementation "com.google.android.material:material:1.3.0"
 
     //noinspection GradleCompatible
 //    implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -44,4 +51,6 @@ dependencies {
      * https://github.com/dlew/joda-time-android
      */
     implementation 'net.danlew:android.joda:2.10.3'
+//    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0'
+//    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
 }

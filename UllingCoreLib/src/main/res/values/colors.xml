@@ -13,6 +13,12 @@
   <color name="color_red">#D32F2F</color>
   <color name="color_green">#4CAF50</color>
 
+  <color name="color_FFBB86FC">#FFBB86FC</color>
+  <color name="color_FF6200EE">#FF6200EE</color>
+  <color name="color_FF3700B3">#FF3700B3</color>
+  <color name="color_FF03DAC5">#FF03DAC5</color>
+  <color name="color_FF018786">#FF018786</color>
+
   <!-- 반투명 -->
   <color name="color_black_trance_10">#11000000</color>
   <color name="color_black_trance_20">#33000000</color>
