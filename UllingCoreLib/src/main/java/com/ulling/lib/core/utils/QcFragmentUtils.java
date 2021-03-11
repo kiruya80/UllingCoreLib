@@ -23,33 +23,45 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.ulling.lib.core.ui.QcBaseFragment;
+
 public class QcFragmentUtils {
 
     /**
      * The {@code fragment} is added to the container view with id {@code frameId}. The operation is
      * performed by the {@code fragmentManager}.
-     *
      */
     public static void addFragment(@NonNull FragmentManager fragmentManager,
-                                   @NonNull Fragment fragment, int frameId, String tag) {
+                                   @NonNull Fragment fragment,
+                                   int frameId) {
+        String tag = "";
+        if (fragment instanceof QcBaseFragment) {
+            tag = ((QcBaseFragment) fragment).getTAG();
+        } else {
+            tag = fragment.getTag();
+        }
+
+        addFragment(fragmentManager, fragment, frameId, tag);
+    }
+
+    public static void addFragment(@NonNull FragmentManager fragmentManager,
+                                   @NonNull Fragment fragment,
+                                   int frameId,
+                                   String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(frameId, fragment, tag);
         transaction.commit();
 //        transaction.commitAllowingStateLoss();
     }
 
-    public static void addBackStackFragment(@NonNull FragmentManager fragmentManager,
-                                            @NonNull Fragment fragment, int frameId, String tag) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(frameId, fragment, tag);
-        transaction.addToBackStack(tag);
-        transaction.commit();
-    }
-
     public static void addFragment(@NonNull FragmentManager fragmentManager,
-                                   @NonNull Fragment fragment, int frameId, String tag,
-                                   @AnimatorRes @AnimRes int enter, @AnimatorRes @AnimRes int exit,
-                                   @AnimatorRes @AnimRes int popEnter, @AnimatorRes @AnimRes int popExit) {
+                                   @NonNull Fragment fragment,
+                                   int frameId,
+                                   String tag,
+                                   @AnimatorRes @AnimRes int enter,
+                                   @AnimatorRes @AnimRes int exit,
+                                   @AnimatorRes @AnimRes int popEnter,
+                                   @AnimatorRes @AnimRes int popExit) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         removeExistFragment(fragmentManager, transaction, tag);
         transaction.setCustomAnimations(enter, exit, popEnter, popExit);
@@ -57,24 +69,60 @@ public class QcFragmentUtils {
         transaction.commit();
     }
 
+    public static void addBackStackFragment(@NonNull FragmentManager fragmentManager,
+                                            @NonNull Fragment fragment,
+                                            int frameId) {
+        String tag = "";
+        if (fragment instanceof QcBaseFragment) {
+            tag = ((QcBaseFragment) fragment).getTAG();
+        } else {
+            tag = fragment.getTag();
+        }
+
+        addBackStackFragment(fragmentManager, fragment, frameId, tag);
+    }
+
+    public static void addBackStackFragment(@NonNull FragmentManager fragmentManager,
+                                            @NonNull Fragment fragment,
+                                            int frameId,
+                                            String tag) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(frameId, fragment, tag);
+        transaction.addToBackStack(tag);
+        transaction.commit();
+    }
+
     public static void replaceFragment(@NonNull FragmentManager fragmentManager,
-                                       @NonNull Fragment fragment, int frameId, String tag) {
+                                       @NonNull Fragment fragment,
+                                       int frameId) {
+        String tag = "";
+        if (fragment instanceof QcBaseFragment) {
+            tag = ((QcBaseFragment) fragment).getTAG();
+        } else {
+            tag = fragment.getTag();
+        }
+
+        replaceFragment(fragmentManager, fragment, frameId, tag);
+    }
+
+    public static void replaceFragment(@NonNull FragmentManager fragmentManager,
+                                       @NonNull Fragment fragment,
+                                       int frameId,
+                                       String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(frameId, fragment, tag);
         transaction.commit();
     }
 
-//    public static void replaceFragment(@NonNull FragmentManager fragmentManager,
-//                                       @NonNull Fragment fragment, int frameId, String tag) {
-//        android.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        transaction.replace(frameId, fragment, tag);
-//        transaction.commit();
-//    }
 
     public static void replaceFragment(@NonNull FragmentManager fragmentManager,
-                                       @NonNull Fragment fragment, int frameId, String tag,
-                                       @AnimatorRes @AnimRes int enter, @AnimatorRes @AnimRes int exit,
-                                       @AnimatorRes @AnimRes int popEnter, @AnimatorRes @AnimRes int popExit) {
+                                       @NonNull Fragment fragment,
+                                       int frameId,
+                                       String tag,
+                                       @AnimatorRes @AnimRes int enter,
+                                       @AnimatorRes @AnimRes int exit,
+                                       @AnimatorRes @AnimRes int popEnter,
+                                       @AnimatorRes @AnimRes int popExit) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(enter, exit, popEnter, popExit);
         transaction.replace(frameId, fragment, tag);
@@ -82,7 +130,21 @@ public class QcFragmentUtils {
     }
 
     public static void replaceFragmentAddToBackStack(@NonNull FragmentManager fragmentManager,
-                                                     @NonNull Fragment fragment, int frameId,
+                                                     @NonNull Fragment fragment,
+                                                     int frameId) {
+        String tag = "";
+        if (fragment instanceof QcBaseFragment) {
+            tag = ((QcBaseFragment) fragment).getTAG();
+        } else {
+            tag = fragment.getTag();
+        }
+
+        replaceFragmentAddToBackStack(fragmentManager, fragment, frameId, tag);
+    }
+
+    public static void replaceFragmentAddToBackStack(@NonNull FragmentManager fragmentManager,
+                                                     @NonNull Fragment fragment,
+                                                     int frameId,
                                                      String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(frameId, fragment, tag);
@@ -92,9 +154,14 @@ public class QcFragmentUtils {
 
     public static void removeFragment(@NonNull FragmentManager fragmentManager,
                                       @NonNull String tag) {
+
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.remove(fragmentManager.findFragmentByTag(tag));
-        transaction.commit();
+        Fragment tagFragment = fragmentManager.findFragmentByTag(tag);
+
+        if (tagFragment != null) {
+            transaction.remove(tagFragment);
+            transaction.commit();
+        }
     }
 
     public static void removeFragment(@NonNull FragmentManager fragmentManager,
@@ -106,25 +173,41 @@ public class QcFragmentUtils {
 
     public static void removeFragment(@NonNull FragmentManager fragmentManager,
                                       @NonNull String tag,
-                                      @AnimatorRes @AnimRes int enter, @AnimatorRes @AnimRes int exit,
-                                      @AnimatorRes @AnimRes int popEnter, @AnimatorRes @AnimRes int popExit) {
+                                      @AnimatorRes @AnimRes int enter,
+                                      @AnimatorRes @AnimRes int exit,
+                                      @AnimatorRes @AnimRes int popEnter,
+                                      @AnimatorRes @AnimRes int popExit) {
+
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(enter, exit, popEnter, popExit);
-        transaction.remove(fragmentManager.findFragmentByTag(tag));
-        transaction.commit();
+        Fragment tagFragment = fragmentManager.findFragmentByTag(tag);
+
+        if (tagFragment != null) {
+            transaction.setCustomAnimations(enter, exit, popEnter, popExit);
+            transaction.remove(tagFragment);
+            transaction.commit();
+        }
     }
 
     public static void hideFragment(@NonNull FragmentManager fragmentManager,
                                     @NonNull String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.hide(fragmentManager.findFragmentByTag(tag));
-        transaction.commit();
+        Fragment tagFragment = fragmentManager.findFragmentByTag(tag);
+
+        if (tagFragment != null) {
+            transaction.hide(tagFragment);
+            transaction.commit();
+        }
     }
 
-    public static void showFragment(@NonNull FragmentManager fragmentManager, @NonNull String tag) {
+    public static void showFragment(@NonNull FragmentManager fragmentManager,
+                                    @NonNull String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.show(fragmentManager.findFragmentByTag(tag));
-        transaction.commit();
+        Fragment tagFragment = fragmentManager.findFragmentByTag(tag);
+
+        if (tagFragment != null) {
+            transaction.show(tagFragment);
+            transaction.commit();
+        }
     }
 
     public static void showFragment(@NonNull FragmentManager fragmentManager,
@@ -140,10 +223,12 @@ public class QcFragmentUtils {
     }
 
     private static void removeExistFragment(@NonNull FragmentManager fragmentManager,
-                                            @NonNull FragmentTransaction transaction, String tag) {
+                                            @NonNull FragmentTransaction transaction,
+                                            String tag) {
         Fragment existFragment = fragmentManager.findFragmentByTag(tag);
         if (existFragment != null) {
             transaction.remove(existFragment);
+            transaction.commit();
         }
     }
 

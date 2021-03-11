@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UllingCoreLib">
 
-        <activity android:name=".ui.MainActivity"></activity>
+        <activity android:name=".ui.MainActivity">
+
+        </activity>
         <activity
             android:name=".ui.MainActivity2"
             android:theme="@style/QappTheme">
