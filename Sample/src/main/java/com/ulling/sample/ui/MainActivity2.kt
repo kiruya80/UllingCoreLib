@@ -1,27 +1,51 @@
 package com.ulling.sample.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ulling.lib.core.ui.QcBaseActivity
 import com.ulling.lib.core.utils.QcFragmentUtils
 import com.ulling.sample.R
-import com.ulling.sample.ui.ui.main.MainFragment
+import com.ulling.sample.ui.main.MainFragment
 
-class MainActivity2 : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+class MainActivity2 : QcBaseActivity() {
 
 
-        if (savedInstanceState == null) {
-        var mMainFragment:MainFragment = MainFragment()
+    override fun needGetLayoutId(): Int {
+        return R.layout.main_activity
+    }
+
+    override fun needInitToOnCreate(): Boolean {
+        var mMainFragment: MainFragment = MainFragment()
 //            supportFragmentManager.beginTransaction()
 //                    .replace(R.id.container, mMainFragment, mMainFragment.TAG)
 //                    .commitAllowingStateLoss()
 
-            QcFragmentUtils.addFragment(supportFragmentManager, mMainFragment, R.id.container, mMainFragment.TAG)
-        }
+        QcFragmentUtils.addFragment(supportFragmentManager, mMainFragment, R.id.container, mMainFragment.TAG)
+        return false
+    }
 
+    override fun optGetSavedInstanceState(savedInstanceState: Bundle?) {
+    }
 
+    override fun needResetData() {
+    }
+
+    override fun needUIBinding() {
+    }
+
+    override fun needUIEventListener() {
+    }
+
+    override fun needSubscribeUiFromViewModel() {
+    }
+
+    override fun needSubscribeUiClear() {
+    }
+
+    override fun needOnShowToUser() {
+    }
+
+    override fun optGetIntent(intent: Intent?) {
     }
 }

@@ -47,7 +47,7 @@ abstract class QcBaseActivity : AppCompatActivity(), QcInNeed, QcInOption {
 
         savedInstanceState?.let { optGetSavedInstanceState(it) }
 
-        intent?.let { optGetIntent(intent) }
+        intent?.let { optGetIntent(it) }
 
         needResetData()
 

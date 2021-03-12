@@ -1,4 +1,4 @@
-package com.ulling.sample.ui.ui
+package com.ulling.sample.data
 
 class User {
     var name:String ?= null
