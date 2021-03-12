@@ -31,6 +31,8 @@ import kotlinx.coroutines.launch
  *  코루틴 설명 구글
  *  ㄴ https://developer.android.com/kotlin/coroutines?hl=ko
  *
+ *   https://jaejong.tistory.com/61
+ *
  * iewModel 레이어에서 View와 통신하려면 앱 아키텍처 가이드에서 권장하는 대로 LiveData를 사용합니다.
  * 이 패턴을 따르면 ViewModel의 코드가 기본 스레드에서 실행되므로 MutableLiveData의 setValue() 함수를 직접 호출할 수 있습니다.
  **/

@@ -8,6 +8,21 @@ import com.ulling.lib.core.utils.QcFragmentUtils
 import com.ulling.sample.R
 import com.ulling.sample.ui.main.MainFragment
 
+/**
+*
+*
+* Class:
+* Created by KILHO on 2021-03-12 오후 5:31
+*
+* @version 1.0.0
+*
+* Description:
+*
+*  코틀린
+ *  https://developer.android.com/kotlin/learn?hl=ko
+ *
+ *
+**/
 class MainActivity2 : QcBaseActivity() {
 
 
