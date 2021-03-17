@@ -2,14 +2,20 @@
 
 1. 배포전 사용시
 
-신규 프로젝트 settings.gradle에서 아래 저장 경로
+ 1) 신규 프로젝트 settings.gradle에서 아래 저장 경로
+
+<pre><code>
 include ':UllingCoreLib'
 project(':UllingCoreLib').projectDir=new File('C:\\Android\\AndroidStudioGit\\UllingCoreLib\\UllingCoreLib')
+</code></pre>
+ 
+ 2) app폴더 내 build.gradle에서 project 추가
 
-app폴더 내 build.gradle에서 project 추가
+<pre><code>
 dependencies {
     implementation project(':UllingCoreLib')
     }
+</code></pre>
 
 
 2. 배포 이후 사용시 
