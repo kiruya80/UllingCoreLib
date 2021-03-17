@@ -1,5 +1,18 @@
 # UllingCoreLib
 
+1. 배포전 사용시
+
+신규 프로젝트 settings.gradle에서 아래 저장 경로
+include ':UllingCoreLib'
+project(':UllingCoreLib').projectDir=new File('C:\\Android\\AndroidStudioGit\\UllingCoreLib\\UllingCoreLib')
+
+app폴더 내 build.gradle에서 project 추가
+dependencies {
+    implementation project(':UllingCoreLib')
+    }
+
+
+2. 배포 이후 사용시 
 - Android Module을 JitPack을 이용하여 배포하기 참고 사이트  
 http://thdev.tech/androiddev/2016/09/14/Android-AAR-Publish-Jit.html  
 https://thdev.tech/androiddev/2016/09/14/Android-AAR-Publish-Jit/
