@@ -36,13 +36,35 @@ import kotlinx.coroutines.launch
  * iewModel 레이어에서 View와 통신하려면 앱 아키텍처 가이드에서 권장하는 대로 LiveData를 사용합니다.
  * 이 패턴을 따르면 ViewModel의 코드가 기본 스레드에서 실행되므로 MutableLiveData의 setValue() 함수를 직접 호출할 수 있습니다.
  **/
-class LoginViewModel( ) : ViewModel() {
-    var loginRepository: LoginRepository ?=null
+class LoginViewModel() : ViewModel() {
+    var loginRepository: LoginRepository? = null
 
     fun init() {
         val responseParser: LoginResponseParser = LoginResponseParser()
         loginRepository = LoginRepository(responseParser)
+
+        val stringLength: Int = stringLengthFunc("Android")
+
+        var result1 = stringMapper("Android", { input ->
+            input.length
+        })
+        QcLog.e("result1 === " + result1)
+
+        var result2 = stringMapper("Android") { input ->
+            input.length
+        }
+        QcLog.e("result2 === " + result2)
     }
+
+    val stringLengthFunc: (String) -> Int = { input ->
+        input.length
+    }
+
+    fun stringMapper(str: String, mapper: (String) -> Int): Int {
+        // Invoke function
+        return mapper(str)
+    }
+
     /**
      * 코루틴 예제
      *

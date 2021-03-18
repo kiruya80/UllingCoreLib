@@ -43,14 +43,6 @@ class MainViewModel() : ViewModel() {
         return users
     }
 
-
-    private fun loadUsers() {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-        // Do an asynchronous operation to fetch users.
-    }
-
     fun select(item: User) {
         selected.value = item
     }
