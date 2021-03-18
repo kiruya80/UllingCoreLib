@@ -5,13 +5,13 @@
 package com.ulling.lib.core.utils;
 
 import android.content.Context;
-
 import com.ulling.lib.core.base.QcBaseApplication;
 
 /**
  *
  */
 public class QcBackPressClose {
+
     private static QcBackPressClose SINGLE_U;
     private Context qCon;
     private long backKeyPressedTime = 0;
@@ -27,9 +27,11 @@ public class QcBackPressClose {
         }
         return SINGLE_U;
     }
+
     private QcBackPressClose() {
-        if (qCon == null)
+        if (qCon == null) {
             qCon = QcBaseApplication.getInstance().getApplicationContext();
+        }
     }
 
     public boolean isBackPress(String backKeyMsg) {
@@ -52,7 +54,9 @@ public class QcBackPressClose {
             backKeyPressedTime = System.currentTimeMillis();
             if (qCon != null) {
 //                    QcToast.with(qCtx, qCtx.getResources().getString(backKeyMsgId), false);
-                QcToast.getInstance().show(QcBaseApplication.getInstance().getResources().getString(backKeyMsgId), false);
+                QcToast.getInstance()
+                    .show(QcBaseApplication.getInstance().getResources().getString(backKeyMsgId),
+                        false);
             }
             return false;
         }

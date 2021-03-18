@@ -5,18 +5,18 @@ import com.ulling.lib.core.base.QcBaseApplication
 import com.ulling.lib.core.utils.QcLog
 
 /**
-*
-*
-* Class:
-* Created by KILHO on 2021-03-11 오후 3:22
-*
-* @version 1.0.0
-*
-* Description:
-*
-* 사용자에게 보일때 프레그먼트
  *
-**/
+ *
+ * Class:
+ * Created by KILHO on 2021-03-11 오후 3:22
+ *
+ * @version 1.0.0
+ *
+ * Description:
+ *
+ * 사용자에게 보일때 프레그먼트
+ *
+ **/
 abstract class QcBaseShowFragment : QcBaseFragment() {
 
     /**
@@ -59,7 +59,7 @@ abstract class QcBaseShowFragment : QcBaseFragment() {
         sectionPosition = arguments?.getInt(QcBaseLifeFragment.ARG_SECTION_POSITION) ?: -1
     }
 
-      open fun lazyFetchDataIfPrepared() {
+    open fun lazyFetchDataIfPrepared() {
         QcLog.i("lazyFetchDataIfPrepared   === " +
                 userVisibleHint + " , " + sectionPosition + " , " + isViewPrepared)
         QcBaseApplication.CLICK_LAST_RUN_TIME = 0

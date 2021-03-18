@@ -1,32 +1,29 @@
 package com.ulling.lib.core.utils;
 
 import com.ulling.lib.core.common.QcDefine;
-
+import java.util.Calendar;
+import java.util.TimeZone;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.util.Calendar;
-import java.util.TimeZone;
-
 /**
- *
  * @Class: QcJodaTimeUtils
  * @Version 1.0.0
  * @Date 2019-04-29
- *
+ * <p>
  * Description:
- *
  */
 public class QcJodaTimeUtils {
 
     private static QcJodaTimeUtils SINGLE_U;
 
     public static synchronized QcJodaTimeUtils getInstance() {
-        if (SINGLE_U == null)
+        if (SINGLE_U == null) {
             SINGLE_U = new QcJodaTimeUtils();
+        }
 
         return SINGLE_U;
     }
@@ -35,7 +32,7 @@ public class QcJodaTimeUtils {
         init();
     }
 
-// [getDiffHours()]  == getDiffHours ========== 2019-10-26T09:36:52Z
+    // [getDiffHours()]  == getDiffHours ========== 2019-10-26T09:36:52Z
 //  [getDiffHours()]  == jodatime === 10월 26일 오전 9:36
 //   [getDiffHours()]  == jodatime withZone === 10월 26일 오전 9:36
 //   [getDiffHours()]  == now === 10월 26일 오후 3:10
@@ -91,13 +88,10 @@ public class QcJodaTimeUtils {
     public static DateTime getDateTimeFromPattern(String dateTimeStr, String pattern) {
 //        DateTimeFormatter fmt = DateTimeFormat.forPattern(pattern);
 //        DateTime dateTime = fmt.parseDateTime(dateTimeStr);
-        DateTimeFormatter fmt =  DateTimeFormat.forPattern(pattern);
+        DateTimeFormatter fmt = DateTimeFormat.forPattern(pattern);
         DateTime dateTime = DateTime.parse(dateTimeStr, fmt);
         return dateTime;
     }
-
-
-
 
 //    public static String getCurrentTime(boolean isUtc) {
 //        return getCurrentTime(isUtc, QcDefine.DATE_FORMAT_UI_HHMMSS);
@@ -117,17 +111,6 @@ public class QcJodaTimeUtils {
 ////        return dtfOut.print(jodatime);
 //        return dateTime.toString(format);
 //    }
-
-
-
-
-
-
-
-
-
-
-
 
 //    public void shouldGetAfterOneDay() {
 //        Chronology chrono = GregorianChronology.getInstance();

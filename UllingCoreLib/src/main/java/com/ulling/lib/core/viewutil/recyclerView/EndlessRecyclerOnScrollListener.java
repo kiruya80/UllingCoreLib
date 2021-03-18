@@ -4,11 +4,11 @@ package com.ulling.lib.core.viewutil.recyclerView;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * Created by P100651 on 2017-07-03.
- * 리스너를 RecyclerView에 addOnScrollListener로 설정하면 됩니다.
- * OnLoadMore 함수로 리턴 받을 수가 있습니다.
+ * Created by P100651 on 2017-07-03. 리스너를 RecyclerView에 addOnScrollListener로 설정하면 됩니다. OnLoadMore
+ * 함수로 리턴 받을 수가 있습니다.
  */
 public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener {
+
     private int previousTotal = 0; // The total number of items in the dataset after the last load
     private boolean loading = true; // True if we are still waiting for the last set of data to load.
     private int visibleThreshold = 5; // The minimum amount of items to have below your current scroll position before loading more.
@@ -29,7 +29,8 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
                 previousTotal = totalItemCount;
             }
         }
-        if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
+        if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem
+            + visibleThreshold)) {
             // End has been reached
             // Do something
             currentPage++;
@@ -40,9 +41,6 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
 
     //Start loading
     public abstract void onLoadMore(int currentPage);
-
-
-
 
 //    private LinearLayoutManager mLayoutManager;
 //    //    RecyclerView.LayoutManager mLayoutManager;

@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 /**
- *
  * https://viblo.asia/p/recyclerview-handle-load-more-load-failed-and-reach-end-naQZReVvKvx
- *
+ * <p>
  * https://github.com/PhanVanLinh/RecyclerWithLoadmore-Retrieve-ReachEnd
  */
 public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
+
     // The minimum amount of items to have below your current scroll position
     // before loading more.
     private int visibleThreshold = 5;
@@ -47,22 +47,26 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
     // but first we check if we are waiting for the previous load to finish.
     @Override
     public void onScrolled(RecyclerView view, int dx, int dy) {
-        if (mLayoutManager == null)
+        if (mLayoutManager == null) {
             return;
+        }
 
         int lastVisibleItemPosition = 0;
         int totalItemCount = mLayoutManager.getItemCount();
 
         if (mLayoutManager instanceof StaggeredGridLayoutManager) {
-            int[] lastVisibleItemPositions = ((StaggeredGridLayoutManager) mLayoutManager).findLastVisibleItemPositions(null);
+            int[] lastVisibleItemPositions = ((StaggeredGridLayoutManager) mLayoutManager)
+                .findLastVisibleItemPositions(null);
             // get maximum element within the list
             lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions);
 
         } else if (mLayoutManager instanceof GridLayoutManager) {
-            lastVisibleItemPosition = ((GridLayoutManager) mLayoutManager).findLastVisibleItemPosition();
+            lastVisibleItemPosition = ((GridLayoutManager) mLayoutManager)
+                .findLastVisibleItemPosition();
 
         } else if (mLayoutManager instanceof LinearLayoutManager) {
-            lastVisibleItemPosition = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
+            lastVisibleItemPosition = ((LinearLayoutManager) mLayoutManager)
+                .findLastVisibleItemPosition();
         }
 
         // If the total item count is zero and the previous isn't, assume the

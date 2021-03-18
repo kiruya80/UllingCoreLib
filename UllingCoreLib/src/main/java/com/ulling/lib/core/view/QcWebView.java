@@ -14,11 +14,11 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-
 import com.ulling.lib.core.R;
 import com.ulling.lib.core.viewutil.QcWebViewClient;
 
 public class QcWebView extends FrameLayout {
+
     private Context context;
 
     private WebView webView;
@@ -67,8 +67,9 @@ public class QcWebView extends FrameLayout {
             @Override
             public void onCloseWindow(WebView window) {
                 super.onCloseWindow(window);
-                if (window.canGoBack())
+                if (window.canGoBack()) {
                     window.goBack();
+                }
             }
         });
 
@@ -115,6 +116,7 @@ public class QcWebView extends FrameLayout {
     }
 
     private class WebViewTask extends AsyncTask<Void, Void, Boolean> {
+
         protected Boolean doInBackground(Void... param) {
             SystemClock.sleep(100);
             return true;

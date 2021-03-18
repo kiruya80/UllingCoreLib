@@ -6,20 +6,19 @@
 package com.ulling.lib.core.utils;
 
 import android.content.Context;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-
 import java.io.IOException;
 
 /**
  *
  */
 class QcGsonBuilder {
+
     private static QcGsonBuilder gsonInstances = null;
     private static Gson GSON;
     private static final String UTC_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
@@ -44,8 +43,9 @@ class QcGsonBuilder {
     }
 
     public static QcGsonBuilder getInstance(Context mCtx_) {
-        if (gsonInstances == null)
+        if (gsonInstances == null) {
             gsonInstances = new QcGsonBuilder(mCtx_);
+        }
         return gsonInstances;
     }
 
@@ -54,6 +54,7 @@ class QcGsonBuilder {
     }
 
     public class LongTypeAdapter extends TypeAdapter<Long> {
+
         @Override
         public Long read(JsonReader reader) throws IOException {
             if (reader.peek() == JsonToken.NULL) {
@@ -83,6 +84,7 @@ class QcGsonBuilder {
     }
 
     public class FloatTypeAdapter extends TypeAdapter<Float> {
+
         @Override
         public Float read(JsonReader reader) throws IOException {
             if (reader.peek() == JsonToken.NULL) {
@@ -112,6 +114,7 @@ class QcGsonBuilder {
     }
 
     public class DoubleTypeAdapter extends TypeAdapter<Double> {
+
         @Override
         public Double read(JsonReader reader) throws IOException {
             if (reader.peek() == JsonToken.NULL) {

@@ -4,19 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.ulling.lib.core.entities.QcBaseItem;
 import com.ulling.lib.core.ui.QcBaseLifeActivity;
 import com.ulling.lib.core.ui.QcBaseLifeFragment;
 import com.ulling.lib.core.utils.QcDiffCallback;
 import com.ulling.lib.core.utils.QcLog;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +28,7 @@ import java.util.List;
  * 1. 공통으로 사용할 수 있는 데이터 리스트? 2. 데이터 모델이 필요할까
  */
 public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBaseViewHolder> {
+
     public static final int TYPE_DEFAULT = 0;
     public static final int TYPE_HEADER = 1;
     public static final int TYPE_LOAD_FAIL = -999;
@@ -49,6 +47,7 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
     public List<T> itemList;
 
     public interface QcRecyclerItemListener<T> {
+
         //        void onItemClick(View view, int position, T t, String... transName);
         void onItemClick(View view, int position, T t);
 
@@ -72,8 +71,7 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
     protected abstract void needInitToOnCreate();
 
     /**
-     * 1-2.
-     * 리셋할 데이터 정의
+     * 1-2. 리셋할 데이터 정의
      */
     protected abstract void needResetData();
 
@@ -121,19 +119,21 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
     /**
      * 4.
      * <p>
-     * UI에서 필요한 데이터 바인딩
-     * View객체에 접근하여 데이터 연결한다.
+     * UI에서 필요한 데이터 바인딩 View객체에 접근하여 데이터 연결한다.
      */
     protected abstract void needUIBinding(QcBaseViewHolder holder, int position, Object object);
 
-    protected abstract void needUIHeaderBinding(QcBaseViewHolder holder, int position, Object object);
+    protected abstract void needUIHeaderBinding(QcBaseViewHolder holder, int position,
+        Object object);
 
-    protected abstract void needUILoadFailBinding(QcBaseViewHolder holder, int position, Object object);
+    protected abstract void needUILoadFailBinding(QcBaseViewHolder holder, int position,
+        Object object);
 
-    protected abstract void needUILoadProgressBinding(QcBaseViewHolder holder, int position, Object object);
+    protected abstract void needUILoadProgressBinding(QcBaseViewHolder holder, int position,
+        Object object);
 
-    protected abstract void needUIOtherBinding(QcBaseViewHolder holder, int position, Object object);
-
+    protected abstract void needUIOtherBinding(QcBaseViewHolder holder, int position,
+        Object object);
 
     /**
      * 6.
@@ -168,8 +168,9 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
         if (null == item_) {
             return;
         }
-        if (this.itemList == null)
+        if (this.itemList == null) {
             this.itemList = new ArrayList<>();
+        }
         int start = itemList.size();
         this.itemList.add(item_);
 
@@ -184,8 +185,9 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
             return;
         }
         QcLog.e("add == ");
-        if (this.itemList == null)
+        if (this.itemList == null) {
             this.itemList = new ArrayList<>();
+        }
         int start = itemList.size();
         this.itemList.add(index, item_);
 
@@ -196,9 +198,7 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
     }
 
     /**
-     * 아이템 전체를 추가
-     * 기존 아이템 삭제됨
-     * TYPE_DEFAULT으로 설정
+     * 아이템 전체를 추가 기존 아이템 삭제됨 TYPE_DEFAULT으로 설정
      */
     public void addAll(List<T> itemList_) {
 //        if (null == itemList_ || itemList_.isEmpty()) {
@@ -232,8 +232,9 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
 //                mQcBaseItem.setType(QcRecyclerBaseAdapter.TYPE_DEFAULT);
 //            }
 //        }
-        if (this.itemList == null)
+        if (this.itemList == null) {
             this.itemList = new ArrayList<>();
+        }
         this.itemList.addAll(itemList_);
 
         notifyDataSetChanged();
@@ -325,15 +326,17 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
         if (getItemCount() == 0) {
             return;
         }
-        if (!removeProgress())
+        if (!removeProgress()) {
             return;
+        }
         QcLog.e("addProgress =====");
         add(item_);
     }
 
     public boolean removeProgress() {
-        if (getItemCount() == 0)
+        if (getItemCount() == 0) {
             return false;
+        }
 
         QcLog.e("removeProgress == " + itemList.size());
         for (int i = itemList.size() - 1; i >= 0; i--) {
@@ -350,8 +353,9 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
     }
 
     public boolean isProgress() {
-        if (getItemCount() == 0)
+        if (getItemCount() == 0) {
             return false;
+        }
 
         for (int i = itemList.size() - 1; i >= 0; i--) {
             if (itemList.get(i) instanceof QcBaseItem) {
@@ -372,15 +376,17 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
         if (getItemCount() == 0) {
             return;
         }
-        if (!removeLoadFail())
+        if (!removeLoadFail()) {
             return;
+        }
         QcLog.e("addLoadFail =====");
         add(item_);
     }
 
     public boolean removeLoadFail() {
-        if (getItemCount() == 0)
+        if (getItemCount() == 0) {
             return false;
+        }
 
         QcLog.e("removeLoadFail == ");
 
@@ -397,8 +403,9 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
     }
 
     public boolean isLoadFail() {
-        if (getItemCount() == 0)
+        if (getItemCount() == 0) {
             return false;
+        }
 
         for (int i = itemList.size() - 1; i >= 0; i--) {
             if (itemList.get(i) instanceof QcBaseItem) {
@@ -424,7 +431,8 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
         needResetData();
     }
 
-    public QcRecyclerBaseAdapter(QcBaseLifeActivity qQcBaseLifeActivity, QcRecyclerItemListener qcRecyclerItemListener) {
+    public QcRecyclerBaseAdapter(QcBaseLifeActivity qQcBaseLifeActivity,
+        QcRecyclerItemListener qcRecyclerItemListener) {
         super();
         this.qQcBaseLifeActivity = qQcBaseLifeActivity;
         this.qCon = qQcBaseLifeActivity.getBaseContext();
@@ -432,6 +440,7 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
         needInitToOnCreate();
         needResetData();
     }
+
     public QcRecyclerBaseAdapter(Fragment fragment) {
         super();
         this.fragment = fragment;
@@ -439,6 +448,7 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
         needInitToOnCreate();
         needResetData();
     }
+
     /**
      * 아답터 시작
      */
@@ -450,7 +460,8 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
         needResetData();
     }
 
-    public QcRecyclerBaseAdapter(QcBaseLifeFragment qFragment, QcRecyclerItemListener qcRecyclerItemListener) {
+    public QcRecyclerBaseAdapter(QcBaseLifeFragment qFragment,
+        QcRecyclerItemListener qcRecyclerItemListener) {
         super();
         this.qFragment = qFragment;
         this.qCon = qFragment.getContext();
@@ -460,15 +471,15 @@ public abstract class QcRecyclerBaseAdapter<T> extends RecyclerView.Adapter<QcBa
     }
 
     /**
-     * 1. 뷰모델 가져오기
-     * 2. 이벤트 리스너 달기
+     * 1. 뷰모델 가져오기 2. 이벤트 리스너 달기
      */
     @Override
     public QcBaseViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewTypeResId) {
 //        QcLog.i("onCreateViewHolder == ");
 
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
-        ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, viewTypeResId, viewGroup, false);
+        ViewDataBinding binding = DataBindingUtil
+            .inflate(layoutInflater, viewTypeResId, viewGroup, false);
 
 //        needUIEventListener(viewTypeResId, binding);
         return new QcBaseViewHolder(binding);

@@ -2,7 +2,6 @@ package com.ulling.lib.core.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-
 import androidx.appcompat.widget.AppCompatImageView;
 
 /**
@@ -13,6 +12,7 @@ import androidx.appcompat.widget.AppCompatImageView;
  * @since :
  */
 public final class QcSquareImageView extends AppCompatImageView {
+
     public QcSquareImageView(Context context) {
         super(context);
     }

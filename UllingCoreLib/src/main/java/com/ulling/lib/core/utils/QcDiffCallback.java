@@ -3,7 +3,6 @@ package com.ulling.lib.core.utils;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
-
 import java.util.List;
 
 public class QcDiffCallback<T> extends DiffUtil.Callback {
@@ -32,7 +31,7 @@ public class QcDiffCallback<T> extends DiffUtil.Callback {
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
         return mOldItemList.get(oldItemPosition).equals(
-                mNewItemList.get(newItemPosition));
+            mNewItemList.get(newItemPosition));
     }
 
     // 두 항목의 데이터가 같은지 여부를 결정합니다. areItemsTheSame()이 true를 반환하는 경우에만 호출됩니다.

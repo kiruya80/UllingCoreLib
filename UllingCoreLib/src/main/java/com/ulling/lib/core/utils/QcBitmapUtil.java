@@ -3,12 +3,11 @@ package com.ulling.lib.core.utils;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
-
 import com.ulling.lib.core.base.QcBaseApplication;
-
 import java.io.IOException;
 
 public class QcBitmapUtil {
+
     private static QcBitmapUtil SINGLE_U;
 
     public static synchronized QcBitmapUtil getInstance() {
@@ -31,14 +30,15 @@ public class QcBitmapUtil {
      * @param filter
      * @return
      */
-    public static Bitmap resizeMaxBitmap(boolean isResize, Bitmap oriBitmap, float maxImageSize, boolean filter) {
+    public static Bitmap resizeMaxBitmap(boolean isResize, Bitmap oriBitmap, float maxImageSize,
+        boolean filter) {
         if (!isResize) {
             return oriBitmap;
         }
         if (oriBitmap.getWidth() > maxImageSize || oriBitmap.getWidth() > maxImageSize) {
             float ratio = Math.min(
-                    (float) maxImageSize / oriBitmap.getWidth(),
-                    (float) maxImageSize / oriBitmap.getHeight());
+                (float) maxImageSize / oriBitmap.getWidth(),
+                (float) maxImageSize / oriBitmap.getHeight());
             int width = Math.round((float) ratio * oriBitmap.getWidth());
             int height = Math.round((float) ratio * oriBitmap.getHeight());
 
@@ -50,8 +50,7 @@ public class QcBitmapUtil {
 
 
     /**
-     * 비트맵 회전
-     * ㄴ 카메라등 사진이 일부 단말등에서 회전되어 나와 재설정하는 단계
+     * 비트맵 회전 ㄴ 카메라등 사진이 일부 단말등에서 회전되어 나와 재설정하는 단계
      *
      * @param bitmap
      * @param degree
@@ -60,7 +59,8 @@ public class QcBitmapUtil {
     public Bitmap rotate(Bitmap bitmap, float degree) {
         Matrix matrix = new Matrix();
         matrix.postRotate(degree);
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        return Bitmap
+            .createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
 
     /**
@@ -82,7 +82,8 @@ public class QcBitmapUtil {
         int exifDegree;
 
         if (exif != null) {
-            exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            exifOrientation = exif
+                .getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
             exifDegree = exifOrientationToDegrees(exifOrientation);
         } else {
             exifDegree = 0;

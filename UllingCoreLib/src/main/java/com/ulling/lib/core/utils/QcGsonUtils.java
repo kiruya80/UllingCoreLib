@@ -1,11 +1,9 @@
 package com.ulling.lib.core.utils;
 
 import android.content.Context;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParseException;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -16,6 +14,7 @@ import java.util.List;
  */
 
 public class QcGsonUtils {
+
     private static QcGsonUtils SINGLE_U = null;
     private final Gson GSON;
 
@@ -63,6 +62,7 @@ public class QcGsonUtils {
     }
 
     private static class ListOfJson<T> implements ParameterizedType {
+
         private Class<?> wrapped;
 
         public ListOfJson(Class<T> wrapper) {

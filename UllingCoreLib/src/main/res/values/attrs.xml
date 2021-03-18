@@ -2,12 +2,12 @@
 <resources>
 
     <declare-styleable name="StyledTextView">
-        <attr name="typeface" format="string" />
+        <attr format="string" name="typeface" />
     </declare-styleable>
 
     <declare-styleable name="QcAutoSoftkeyView">
-        <attr name="visiableTime" format="integer" />
-        <attr name="orientation" format="enum">
+        <attr format="integer" name="visiableTime" />
+        <attr format="enum" name="orientation">
             <enum name="both" value="0" />
             <enum name="portrait" value="1" />
             <enum name="landscape" value="2" />
@@ -28,8 +28,8 @@
         <!--<enum name="false" value="false"/>-->
         <!--<enum name="true" value="true"/>-->
         <!--</attr>-->
-        <attr name="qcReverseLayout" format="boolean" />
-        <attr name="qcCurrentPage" format="reference|integer" />
+        <attr format="boolean" name="qcReverseLayout" />
+        <attr format="reference|integer" name="qcCurrentPage" />
         <!--<declare-styleable name="RecycleListView">-->
         <!--<attr name="paddingBottomNoButtons" format="dimension"/>-->
         <!--<attr name="paddingTopNoTitle" format="dimension"/>-->

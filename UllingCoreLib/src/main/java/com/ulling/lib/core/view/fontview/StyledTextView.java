@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-
 import androidx.appcompat.widget.AppCompatTextView;
-
 import com.ulling.lib.core.R;
 
 /**
@@ -42,7 +40,8 @@ public class StyledTextView extends AppCompatTextView {
 
     public void getTypefaceFont(Context context, AttributeSet attrs) {
         Typeface typeFaceFont_ = null;
-        TypedArray arr = context.getTheme().obtainStyledAttributes(attrs, R.styleable.StyledTextView, 0, 0);
+        TypedArray arr = context.getTheme()
+            .obtainStyledAttributes(attrs, R.styleable.StyledTextView, 0, 0);
         try {
             String fontName = arr.getString(R.styleable.StyledTextView_typeface);
 
@@ -63,7 +62,8 @@ public class StyledTextView extends AppCompatTextView {
         Typeface typeFaceFont_ = null;
         typeFaceFont_ = StyledFontHelper.getInstance(context).getTyprFaceFont(fontName);
 
-        if (typeFaceFont_ != null)
+        if (typeFaceFont_ != null) {
             setTypeface(typeFaceFont_);
+        }
     }
 }

@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
  * @since :
  */
 public final class QcSquareRelativeLayout extends RelativeLayout {
+
     public QcSquareRelativeLayout(Context context) {
         super(context);
     }

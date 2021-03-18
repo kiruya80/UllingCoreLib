@@ -20,6 +20,7 @@ public class QcWebViewClient extends WebViewClient {
     }
 
     public interface OnWebViewClientListener {
+
         void onLodingFinish();
     }
 

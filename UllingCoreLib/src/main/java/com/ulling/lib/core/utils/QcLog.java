@@ -9,11 +9,7 @@ import android.os.Debug;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.ulling.lib.core.BuildConfig;
-import com.ulling.lib.core.base.QcBaseApplication;
-import com.ulling.lib.core.common.QcDefine;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -54,8 +50,9 @@ public class QcLog {
     }
 
     public static void initialize(String appName, String logPath) {
-        if (fileLogDirPath != null)
+        if (fileLogDirPath != null) {
             return;
+        }
 
         APP_NAME = appName;
         LOG_PATH = "/.ulling/" + appName + "/Logs/";
@@ -143,16 +140,16 @@ public class QcLog {
         msgBuilder = new StringBuilder();
         try {
             msgBuilder
-                    // move class line
-                    .append(" (").append(Thread.currentThread().getStackTrace()[4].getFileName())
-                    .append(":")
-                    .append(Thread.currentThread().getStackTrace()[4].getLineNumber()).append(")")
-                    // methodName class name
-                    .append(" ")
-                    .append("[").append(Thread.currentThread().getStackTrace()[4].getMethodName())
-                    .append("()").append("]")
-                    .append(" ")
-                    .append(" == ").append(message);
+                // move class line
+                .append(" (").append(Thread.currentThread().getStackTrace()[4].getFileName())
+                .append(":")
+                .append(Thread.currentThread().getStackTrace()[4].getLineNumber()).append(")")
+                // methodName class name
+                .append(" ")
+                .append("[").append(Thread.currentThread().getStackTrace()[4].getMethodName())
+                .append("()").append("]")
+                .append(" ")
+                .append(" == ").append(message);
         } catch (Exception e) {
             e.printStackTrace();
             msgBuilder.append(message);
@@ -173,22 +170,24 @@ public class QcLog {
     }
 
     public static String getLogStyleMsg(String title, String message) {
-        String codeLine = Thread.currentThread().getStackTrace()[4].getFileName() + ":" + Thread.currentThread().getStackTrace()[4].getLineNumber();
+        String codeLine =
+            Thread.currentThread().getStackTrace()[4].getFileName() + ":" + Thread.currentThread()
+                .getStackTrace()[4].getLineNumber();
         String logStyleMsg = codeLine;
         if (title != null && !"".equals(title)) {
             logStyleMsg = ""
-                    + "    ┌──── ■ " + codeLine + " ■ ────┐\n"
-                    + "    ┌──────────────────────────────────────────────────────────────────────────────────────────────────────\n"
-                    + "    │  " + title + "\n"
-                    + "    │  " + message + "\n"
-                    + "    └──────────────────────────────────────────────────────────────────────────────────────────────────────";
+                + "    ┌──── ■ " + codeLine + " ■ ────┐\n"
+                + "    ┌──────────────────────────────────────────────────────────────────────────────────────────────────────\n"
+                + "    │  " + title + "\n"
+                + "    │  " + message + "\n"
+                + "    └──────────────────────────────────────────────────────────────────────────────────────────────────────";
 
         } else {
             logStyleMsg = ""
-                    + "    ┌──── ■ " + codeLine + " ■ ────┐\n"
-                    + "    ┌──────────────────────────────────────────────────────────────────────────────────────────────────────\n"
-                    + "    │  " + message + "\n"
-                    + "    └──────────────────────────────────────────────────────────────────────────────────────────────────────";
+                + "    ┌──── ■ " + codeLine + " ■ ────┐\n"
+                + "    ┌──────────────────────────────────────────────────────────────────────────────────────────────────────\n"
+                + "    │  " + message + "\n"
+                + "    └──────────────────────────────────────────────────────────────────────────────────────────────────────";
         }
 
 //        print(logType.error, logStyleMsg);
@@ -216,8 +215,8 @@ public class QcLog {
 
     private static void nativeHeap() {
         String heapSize = " NativeHeapSize = " + Debug.getNativeHeapSize()
-                + " NativeHeapFreeSize = " + Debug.getNativeHeapFreeSize()
-                + " NativeHeapAllocatedSize() = " + Debug.getNativeHeapAllocatedSize();
+            + " NativeHeapFreeSize = " + Debug.getNativeHeapFreeSize()
+            + " NativeHeapAllocatedSize() = " + Debug.getNativeHeapAllocatedSize();
         log(logType.error, heapSize);
     }
 
@@ -301,7 +300,7 @@ public class QcLog {
 
         try {
             bufferedWriter = new BufferedWriter(
-                    new FileWriter(fileDir + "/" + fileName, true));
+                new FileWriter(fileDir + "/" + fileName, true));
             bufferedWriter.write(message);
             bufferedWriter.flush();
 

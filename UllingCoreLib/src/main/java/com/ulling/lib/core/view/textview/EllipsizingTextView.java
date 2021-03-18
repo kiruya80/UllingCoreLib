@@ -25,19 +25,20 @@ import android.text.StaticLayout;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.view.View;
-
 import androidx.appcompat.widget.AppCompatTextView;
-
 import java.util.regex.Pattern;
 
 /**
  * 말줄임 상태체크를 위한 커스텀 텍스트뷰
  */
 public class EllipsizingTextView extends AppCompatTextView {
+
     private static final String ELLIPSIS = "…";
-    private static final Pattern DEFAULT_END_PUNCTUATION = Pattern.compile("[\\.,…;\\:\\s]*$", Pattern.DOTALL);
+    private static final Pattern DEFAULT_END_PUNCTUATION = Pattern
+        .compile("[\\.,…;\\:\\s]*$", Pattern.DOTALL);
 
     public interface EllipsizeListener {
+
         void ellipsizeStateChanged(View v, boolean ellipsized);
     }
 
@@ -106,7 +107,7 @@ public class EllipsizingTextView extends AppCompatTextView {
 
     @Override
     protected void onTextChanged(CharSequence text, int start, int before,
-                                 int after) {
+        int after) {
         super.onTextChanged(text, start, before, after);
         if (!programmaticChange) {
             fullText = text.toString();
@@ -172,8 +173,9 @@ public class EllipsizingTextView extends AppCompatTextView {
         // ellipsized = true , isEllipsized = false  정상적으로 리스너 전달
         if (ellipsized != isEllipsized) {
             isEllipsized = ellipsized;
-            if (ellipsizeListeners != null)
+            if (ellipsizeListeners != null) {
                 ellipsizeListeners.ellipsizeStateChanged(this, ellipsized);
+            }
         }
     }
 
@@ -205,9 +207,9 @@ public class EllipsizingTextView extends AppCompatTextView {
 
     private Layout createWorkingLayout(String workingText) {
         return new StaticLayout(workingText, getPaint(),
-                getWidth() - getPaddingLeft() - getPaddingRight(),
-                Alignment.ALIGN_NORMAL, lineSpacingMultiplier,
-                lineAdditionalVerticalPadding, false /* includepad */);
+            getWidth() - getPaddingLeft() - getPaddingRight(),
+            Alignment.ALIGN_NORMAL, lineSpacingMultiplier,
+            lineAdditionalVerticalPadding, false /* includepad */);
     }
 
     @Override

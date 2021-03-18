@@ -14,17 +14,17 @@ import com.ulling.lib.core.base.QcBaseApplication
 import com.ulling.lib.core.utils.QcLog
 
 /**
-*
-*
-* Class:
-* Created by KILHO on 2021-03-11 오후 3:21
-*
-* @version 1.0.0
-*
-* Description:
-*
-*
-**/
+ *
+ *
+ * Class:
+ * Created by KILHO on 2021-03-11 오후 3:21
+ *
+ * @version 1.0.0
+ *
+ * Description:
+ *
+ *
+ **/
 abstract class QcBaseFragment : Fragment(), QcInNeed, QcInOption {
     val TAG: String = javaClass.simpleName
     var APP_NAME: String? = null

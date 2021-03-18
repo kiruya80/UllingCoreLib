@@ -1,41 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2016. iUlling Corp.
   ~ Created By Kil-Ho Choi
   -->
 
 <resources>
-  <color name="color_white">#FFFFFF</color>
-  <color name="color_black">#000000</color>
-  <color name="color_trance">#0fff</color>
-  <color name="color_gray">#686868</color>
-  <color name="color_light_gray">#E6E6E6</color>
-  <color name="color_red">#D32F2F</color>
-  <color name="color_green">#4CAF50</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_black">#000000</color>
+    <color name="color_trance">#0fff</color>
+    <color name="color_gray">#686868</color>
+    <color name="color_light_gray">#E6E6E6</color>
+    <color name="color_red">#D32F2F</color>
+    <color name="color_green">#4CAF50</color>
 
-  <color name="color_FFBB86FC">#FFBB86FC</color>
-  <color name="color_FF6200EE">#FF6200EE</color>
-  <color name="color_FF3700B3">#FF3700B3</color>
-  <color name="color_FF03DAC5">#FF03DAC5</color>
-  <color name="color_FF018786">#FF018786</color>
+    <color name="color_FFBB86FC">#FFBB86FC</color>
+    <color name="color_FF6200EE">#FF6200EE</color>
+    <color name="color_FF3700B3">#FF3700B3</color>
+    <color name="color_FF03DAC5">#FF03DAC5</color>
+    <color name="color_FF018786">#FF018786</color>
 
-  <!-- 반투명 -->
-  <color name="color_black_trance_10">#11000000</color>
-  <color name="color_black_trance_20">#33000000</color>
-  <color name="color_black_trance_30">#48000000</color>
-  <color name="color_black_trance_40">#66000000</color>
-  <color name="color_black_trance_60">#99000000</color>
-  <color name="color_black_trance_80">#bb000000</color>
-  <color name="color_black_trance_90">#dd000000</color>
-  <color name="color_white_trance_60">#99ffffff</color>
-  <color name="color_white_trance_80">#80ffffff</color>
-  <color name="color_dim_gray_50">#80686868</color>
-  <color name="color_dim_gray_70">#a0686868</color>
-  <color name="color_dim_gray_90">#dd686868</color>
+    <!-- 반투명 -->
+    <color name="color_black_trance_10">#11000000</color>
+    <color name="color_black_trance_20">#33000000</color>
+    <color name="color_black_trance_30">#48000000</color>
+    <color name="color_black_trance_40">#66000000</color>
+    <color name="color_black_trance_60">#99000000</color>
+    <color name="color_black_trance_80">#bb000000</color>
+    <color name="color_black_trance_90">#dd000000</color>
+    <color name="color_white_trance_60">#99ffffff</color>
+    <color name="color_white_trance_80">#80ffffff</color>
+    <color name="color_dim_gray_50">#80686868</color>
+    <color name="color_dim_gray_70">#a0686868</color>
+    <color name="color_dim_gray_90">#dd686868</color>
 
-  <!-- loading progress color -->
-  <color name="color_progress_01">#fc9db6</color>
-  <color name="color_progress_02">#c0b2ff</color>
-  <color name="color_progress_03">#92e3e7</color>
-  <color name="color_progress_04">#bfffb3</color>
+    <!-- loading progress color -->
+    <color name="color_progress_01">#fc9db6</color>
+    <color name="color_progress_02">#c0b2ff</color>
+    <color name="color_progress_03">#92e3e7</color>
+    <color name="color_progress_04">#bfffb3</color>
 </resources>

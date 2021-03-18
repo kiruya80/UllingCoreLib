@@ -1,16 +1,14 @@
 package com.ulling.lib.core.ui;
 
 import android.os.Bundle;
-
 import com.ulling.lib.core.base.QcBaseApplication;
 import com.ulling.lib.core.utils.QcLog;
 
 /**
- * 현재 보이는 프레그먼트
- * 보이는 경우
- * needPageVisiableToUser가 호출된다
+ * 현재 보이는 프레그먼트 보이는 경우 needPageVisiableToUser가 호출된다
  */
 public abstract class QcBaseShowLifeFragement extends QcBaseLifeFragment {
+
     /**
      * 뷰 초기화 체크
      */
@@ -30,10 +28,12 @@ public abstract class QcBaseShowLifeFragement extends QcBaseLifeFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         // 뷰 초기화가 안된 경우 패스
-        if (!isViewPrepared)
+        if (!isViewPrepared) {
             return;
+        }
 
-        QcLog.i("setUserVisibleHint == " + sectionPosition + " , " + isVisibleToUser + " ," + isViewPrepared);
+        QcLog.i("setUserVisibleHint == " + sectionPosition + " , " + isVisibleToUser + " ,"
+            + isViewPrepared);
 
         if (isVisibleToUser) {
             lazyFetchDataIfPrepared();
@@ -73,7 +73,7 @@ public abstract class QcBaseShowLifeFragement extends QcBaseLifeFragment {
 
     private void lazyFetchDataIfPrepared() {
         QcLog.i("lazyFetchDataIfPrepared   === " +
-                getUserVisibleHint() + " , " + sectionPosition + " , " + isViewPrepared);
+            getUserVisibleHint() + " , " + sectionPosition + " , " + isViewPrepared);
         QcBaseApplication.CLICK_LAST_RUN_TIME = 0;
 
         if (getUserVisibleHint() && isViewPrepared) {

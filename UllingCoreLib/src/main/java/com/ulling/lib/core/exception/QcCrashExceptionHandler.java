@@ -2,10 +2,8 @@ package com.ulling.lib.core.exception;
 
 import android.os.Environment;
 import android.util.Log;
-
 import com.ulling.lib.core.base.QcBaseApplication;
 import com.ulling.lib.core.utils.QcLog;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -15,24 +13,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
-*
-*
-* Class: QcCrashExceptionHandler
-* Created by 19001662 on 2021-01-05 오후 5:56
-*
-* @version 1.0.0
-*
-* Description:
-*
+ * Class: QcCrashExceptionHandler Created by 19001662 on 2021-01-05 오후 5:56
+ *
+ * @version 1.0.0
+ * <p>
+ * Description:
+ * <p>
  * 앱 강제종료 등 로컬 로그 남기기
-*
-**/
-public class QcCrashExceptionHandler  implements Thread.UncaughtExceptionHandler {
-    public final static String TAG = QcCrashExceptionHandler.class.getSimpleName();;
+ **/
+public class QcCrashExceptionHandler implements Thread.UncaughtExceptionHandler {
+
+    public final static String TAG = QcCrashExceptionHandler.class.getSimpleName();
+    ;
 
     /**
-     * URQAController.InitializeAndStartSession
-     * class com.urqa.library.UncaughtExceptionHandler
+     * URQAController.InitializeAndStartSession class com.urqa.library.UncaughtExceptionHandler
      */
     private Thread.UncaughtExceptionHandler defaultUEHandler;
 
@@ -52,7 +47,7 @@ public class QcCrashExceptionHandler  implements Thread.UncaughtExceptionHandler
     }
 
     public QcCrashExceptionHandler(String filePath) {
-        Log.e(TAG, "CustomizedExceptionHandler =============" );
+        Log.e(TAG, "CustomizedExceptionHandler =============");
 //        this.localPath = localPath;
         this.FILE_PATH = filePath;
 
@@ -86,14 +81,14 @@ public class QcCrashExceptionHandler  implements Thread.UncaughtExceptionHandler
 
             if (localPath != null) {
                 String fileLog =
-                        "\n┌──── ■ " + TAG + " ■ ────┐\n"
-                                + "┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n"
-                                + "│ ▶ " + "발생시간 : " + getCurrentTime(CRASH_DATE_PATTERN) + "\n"
-                                + "│ ▶ " + "앱 버전  : " + QcBaseApplication.getInstance().getAppVer() + "\n"
-                                + "│ ▶ " + ex.toString() + "\n"
-                                + "├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n"
-                                + "│  " + stacktrace + "\n"
-                                + "└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ";
+                    "\n┌──── ■ " + TAG + " ■ ────┐\n"
+                        + "┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n"
+                        + "│ ▶ " + "발생시간 : " + getCurrentTime(CRASH_DATE_PATTERN) + "\n"
+                        + "│ ▶ " + "앱 버전  : " + QcBaseApplication.getInstance().getAppVer() + "\n"
+                        + "│ ▶ " + ex.toString() + "\n"
+                        + "├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n"
+                        + "│  " + stacktrace + "\n"
+                        + "└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────\n ";
 
                 writeToFile(fileLog);
             }

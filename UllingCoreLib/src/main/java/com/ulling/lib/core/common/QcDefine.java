@@ -7,12 +7,11 @@ package com.ulling.lib.core.common;
 
 import android.Manifest;
 import android.os.Environment;
-
 import com.ulling.lib.core.base.QcBaseApplication;
-
 import java.io.File;
 
 public class QcDefine {
+
     /**
      * 상용/ 테스트용
      */
@@ -39,9 +38,9 @@ public class QcDefine {
     public static final String TIMEZONE_SEOUL = "Asia/Seoul";
     public static final String TIMEZONE_UTC = "UTC";
     public static final String UTC_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
-    public  static final String DATE_FORMAT_UI_YYMMDDHH = "yyyy-MM-dd HH:mm:ss";
-    public  static final String DATE_FORMAT_UI_MMDDHH = "MM-dd HH:mm:ss";
-    public  static final String DATE_FORMAT_UI_HHMMSS = "HH:mm:ss";
+    public static final String DATE_FORMAT_UI_YYMMDDHH = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_FORMAT_UI_MMDDHH = "MM-dd HH:mm:ss";
+    public static final String DATE_FORMAT_UI_HHMMSS = "HH:mm:ss";
 
     public static final String displayDateFormatFrom = "MM.dd aa hh:mm";
     public static final String saveDateFormatFrom = "MM.dd aa hh:mm";
@@ -68,36 +67,36 @@ public class QcDefine {
     public static final int REQUEST_PERMISSIONS = 910;
 
     public static final String[] PERMISSIONS_READ_STORAGE_CAMERA =
-            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA};
 
 //    public static final String URL_UPLOAD_IMAGE = "http://dev2.aritaum.com/comm/comm_appimage_upload.do?uploadCd=USR_PHOTO&thumbnailWidth=98;128&thumbnailHeight=98;128&flagFixed=N";
 
 
     public static final String[] PERMISSIONS_CAMERA_STORAGE = {
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        Manifest.permission.CAMERA,
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     public static final String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     public static final String[] PERMISSIONS_LOCATION = {
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION};
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION};
 
     public final static String DIRECTORY_LOG_CAT_NAME = "logcat";
 
     // /storage/emulated/0/DCU
     public static String APP_ROOT =
-            Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-                    + QcBaseApplication.getInstance().getAppName();
+        Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+            + QcBaseApplication.getInstance().getAppName();
 
     // /storage/emulated/0/DCU/log
     public static String LOG_CAT_ROOT =
-            APP_ROOT + File.separator
-                    + DIRECTORY_LOG_CAT_NAME + File.separator;
+        APP_ROOT + File.separator
+            + DIRECTORY_LOG_CAT_NAME + File.separator;
 
     public static String FILE_TXT = ".txt";
 }

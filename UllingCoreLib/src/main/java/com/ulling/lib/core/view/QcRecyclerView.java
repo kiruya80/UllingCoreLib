@@ -4,13 +4,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
-
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
 import com.ulling.lib.core.utils.QcLog;
 import com.ulling.lib.core.viewutil.adapter.QcRecyclerBaseAdapter;
 import com.ulling.lib.core.viewutil.recyclerView.EndlessRecyclerScrollListener;
@@ -22,40 +20,31 @@ import com.ulling.lib.core.viewutil.recyclerView.EndlessRecyclerScrollListener;
  * <p>
  * LinearLayoutManager
  * <p>
- * <android.support.v7.widget.RecyclerView
- * app:layoutManager="LinearLayoutManager" />
+ * <android.support.v7.widget.RecyclerView app:layoutManager="LinearLayoutManager" />
  * GridLayoutManager
  * <p>
- * <android.support.v7.widget.RecyclerView
- * app:layoutManager="GridLayoutManager"
- * app:spanCount="2" />
- * LinearLayoutManager
+ * <android.support.v7.widget.RecyclerView app:layoutManager="GridLayoutManager" app:spanCount="2"
+ * /> LinearLayoutManager
  * <p>
- * <android.support.v7.widget.RecyclerView
- * app:layoutManager="StaggeredGridLayoutManager"
+ * <android.support.v7.widget.RecyclerView app:layoutManager="StaggeredGridLayoutManager"
  * app:spanCount="3" />
  * <p>
  * <p>
- * LinearLayoutManager
- * // use a linear layout manager
- * mLayoutManager = new LinearLayoutManager(this);
- * mRecyclerView.setLayoutManager(mLayoutManager);
+ * LinearLayoutManager // use a linear layout manager mLayoutManager = new
+ * LinearLayoutManager(this); mRecyclerView.setLayoutManager(mLayoutManager);
  * <p>
- * GridLayoutManager
- * // use a staggered grid layout manager
- * mGridLayoutManager = new new GridLayoutManager(this, 3);
- * mRecyclerView.setLayoutManager(mGridLayoutManager);
+ * GridLayoutManager // use a staggered grid layout manager mGridLayoutManager = new new
+ * GridLayoutManager(this, 3); mRecyclerView.setLayoutManager(mGridLayoutManager);
  * <p>
- * StaggeredGridLayoutManager
- * // use a staggered grid layout manager
- * mStgaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+ * StaggeredGridLayoutManager // use a staggered grid layout manager mStgaggeredGridLayoutManager =
+ * new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
  * mRecyclerView.setLayoutManager(mStgaggeredGridLayoutManager);
  * <p>
  * <p>
- * Header/Footer을 포함?
- * Fail loading ?
+ * Header/Footer을 포함? Fail loading ?
  */
 public abstract class QcRecyclerView extends RecyclerView {
+
     private Context context;
     private QcRecyclerListener qcRecyclerListener;
     private QcRecyclerBaseAdapter adapter;
@@ -65,6 +54,7 @@ public abstract class QcRecyclerView extends RecyclerView {
 
 
     public interface QcRecyclerListener {
+
         void onLoadMore(int page, int totalItemsCount, RecyclerView view);
 
         void onPositionTop();
@@ -77,12 +67,14 @@ public abstract class QcRecyclerView extends RecyclerView {
      * SCROLL PAGE SETTING
      */
 
-    private EndlessRecyclerScrollListener endlessRecyclerScrollListener = new EndlessRecyclerScrollListener((LayoutManager) getLayoutManager()) {
+    private EndlessRecyclerScrollListener endlessRecyclerScrollListener = new EndlessRecyclerScrollListener(
+        (LayoutManager) getLayoutManager()) {
         @Override
         public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
             QcLog.i("onLoadMore =====");
-            if (endlessRecyclerScrollListener != null)
+            if (endlessRecyclerScrollListener != null) {
                 endlessRecyclerScrollListener.onNetworkLoading(true);
+            }
             if (qcRecyclerListener != null) {
                 qcRecyclerListener.onLoadMore(page, totalItemsCount, view);
             }
@@ -91,25 +83,27 @@ public abstract class QcRecyclerView extends RecyclerView {
         @Override
         public void onPositionTop() {
             QcLog.i("onPositionTop =====");
-            if (qcRecyclerListener != null)
+            if (qcRecyclerListener != null) {
                 qcRecyclerListener.onPositionTop();
+            }
         }
 
         @Override
         public void onPositionBottom() {
             QcLog.i("onPositionBottom =====");
-            if (qcRecyclerListener != null)
+            if (qcRecyclerListener != null) {
                 qcRecyclerListener.onPositionBottom();
+            }
         }
     };
 
     /**
-     * 스크롤 데이터 리스너 가져오기
-     * 뷰에서 네트워크데이터 변경시 스크롤리스너에게 알려주기위해서
+     * 스크롤 데이터 리스너 가져오기 뷰에서 네트워크데이터 변경시 스크롤리스너에게 알려주기위해서
      */
     public EndlessRecyclerScrollListener getEndlessRecyclerScrollListener() {
-        if (endlessRecyclerScrollListener != null)
+        if (endlessRecyclerScrollListener != null) {
             return endlessRecyclerScrollListener;
+        }
         return null;
     }
 
@@ -181,13 +175,14 @@ public abstract class QcRecyclerView extends RecyclerView {
     }
 
     private void initEmptyView() {
-        if (emptyView == null)
+        if (emptyView == null) {
             return;
+        }
 
         emptyView.setVisibility(
-                getAdapter() == null || getAdapter().getItemCount() == 0 ? VISIBLE : GONE);
+            getAdapter() == null || getAdapter().getItemCount() == 0 ? VISIBLE : GONE);
         QcRecyclerView.this.setVisibility(
-                getAdapter() == null || getAdapter().getItemCount() == 0 ? GONE : VISIBLE);
+            getAdapter() == null || getAdapter().getItemCount() == 0 ? GONE : VISIBLE);
     }
 
     final AdapterDataObserver adapterDataObserver = new AdapterDataObserver() {
@@ -248,12 +243,14 @@ public abstract class QcRecyclerView extends RecyclerView {
 
     public void setAdapter(QcRecyclerBaseAdapter adapter, int pageSize, View emptyView) {
         if (!(adapter instanceof QcRecyclerBaseAdapter)) {
-            throw new IllegalArgumentException("please use QcRecyclerBaseAdapter to instead of Adapter");
+            throw new IllegalArgumentException(
+                "please use QcRecyclerBaseAdapter to instead of Adapter");
         }
         if (pageSize > 0) {
             this.pageSize = pageSize;
-            if (endlessRecyclerScrollListener != null)
+            if (endlessRecyclerScrollListener != null) {
                 endlessRecyclerScrollListener.setPgeSize(pageSize);
+            }
         }
 //        this.emptyView = emptyView;
 //        this.adapter = adapter;
@@ -406,7 +403,6 @@ public abstract class QcRecyclerView extends RecyclerView {
 //        return layoutManager;
 //    }
 
-
 //    /**
 //     * set list divider
 //     *
@@ -477,7 +473,6 @@ public abstract class QcRecyclerView extends RecyclerView {
 //    public void setDivider(Drawable drawable) {
 //        setDivider(drawable, WRAP_CONTENT);
 //    }
-
 
 //    /**
 //     * enable list view auto load more

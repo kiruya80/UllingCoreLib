@@ -8,39 +8,27 @@ import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.util.Base64;
-
 import androidx.core.content.ContextCompat;
-
 import com.ulling.lib.core.common.QcDefine;
 import com.ulling.lib.core.exception.QcCrashExceptionHandler;
 import com.ulling.lib.core.utils.QcLog;
 import com.ulling.lib.core.utils.QcPreferences;
 import com.ulling.lib.core.utils.QcToast;
-
-import net.danlew.android.joda.JodaTimeAndroid;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import net.danlew.android.joda.JodaTimeAndroid;
 
 /**
  * 2017.07.19
  * <p>
- * 4.4	KitKat	19	17.1%
- * 5.0	Lollipop	21	7.8%
- * 5.1	22	22.3%
- * 6.0	Marshmallow	23	31.8%
- * 7.0	Nougat	24	10.6%
- * 7.1	25	0.9%
+ * 4.4	KitKat	19	17.1% 5.0	Lollipop	21	7.8% 5.1	22	22.3% 6.0	Marshmallow	23	31.8%
+ * 7.0	Nougat	24	10.6% 7.1	25	0.9%
  * <p>
- * FlexboxLayout 뜯어보기
- * http://www.kmshack.kr/2017/03/flexboxlayout-%EB%9C%AF%EC%96%B4%EB%B3%B4%EA%B8%B0/
+ * FlexboxLayout 뜯어보기 http://www.kmshack.kr/2017/03/flexboxlayout-%EB%9C%AF%EC%96%B4%EB%B3%B4%EA%B8%B0/
  * <p>
- * CoordinatorLayout과 Behavior의 관계
- * >> 스크롤하는 경우 상단등 자식뷰들이 변화하게
- * http://www.kmshack.kr/tag/coordinatorlayout/
+ * CoordinatorLayout과 Behavior의 관계 >> 스크롤하는 경우 상단등 자식뷰들이 변화하게 http://www.kmshack.kr/tag/coordinatorlayout/
  * <p>
- * adapter modelview holder 최적화
- * https://medium.com/google-developers/android-data-binding-recyclerview-db7c40d9f0e4
+ * adapter modelview holder 최적화 https://medium.com/google-developers/android-data-binding-recyclerview-db7c40d9f0e4
  * https://medium.com/@taman.neupane/basic-example-of-livedata-and-viewmodel-14d5af922d0
  * <p>
  * NestedScrollView
@@ -48,13 +36,11 @@ import java.security.NoSuchAlgorithmException;
  * BottomSheetBehavior
  * <p>
  * <p>
- * Transition Animation
- * 화면 전환 애니메이션
- * android:transitionName
- * http://jhson5183.tistory.com/2
+ * Transition Animation 화면 전환 애니메이션 android:transitionName http://jhson5183.tistory.com/2
  * https://developer.android.com/training/material/animations.html?hl=ko
  */
 public class QcBaseApplication extends Application {
+
     //    public String TAG = getClass().getSimpleName();
     private static QcBaseApplication SINGLE_U;
     public static String APP_NAME = "";
@@ -65,9 +51,7 @@ public class QcBaseApplication extends Application {
      */
     public static long CLICK_INTERVAL = 300;
     /**
-     * 마지막 실행 클릭 시간
-     * 앱에서 공통으로 사용하며, 액티비티 & 프레그먼트 onResume 에서 리셋한다
-     *
+     * 마지막 실행 클릭 시간 앱에서 공통으로 사용하며, 액티비티 & 프레그먼트 onResume 에서 리셋한다
      */
     public static long CLICK_LAST_RUN_TIME = 0;
     /**
@@ -112,8 +96,9 @@ public class QcBaseApplication extends Application {
         QcPreferences.getInstance();
         QcToast.getInstance();
         appExecutors = new AppExecutors();
-        if (QcDefine.DEBUG_FLAG)
+        if (QcDefine.DEBUG_FLAG) {
             getHashKey();
+        }
 
         // 로그 저장등 관리
 //        QcLog.initialize(getString(R.string.app_name_eng), null);
@@ -122,8 +107,7 @@ public class QcBaseApplication extends Application {
     }
 
     /**
-     * 크래시 앱 저장용도
-     * "/.ulling/log/Crash/";
+     * 크래시 앱 저장용도 "/.ulling/log/Crash/";
      *
      * @param filePath
      */
@@ -137,7 +121,8 @@ public class QcBaseApplication extends Application {
 
     private void getHashKey() {
         try {
-            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            PackageInfo info = getPackageManager()
+                .getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
@@ -160,8 +145,7 @@ public class QcBaseApplication extends Application {
     }
 
     /**
-     * 애플리케이션은 구성변경을 위해 재시작하지 않는다.
-     * 변경이 필요하다면 이곳에서 핸들러를 재정의 하면 된다.
+     * 애플리케이션은 구성변경을 위해 재시작하지 않는다. 변경이 필요하다면 이곳에서 핸들러를 재정의 하면 된다.
      *
      * @param newConfig
      */
@@ -225,14 +209,14 @@ public class QcBaseApplication extends Application {
      */
     public boolean isExternalStorage() {
         if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
+            Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
+            Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            || ContextCompat.checkSelfPermission(this,
+            Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
             // 퍼미션 체크
             return false;
         }

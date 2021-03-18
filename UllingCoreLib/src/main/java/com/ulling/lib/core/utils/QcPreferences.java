@@ -6,7 +6,6 @@ package com.ulling.lib.core.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -15,7 +14,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.LongSerializationPolicy;
 import com.ulling.lib.core.base.QcBaseApplication;
 import com.ulling.lib.core.common.QcDefine;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +23,7 @@ import java.util.List;
  * @변경이력
  */
 public class QcPreferences {
+
     private static QcPreferences SINGLE_U = null;
     /**
      * preference
@@ -48,7 +47,8 @@ public class QcPreferences {
 
     private QcPreferences() {
         APP_NAME = QcBaseApplication.getInstance().getPackageName();
-        prefs = QcBaseApplication.getInstance().getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
+        prefs = QcBaseApplication.getInstance()
+            .getSharedPreferences(APP_NAME, Context.MODE_PRIVATE);
         editor = prefs.edit();
         GsonBuilder gsonGsonBuilder = new GsonBuilder();
         gsonGsonBuilder.setDateFormat(QcDefine.UTC_DATE_FORMAT);
@@ -73,8 +73,9 @@ public class QcPreferences {
             editor.putString(key, value);
         }
         editor.commit();
-        if (PREFER_LOG_FLAG)
+        if (PREFER_LOG_FLAG) {
             QcLog.e("key :" + key + " , value :" + value);
+        }
     }
 
     public void put(String key, int value) {
@@ -84,8 +85,9 @@ public class QcPreferences {
         }
         editor.putInt(key, value);
         editor.commit();
-        if (PREFER_LOG_FLAG)
+        if (PREFER_LOG_FLAG) {
             QcLog.e("key :" + key + " , value :" + value);
+        }
     }
 
     public void put(String key, boolean value) {
@@ -95,8 +97,9 @@ public class QcPreferences {
         }
         editor.putBoolean(key, value);
         editor.commit();
-        if (PREFER_LOG_FLAG)
+        if (PREFER_LOG_FLAG) {
             QcLog.e("key :" + key + " , value :" + value);
+        }
     }
 
     public void put(String key, long value) {
@@ -106,8 +109,9 @@ public class QcPreferences {
         }
         editor.putLong(key, value);
         editor.commit();
-        if (PREFER_LOG_FLAG)
+        if (PREFER_LOG_FLAG) {
             QcLog.e("key :" + key + " , value :" + value);
+        }
     }
 
     public void put(String key, float value) {
@@ -117,8 +121,9 @@ public class QcPreferences {
         }
         editor.putFloat(key, value);
         editor.commit();
-        if (PREFER_LOG_FLAG)
+        if (PREFER_LOG_FLAG) {
             QcLog.e("key :" + key + " , value :" + value);
+        }
     }
 
     public void put(String key, Object object) {
@@ -132,8 +137,9 @@ public class QcPreferences {
             editor.putString(key, GSON.toJson(object));
         }
         editor.commit();
-        if (PREFER_LOG_FLAG && object != null)
+        if (PREFER_LOG_FLAG && object != null) {
             QcLog.e("key :" + key + " , value :" + object.toString());
+        }
     }
 
     //    public void put(String key, ArrayList<String> valueList) {
@@ -156,8 +162,9 @@ public class QcPreferences {
             editor.putString(key, GSON.toJson(valueList));
         }
         editor.commit();
-        if (PREFER_LOG_FLAG && valueList != null)
+        if (PREFER_LOG_FLAG && valueList != null) {
             QcLog.e("key :" + key + " , value :" + valueList);
+        }
     }
 
     public String get(String key, String defValue) {
@@ -165,8 +172,9 @@ public class QcPreferences {
             QcLog.e("Key is empty or null");
             return null;
         }
-        if (PREFER_LOG_FLAG)
+        if (PREFER_LOG_FLAG) {
             QcLog.e("key :" + key + " , value :" + prefs.getString(key, defValue));
+        }
         return prefs.getString(key, defValue);
     }
 
@@ -175,8 +183,9 @@ public class QcPreferences {
             QcLog.e("Key is empty or null");
             return 0;
         }
-        if (PREFER_LOG_FLAG)
+        if (PREFER_LOG_FLAG) {
             QcLog.e("key :" + key + " , value :" + prefs.getInt(key, defValue));
+        }
         return prefs.getInt(key, defValue);
     }
 
@@ -185,8 +194,9 @@ public class QcPreferences {
             QcLog.e("Key is empty or null");
             return false;
         }
-        if (PREFER_LOG_FLAG)
+        if (PREFER_LOG_FLAG) {
             QcLog.e("key :" + key + " , value :" + prefs.getBoolean(key, defValue));
+        }
         return prefs.getBoolean(key, defValue);
     }
 
@@ -195,8 +205,9 @@ public class QcPreferences {
             QcLog.e("Key is empty or null");
             return 0;
         }
-        if (PREFER_LOG_FLAG)
+        if (PREFER_LOG_FLAG) {
             QcLog.e("key :" + key + " , value :" + prefs.getLong(key, defValue));
+        }
         return prefs.getLong(key, defValue);
     }
 
@@ -205,8 +216,9 @@ public class QcPreferences {
             QcLog.e("Key is empty or null");
             return 0;
         }
-        if (PREFER_LOG_FLAG)
+        if (PREFER_LOG_FLAG) {
             QcLog.e("key :" + key + " , value :" + prefs.getFloat(key, defValue));
+        }
         return prefs.getFloat(key, defValue);
     }
 

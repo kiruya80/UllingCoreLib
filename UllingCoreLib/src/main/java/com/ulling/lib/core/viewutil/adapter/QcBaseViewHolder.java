@@ -1,7 +1,6 @@
 package com.ulling.lib.core.viewutil.adapter;
 
 import android.view.View;
-
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
  * @description :
  * @since :
  */
-public class QcBaseViewHolder extends RecyclerView.ViewHolder  {
+public class QcBaseViewHolder extends RecyclerView.ViewHolder {
+
     private final ViewDataBinding binding;
 
     public QcBaseViewHolder(View itemView) {

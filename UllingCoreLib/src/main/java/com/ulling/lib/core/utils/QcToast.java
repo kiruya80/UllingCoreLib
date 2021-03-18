@@ -7,10 +7,10 @@ package com.ulling.lib.core.utils;
 import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
-
 import com.ulling.lib.core.base.QcBaseApplication;
 
 public class QcToast {
+
     private static QcToast SINGLE_U;
     private Toast toast;
     private Context qCon;
@@ -27,22 +27,26 @@ public class QcToast {
     }
 
     private QcToast() {
-        if (qCon == null)
+        if (qCon == null) {
             qCon = QcBaseApplication.getInstance().getApplicationContext();
-        if (qCon != null)
+        }
+        if (qCon != null) {
             toast = new Toast(qCon);
+        }
         QcLog.i("QcToast init Success !!");
     }
 
-    public void show(String toastStr ) {
+    public void show(String toastStr) {
         show(toastStr, false);
     }
 
     public void show(String toastStr, boolean longDuration) {
-        if (toastStr == null)
+        if (toastStr == null) {
             return;
-        if ("".equals(toastStr))
+        }
+        if ("".equals(toastStr)) {
             return;
+        }
         if (toast == null) {
             QcLog.e("toast is null !!");
             return;
@@ -62,10 +66,12 @@ public class QcToast {
     }
 
     public void show(String toastStr, boolean longDuration, boolean isCenter) {
-        if (toastStr == null)
+        if (toastStr == null) {
             return;
-        if ("".equals(toastStr))
+        }
+        if ("".equals(toastStr)) {
             return;
+        }
         if (toast == null) {
             QcLog.e("toast is null !!");
             return;
@@ -77,8 +83,9 @@ public class QcToast {
             } else {
                 toast = Toast.makeText(qCon, toastStr, Toast.LENGTH_SHORT);
             }
-            if (isCenter)
+            if (isCenter) {
                 toast.setGravity(Gravity.CENTER, 0, 0);
+            }
             toast.show();
             QcLog.w("Toast ==");
         } catch (Exception e) {

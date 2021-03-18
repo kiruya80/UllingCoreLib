@@ -5,7 +5,6 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 
 /**
@@ -23,13 +22,14 @@ public class QcTextViewUtils {
      * @return
      */
     public static TextView setColoredTextView(@NonNull TextView textView, @NonNull String allText,
-                                              @NonNull String coloredText, @NonNull int color) {
+        @NonNull String coloredText, @NonNull int color) {
         int start = allText.indexOf(coloredText);
         int end = start + coloredText.length();
         if (start >= 0 && end > 0) {
             ForegroundColorSpan colorSpan = new ForegroundColorSpan(color);
             SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(allText);
-            spannableStringBuilder.setSpan(colorSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableStringBuilder
+                .setSpan(colorSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             textView.setText(spannableStringBuilder);
         } else {
             textView.setText(allText);

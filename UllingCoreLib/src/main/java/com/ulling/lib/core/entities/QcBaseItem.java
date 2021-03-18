@@ -1,7 +1,6 @@
 package com.ulling.lib.core.entities;
 
 import com.ulling.lib.core.viewutil.adapter.QcRecyclerBaseAdapter;
-
 import java.io.Serializable;
 
 /**
@@ -13,6 +12,7 @@ import java.io.Serializable;
  */
 
 public class QcBaseItem implements Serializable {
+
     public int type = QcRecyclerBaseAdapter.TYPE_DEFAULT;
 
     public int getType() {

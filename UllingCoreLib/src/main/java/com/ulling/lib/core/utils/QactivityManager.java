@@ -2,16 +2,15 @@ package com.ulling.lib.core.utils;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
 
 /**
- * 액티비티 매니져
- * 로그 아웃 등 액티비티 관리
+ * 액티비티 매니져 로그 아웃 등 액티비티 관리
  *
  * @author kiruya80@gmail.com
  */
 public class QactivityManager {
+
     private static QactivityManager activityManager = null;
     private ArrayList<AppCompatActivity> activityList = null;
 
@@ -32,8 +31,9 @@ public class QactivityManager {
      * @param activity
      */
     public void addActivity(AppCompatActivity activity) {
-        if (activityList == null)
+        if (activityList == null) {
             activityList = new ArrayList<AppCompatActivity>();
+        }
         activityList.add(activity);
     }
 

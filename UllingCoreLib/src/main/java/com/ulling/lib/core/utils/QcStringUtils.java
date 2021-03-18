@@ -4,7 +4,6 @@ import android.graphics.Paint;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.widget.TextView;
-
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -15,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class QcStringUtils {
+
     public static int NUMBER_TEN = 1;
     public static int NUMBER_HUNDRED = 2;
     public static int NUMBER_THOUSAND = 3;
@@ -33,22 +33,22 @@ public class QcStringUtils {
     }
 
     /**
-     * number자리수 반올림
-     * 1 : 십단위
-     * 2 : 백단위
+     * number자리수 반올림 1 : 십단위 2 : 백단위
      *
      * @param value
      * @param number
      * @return
      */
     public static double getRound(double value, int number) {
-        if (number <= 0)
+        if (number <= 0) {
             return value;
+        }
 
         int intValue = (int) Math.ceil(value);
         int length = (int) (Math.log10(intValue) + 1);
-        if (length <= number)
+        if (length <= number) {
             return value;
+        }
 
         double roundNum = 1;
         for (int i = 0; i < number; i++) {
@@ -80,6 +80,7 @@ public class QcStringUtils {
 
     /**
      * 콤마
+     *
      * @param value
      * @return
      */
@@ -90,6 +91,7 @@ public class QcStringUtils {
         }
         return setConvertComma(v);
     }
+
     public static String setConvertComma(int value) {
         return NumberFormat.getNumberInstance(Locale.KOREA).format(value);
     }
@@ -163,8 +165,6 @@ public class QcStringUtils {
             return decimalFormat.format(num);
         }
     }
-
-
 
 
     public static BigDecimal GetDoubleAdd(double value1, double value2) {
@@ -264,7 +264,8 @@ public class QcStringUtils {
      * 특수문자 제외
      */
     public InputFilter filter = new InputFilter() {
-        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest,
+            int dstart, int dend) {
             for (int i = start; i < end; i++) {
                 if (!Character.isLetterOrDigit(source.charAt(i))) {
                     return "";
@@ -275,9 +276,9 @@ public class QcStringUtils {
     };
 
     //특수문자 제거 하기
-    public static String StringReplace(String str){
+    public static String StringReplace(String str) {
         String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
-        str =str.replaceAll(match, " ");
+        str = str.replaceAll(match, " ");
         return str;
     }
 
@@ -287,19 +288,18 @@ public class QcStringUtils {
     }
 
     //이메일 유효성
-    public static boolean isEmailPattern(String email){
-        Pattern pattern= Pattern.compile("\\w+[@]\\w+\\.\\w+");
-        Matcher match=pattern.matcher(email);
+    public static boolean isEmailPattern(String email) {
+        Pattern pattern = Pattern.compile("\\w+[@]\\w+\\.\\w+");
+        Matcher match = pattern.matcher(email);
         return match.find();
     }
 
     //연속 스페이스 제거
-    public static String continueSpaceRemove(String str){
+    public static String continueSpaceRemove(String str) {
         String match2 = "\\s{2,}";
         str = str.replaceAll(match2, " ");
         return str;
     }
-
 
 //    public static int getColor(Context context, int id) {
 //        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {

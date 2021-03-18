@@ -6,9 +6,7 @@ package com.ulling.lib.core.listener;
 
 import android.os.SystemClock;
 import android.view.View;
-
 import com.ulling.lib.core.base.QcBaseApplication;
-import com.ulling.lib.core.utils.QcLog;
 
 /**
  * @author : KILHO
@@ -20,6 +18,7 @@ import com.ulling.lib.core.utils.QcLog;
  * @변경이력
  */
 public abstract class OnSingleClickListener implements View.OnClickListener {
+
     //    private static long MIN_CLICK_INTERVAL = 300;
     private long clickLastRunTime = 0;
     private long interval;

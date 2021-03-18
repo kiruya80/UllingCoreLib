@@ -1,7 +1,6 @@
 package com.ulling.lib.core.utils;
 
 import com.ulling.lib.core.common.QcDefine;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +11,7 @@ import java.util.TimeZone;
  * Class: QcDateUtils Created by KILHO on 03/04/2019 8:15 PM
  *
  * @version 1.0.0
- *
+ * <p>
  * Description: 날짜 유틸
  **/
 public class QcDateUtils {
@@ -20,6 +19,7 @@ public class QcDateUtils {
     public static String getCurrentTime() {
         return getCurrentTime(QcDefine.DATE_FORMAT_UI_HHMMSS);
     }
+
     public static String getCurrentTime(String format) {
         return getSimpleDateFormat(format, new Date());
     }
@@ -34,18 +34,18 @@ public class QcDateUtils {
      * @Class: DateUtil
      * @Version 1.0.0
      * @Date 2019-04-03
-     *
+     * <p>
      * Description:
-     *
+     * <p>
      * ㄴ utc 시간 계산하기
      */
-    public static String localtimeToUTC(String localTime, String pattern)  throws Exception {
+    public static String localtimeToUTC(String localTime, String pattern) throws Exception {
         String utcTime = null;
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 
         try {
             Date parseDate = sdf.parse(localTime);
-            utcTime =  localtimeToUTC(parseDate, pattern);
+            utcTime = localtimeToUTC(parseDate, pattern);
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception(e);
@@ -100,14 +100,13 @@ public class QcDateUtils {
 //    }
 
 
-
     /**
      * UTC time   to local time
      *
      * @Class: DateUtil
      * @Version 1.0.0
      * @Date 2019-04-03
-     *
+     * <p>
      * Description:
      */
     public static String utcToLocaltime(String utcTime, String pattern) throws Exception {
@@ -129,7 +128,7 @@ public class QcDateUtils {
 
         try {
             Date parseDate = sdf.parse(utcTime);
-            localTime =  utcToLocaltime(parseDate, pattern);
+            localTime = utcToLocaltime(parseDate, pattern);
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception(e);
@@ -160,7 +159,7 @@ public class QcDateUtils {
      * convertToDate
      */
     public static String convertToDate(String inputDate, String fromPattern, String toPattern)
-            throws Exception {
+        throws Exception {
         String dateTime = inputDate;
 //        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a", Locale.US);
         SimpleDateFormat format = new SimpleDateFormat(fromPattern);

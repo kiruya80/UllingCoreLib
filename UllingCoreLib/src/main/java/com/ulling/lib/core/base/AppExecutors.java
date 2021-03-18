@@ -18,9 +18,7 @@ package com.ulling.lib.core.base;
 
 import android.os.Handler;
 import android.os.Looper;
-
 import androidx.annotation.NonNull;
-
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -41,8 +39,8 @@ public class AppExecutors {
 
     public AppExecutors() {
         this(Executors.newSingleThreadExecutor(),
-                Executors.newFixedThreadPool(THREAD_POOL_SIZE),
-                new MainThreadExecutor());
+            Executors.newFixedThreadPool(THREAD_POOL_SIZE),
+            new MainThreadExecutor());
     }
 
     private AppExecutors(Executor diskIO, Executor networkIO, Executor mainThread) {

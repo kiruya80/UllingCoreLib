@@ -1,5 +1,7 @@
 package com.ulling.lib.core.utils;
 
+import static android.content.Context.WINDOW_SERVICE;
+
 import android.app.Application;
 import android.app.Service;
 import android.content.Context;
@@ -20,19 +22,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import com.ulling.lib.core.base.QcBaseApplication;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static android.content.Context.WINDOW_SERVICE;
-
 public class QcUtils {
+
     public static final String PLAY_STORE_MARKET_DETAIL = "market://details?id=";
     public static final String PLAY_STORE_MARKET_DETAIL_APPS = "https://play.google.com/store/apps/details?id=";
 
@@ -42,11 +40,7 @@ public class QcUtils {
     public static final int UPDATE_MINOR = 3;
 
     /**
-     * 앱 업데이트가 필요한지 체크
-     * ex) 1.2.30
-     * ㄴ 1 : 메이져
-     * ㄴ 2 : 버그
-     * ㄴ 3 : 마이너
+     * 앱 업데이트가 필요한지 체크 ex) 1.2.30 ㄴ 1 : 메이져 ㄴ 2 : 버그 ㄴ 3 : 마이너
      *
      * @param context
      * @param localAppVer
@@ -128,7 +122,8 @@ public class QcUtils {
         if (editText != null) {
             editText.clearFocus();
         }
-        InputMethodManager im = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager im = (InputMethodManager) context
+            .getSystemService(Context.INPUT_METHOD_SERVICE);
         im.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
@@ -142,7 +137,8 @@ public class QcUtils {
         if (editText != null) {
             editText.requestFocus();
         }
-        InputMethodManager im = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager im = (InputMethodManager) context
+            .getSystemService(Context.INPUT_METHOD_SERVICE);
         im.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
@@ -154,7 +150,8 @@ public class QcUtils {
      */
     public static boolean hasSoftMenu(Context context) {
         //메뉴버튼 유무
-        boolean hasMenuKey = ViewConfiguration.get(context.getApplicationContext()).hasPermanentMenuKey();
+        boolean hasMenuKey = ViewConfiguration.get(context.getApplicationContext())
+            .hasPermanentMenuKey();
 
         //뒤로가기 버튼 유무
         boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
@@ -198,7 +195,7 @@ public class QcUtils {
 
     public static int getPixelToDp(Context context, float dp) {
         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
-                context.getResources().getDisplayMetrics());
+            context.getResources().getDisplayMetrics());
         return px;
     }
 
@@ -215,7 +212,7 @@ public class QcUtils {
             return resources.getDimensionPixelSize(resourceId);
         } else {
             return (int) Math.ceil((Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? 24 : 25) *
-                    resources.getDisplayMetrics().density);
+                resources.getDisplayMetrics().density);
         }
     }
 
@@ -238,7 +235,7 @@ public class QcUtils {
     public static boolean isTablet(Context context) {
         boolean bTablet = false;
         int screenSizeType = context.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK;
+            & Configuration.SCREENLAYOUT_SIZE_MASK;
 
         switch (screenSizeType) {
             case Configuration.SCREENLAYOUT_SIZE_XLARGE:
@@ -262,20 +259,20 @@ public class QcUtils {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         if (context instanceof AppCompatActivity) {
             ((AppCompatActivity) context).getWindowManager()
-                    .getDefaultDisplay().getMetrics(displayMetrics);
+                .getDefaultDisplay().getMetrics(displayMetrics);
 
         } else if (context instanceof Application) {
             WindowManager windowManager = (WindowManager) context.getSystemService
-                    (WINDOW_SERVICE);
+                (WINDOW_SERVICE);
             windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         } else if (context instanceof Service) {
             WindowManager windowManager = (WindowManager) context.getSystemService
-                    (WINDOW_SERVICE);
+                (WINDOW_SERVICE);
             windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         }
 
         return (displayMetrics.widthPixels < displayMetrics.heightPixels) ?
-                Configuration.ORIENTATION_PORTRAIT : Configuration.ORIENTATION_LANDSCAPE;
+            Configuration.ORIENTATION_PORTRAIT : Configuration.ORIENTATION_LANDSCAPE;
     }
 
     /**
@@ -379,15 +376,19 @@ public class QcUtils {
     public static void startGoogleStore(AppCompatActivity activity, boolean isFinish) {
         final String appPackageName = activity.getPackageName();
         try {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(PLAY_STORE_MARKET_DETAIL + appPackageName));
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse(PLAY_STORE_MARKET_DETAIL + appPackageName));
             activity.startActivity(intent);
-            if (isFinish)
+            if (isFinish) {
                 activity.finish();
+            }
         } catch (android.content.ActivityNotFoundException anfe) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(PLAY_STORE_MARKET_DETAIL_APPS + appPackageName));
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse(PLAY_STORE_MARKET_DETAIL_APPS + appPackageName));
             activity.startActivity(intent);
-            if (isFinish)
+            if (isFinish) {
                 activity.finish();
+            }
         }
     }
 
@@ -397,21 +398,25 @@ public class QcUtils {
      * @param activity
      * @param appPackageName
      */
-    public static void startGoogleStore(AppCompatActivity activity, String appPackageName, boolean isFinish) {
+    public static void startGoogleStore(AppCompatActivity activity, String appPackageName,
+        boolean isFinish) {
         try {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(PLAY_STORE_MARKET_DETAIL + appPackageName));
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse(PLAY_STORE_MARKET_DETAIL + appPackageName));
             activity.startActivity(intent);
-            if (isFinish)
+            if (isFinish) {
                 activity.finish();
+            }
 
         } catch (android.content.ActivityNotFoundException anfe) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(PLAY_STORE_MARKET_DETAIL_APPS + appPackageName));
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse(PLAY_STORE_MARKET_DETAIL_APPS + appPackageName));
             activity.startActivity(intent);
-            if (isFinish)
+            if (isFinish) {
                 activity.finish();
+            }
         }
     }
-
 
     /**
      * 안드로이드 디바이스에 최신 버전의 Google Play Services가 설치되어 있는지 확인
@@ -441,7 +446,6 @@ public class QcUtils {
 //        }
 //    }
 
-
 //    public static int getActionBarHeight(AppCompatActivity activity) {
 //        int actionBarHeight = activity.getSupportActionBar().getHeight();
 //        if (actionBarHeight != 0)
@@ -456,8 +460,7 @@ public class QcUtils {
 //    }
 
     /**
-     * https://blog.asamaru.net/2015/12/15/android-app-finish/
-     * http://duongame.blogspot.com/2018/11/android.html
+     * https://blog.asamaru.net/2015/12/15/android-app-finish/ http://duongame.blogspot.com/2018/11/android.html
      * 앱 완전 종료
      *
      * @param activity

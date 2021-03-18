@@ -12,18 +12,18 @@ import com.ulling.lib.core.base.QcBaseApplication
 import com.ulling.lib.core.utils.QcLog
 
 /**
-*
-*
-* Class:
-* Created by KILHO on 2021-03-11 오후 2:39
-*
-* @version 1.0.0
-*
-* Description:
-*
-* 베이스 액티비티
  *
-**/
+ *
+ * Class:
+ * Created by KILHO on 2021-03-11 오후 2:39
+ *
+ * @version 1.0.0
+ *
+ * Description:
+ *
+ * 베이스 액티비티
+ *
+ **/
 abstract class QcBaseActivity : AppCompatActivity(), QcInNeed, QcInOption {
     val TAG: String = javaClass.simpleName
     var APP_NAME: String? = null

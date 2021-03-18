@@ -3,8 +3,8 @@ package com.ulling.lib.core.viewutil.recyclerView;
 /**
  * Created by P100651 on 2017-07-03.
  */
-import android.view.View;
 
+import android.view.View;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,47 +43,51 @@ public class RecyclerViewPositionHelper {
      */
     public int findFirstVisibleItemPosition() {
         final View child = findOneVisibleChild(0, layoutManager.getChildCount(), false, true);
-        return child == null ? RecyclerView.NO_POSITION : recyclerView.getChildAdapterPosition(child);
+        return child == null ? RecyclerView.NO_POSITION
+            : recyclerView.getChildAdapterPosition(child);
     }
 
     /**
      * Returns the adapter position of the first fully visible view. This position does not include
      * adapter changes that were dispatched after the last layout pass.
      *
-     * @return The adapter position of the first fully visible item or
-     * {@link RecyclerView#NO_POSITION} if there aren't any visible items.
+     * @return The adapter position of the first fully visible item or {@link
+     * RecyclerView#NO_POSITION} if there aren't any visible items.
      */
     public int findFirstCompletelyVisibleItemPosition() {
         final View child = findOneVisibleChild(0, layoutManager.getChildCount(), true, false);
-        return child == null ? RecyclerView.NO_POSITION : recyclerView.getChildAdapterPosition(child);
+        return child == null ? RecyclerView.NO_POSITION
+            : recyclerView.getChildAdapterPosition(child);
     }
 
     /**
-     * Returns the adapter position of the last visible view. This position does not include
-     * adapter changes that were dispatched after the last layout pass.
+     * Returns the adapter position of the last visible view. This position does not include adapter
+     * changes that were dispatched after the last layout pass.
      *
      * @return The adapter position of the last visible view or {@link RecyclerView#NO_POSITION} if
      * there aren't any visible items
      */
     public int findLastVisibleItemPosition() {
         final View child = findOneVisibleChild(layoutManager.getChildCount() - 1, -1, false, true);
-        return child == null ? RecyclerView.NO_POSITION : recyclerView.getChildAdapterPosition(child);
+        return child == null ? RecyclerView.NO_POSITION
+            : recyclerView.getChildAdapterPosition(child);
     }
 
     /**
      * Returns the adapter position of the last fully visible view. This position does not include
      * adapter changes that were dispatched after the last layout pass.
      *
-     * @return The adapter position of the last fully visible view or
-     * {@link RecyclerView#NO_POSITION} if there aren't any visible items.
+     * @return The adapter position of the last fully visible view or {@link
+     * RecyclerView#NO_POSITION} if there aren't any visible items.
      */
     public int findLastCompletelyVisibleItemPosition() {
         final View child = findOneVisibleChild(layoutManager.getChildCount() - 1, -1, true, false);
-        return child == null ? RecyclerView.NO_POSITION : recyclerView.getChildAdapterPosition(child);
+        return child == null ? RecyclerView.NO_POSITION
+            : recyclerView.getChildAdapterPosition(child);
     }
 
     View findOneVisibleChild(int fromIndex, int toIndex, boolean completelyVisible,
-                             boolean acceptPartiallyVisible) {
+        boolean acceptPartiallyVisible) {
         OrientationHelper helper;
         if (layoutManager.canScrollVertically()) {
             helper = OrientationHelper.createVerticalHelper(layoutManager);

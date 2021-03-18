@@ -3,7 +3,6 @@ package com.ulling.lib.core.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-
 import androidx.viewpager.widget.ViewPager;
 
 public class QcWrapContentViewPager extends ViewPager {
@@ -54,7 +53,8 @@ public class QcWrapContentViewPager extends ViewPager {
             int height = 0;
             for (int i = 0; i < getChildCount(); i++) {
                 View child = getChildAt(i);
-                child.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+                child.measure(widthMeasureSpec,
+                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
                 int childMeasuredHeight = child.getMeasuredHeight();
                 if (childMeasuredHeight > height) {
                     height = childMeasuredHeight;

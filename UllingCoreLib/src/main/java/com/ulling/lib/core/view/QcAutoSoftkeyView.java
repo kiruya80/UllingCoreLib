@@ -1,21 +1,21 @@
 package com.ulling.lib.core.view;
 
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
+
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
-
 import com.ulling.lib.core.R;
-
-import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
-import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
 
 /**
  * 전체 화면으로 되는 경우 소프트키 일정시간 뒤 안보이기
  */
 public class QcAutoSoftkeyView extends View implements View.OnSystemUiVisibilityChangeListener {
+
     private final static int HIDE_SECONDS = 5;
     private int visiableTime = 0;
 
@@ -57,17 +57,20 @@ public class QcAutoSoftkeyView extends View implements View.OnSystemUiVisibility
     public void onSystemUiVisibilityChange(int visibility) {
         int diff = mLastSystemUiVis ^ visibility;
         mLastSystemUiVis = visibility;
-        if ((diff & SYSTEM_UI_FLAG_HIDE_NAVIGATION) != 0 && (visibility & SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0) {
+        if ((diff & SYSTEM_UI_FLAG_HIDE_NAVIGATION) != 0
+            && (visibility & SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0) {
             setNavVisibility(true);
         }
     }
 
     private void getTypeOrientation(Context context, AttributeSet attrs) {
-        TypedArray arr = context.getTheme().obtainStyledAttributes(attrs, R.styleable.QcAutoSoftkeyView, 0, 0);
+        TypedArray arr = context.getTheme()
+            .obtainStyledAttributes(attrs, R.styleable.QcAutoSoftkeyView, 0, 0);
         try {
 
             visiableTime = arr.getInteger(R.styleable.QcAutoSoftkeyView_orientation, 0);
-            direction = Direction.values()[arr.getInt(R.styleable.QcAutoSoftkeyView_orientation, 0)];
+            direction = Direction.values()[arr
+                .getInt(R.styleable.QcAutoSoftkeyView_orientation, 0)];
         } catch (Exception e) {
         } finally {
             arr.recycle();
@@ -102,11 +105,9 @@ public class QcAutoSoftkeyView extends View implements View.OnSystemUiVisibility
     }
 
     /**
-     * @param visible ㄴ true 보이기
-     *                ㄴ false 안보이기
+     * @param visible ㄴ true 보이기 ㄴ false 안보이기
      *                <p>
-     *                1: 세로
-     *                2: 가로
+     *                1: 세로 2: 가로
      */
     void setNavVisibility(boolean visible) {
         if (Direction.portrait == direction) {
@@ -128,12 +129,12 @@ public class QcAutoSoftkeyView extends View implements View.OnSystemUiVisibility
 
     private void setVisiable(boolean visible) {
         int newVis = SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            | SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            | SYSTEM_UI_FLAG_LAYOUT_STABLE;
         if (!visible) {
             newVis |= SYSTEM_UI_FLAG_LOW_PROFILE
-                    | SYSTEM_UI_FLAG_FULLSCREEN
-                    | SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+                | SYSTEM_UI_FLAG_FULLSCREEN
+                | SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         }
 
         if (visible) {

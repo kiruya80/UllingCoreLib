@@ -3,9 +3,7 @@ package com.ulling.lib.core.utils;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
 import android.view.Surface;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +11,7 @@ import java.util.List;
 
 
 public class QcCameraUtils {
+
     public static String TAG = "CameraUtils";
     // based on ApiDemos
 
@@ -61,7 +60,6 @@ public class QcCameraUtils {
             QcLog.e("previewS izeList ====== Width : " + size.width + ", Height : " + size.height);
         }
 
-
         List<Size> pictureSizeList = parameters.getSupportedPictureSizes();
         Collections.sort(pictureSizeList, Collections.reverseOrder(new SizeComparator()));
         for (int i = 0; i < pictureSizeList.size(); i++) {
@@ -70,11 +68,11 @@ public class QcCameraUtils {
         }
 
         if (previewSizeList != null && previewSizeList.size() > 0
-                && pictureSizeList != null && pictureSizeList.size() > 0) {
+            && pictureSizeList != null && pictureSizeList.size() > 0) {
             for (Size pictureSize : pictureSizeList) {
                 for (Size previewSize : previewSizeList) {
                     if (pictureSize.height == previewSize.height
-                            && pictureSize.width == previewSize.width) {
+                        && pictureSize.width == previewSize.width) {
                         equalSizeList.add(previewSize);
                     }
                 }
@@ -87,27 +85,28 @@ public class QcCameraUtils {
 
 
     /**
-     *
      * @param displayOrientation
      * @param viewWidth
      * @param viewHeight
      * @param sizePercent
      * @param supportPreviewSize
+     * @return
      * @Date : 2016. 3. 25.
      * @author : KILHO
      * @Method ㄴ 뷰 크기와 비슷한 비율의 프리뷰 사이즈 가져오기
-     * @return
      */
     public static Size getBestDisplayPreviewSize(
-            int displayOrientation,
-            int viewWidth,
-            int viewHeight,
-            int sizePercent,
-            List<Size> supportPreviewSize) {
-        if (supportPreviewSize == null)
+        int displayOrientation,
+        int viewWidth,
+        int viewHeight,
+        int sizePercent,
+        List<Size> supportPreviewSize) {
+        if (supportPreviewSize == null) {
             return null;
-        if (viewWidth == 0 || viewHeight == 0)
+        }
+        if (viewWidth == 0 || viewHeight == 0) {
             return null;
+        }
         if (sizePercent != 0) {
             viewWidth = (viewWidth / 100) * sizePercent;
             viewHeight = (viewHeight / 100) * sizePercent;
@@ -128,7 +127,7 @@ public class QcCameraUtils {
 
         for (Size size : supportPreviewSize) {
             if (Math.abs(size.width - newViewWidth) < minDiff
-                    && Math.abs(size.height - newViewHeight) < minDiff) {
+                && Math.abs(size.height - newViewHeight) < minDiff) {
                 // 화면 해상도와 비슷한 비율의 프리뷰인 경우
                 bestSize = size;
                 break;
@@ -149,23 +148,23 @@ public class QcCameraUtils {
      * @MethodName : getRatioPreviewSize
      * @Date : 2016. 3. 23.
      * @author : KILHO
-     * @Method ㄴ SimpleCameraHost 에서 사용
-     * 프리뷰 사이즈 가져오기
+     * @Method ㄴ SimpleCameraHost 에서 사용 프리뷰 사이즈 가져오기
      * @변경이력
      */
     public static Size getBestRatioPreviewSize(
-            int displayOrientation,
-            int viewWidth,
-            int viewHeight,
-            Camera.Parameters parameters) {
+        int displayOrientation,
+        int viewWidth,
+        int viewHeight,
+        Camera.Parameters parameters) {
         // 뷰 크기와 비슷한 비율의 프리뷰리스트 가져오기
-        ArrayList<Size> ratioPreviewSize = getRatioPreviewSize(displayOrientation, viewWidth, viewHeight,
-                parameters, 0.0d);
+        ArrayList<Size> ratioPreviewSize = getRatioPreviewSize(displayOrientation, viewWidth,
+            viewHeight,
+            parameters, 0.0d);
 
         checkSupportedPictureSizeAtPreviewSize(parameters);
 
-        return getBestDisplayPreviewSize(displayOrientation, viewWidth, viewHeight,100,
-                ratioPreviewSize);
+        return getBestDisplayPreviewSize(displayOrientation, viewWidth, viewHeight, 100,
+            ratioPreviewSize);
     }
 
     /**
@@ -179,10 +178,10 @@ public class QcCameraUtils {
      * @return
      */
     public static Size getBestAspectPreviewSize(int displayOrientation,
-                                                int widthRatio,
-                                                int heightRatio,
-                                                Camera.Parameters parameters,
-                                                double closeEnough) {
+        int widthRatio,
+        int heightRatio,
+        Camera.Parameters parameters,
+        double closeEnough) {
         double targetRatio = (double) widthRatio / heightRatio;
         Size optimalSize = null;
         double minDiff = Double.MAX_VALUE;
@@ -194,7 +193,7 @@ public class QcCameraUtils {
         List<Size> sizes = parameters.getSupportedPreviewSizes();
 
         Collections.sort(sizes,
-                Collections.reverseOrder(new SizeComparator()));
+            Collections.reverseOrder(new SizeComparator()));
 
         android.util.Log.d("CWAC-Camera", "getBestAspectPreviewSize == ");
         for (Size size : sizes) {
@@ -225,15 +224,14 @@ public class QcCameraUtils {
      * @MethodName : getBestAspectPreviewSize
      * @Date : 2016. 3. 23.
      * @author : KILHO
-     * @Method ㄴ 최상 프리뷰 사이즈 가져오기
-     * ㄴ 카메라뷰에 맞는 최상의 프리뷰 비율 사이즈 가져온다
+     * @Method ㄴ 최상 프리뷰 사이즈 가져오기 ㄴ 카메라뷰에 맞는 최상의 프리뷰 비율 사이즈 가져온다
      * @변경이력
      */
     public static ArrayList<Size> getRatioPreviewSize(int displayOrientation,
-                                                      int viewWidth,
-                                                      int viewHeight,
-                                                      Camera.Parameters parameters,
-                                                      double closeEnough) {
+        int viewWidth,
+        int viewHeight,
+        Camera.Parameters parameters,
+        double closeEnough) {
 
         double newViewWidth = (double) viewWidth;
         double newViewHeight = (double) viewHeight;
@@ -245,7 +243,6 @@ public class QcCameraUtils {
         }
 
         double targetRatio = (double) newViewWidth / newViewHeight;
-
 
         ArrayList<Size> supportPreviewSize = new ArrayList<Size>();
 
@@ -281,10 +278,10 @@ public class QcCameraUtils {
      * @변경이력
      */
     public static Size getDisplayPreviewReSize(
-            int displayOrientation,
-            int screenWidth,
-            int screenHeight,
-            Size bestDisplayPreviewSize) {
+        int displayOrientation,
+        int screenWidth,
+        int screenHeight,
+        Size bestDisplayPreviewSize) {
 
         Size newSizeList = bestDisplayPreviewSize;
         int supportPreviewWidth = bestDisplayPreviewSize.width;
@@ -334,16 +331,15 @@ public class QcCameraUtils {
      * <p>
      * http://lsit81.tistory.com/entry/Android-Camera-Picture-Size-%EC%84%A0%ED%83%9D-%EB%B0%A9%EB%B2%95
      * <p>
-     * 그러나 갤럭시 노트에서 확인해 본 결과 촬영 해상도를 1280 * 720으로 설정하고 위 getCameraPreviewSize()통해 얻은 프리뷰 해상도 1280 * 800으로 설정하여 촬영할 경우
-     * 프리뷰 화면과 촬영 화면의 비율이 서로 다르게되어 사용자가 화면에서본 이미지 그대로 영상이 촬영되지 않는 문제가 있었습니다.
-     * getCameraPreviewSize() 알고리즘 상에 문제는 없습니다.
-     * 한 마디로 촬영 해상도인 1280 * 720와 비율이 맞는 프리뷰 해상도가 없다는 것이 문제였습니다.
-     * 갤럭시 노트의 경우에는 촬영 비율이 틀어지면서 촬영은 되었지만 다른 단말에서는 앱이 죽을 수도 있는 문제 입니다.
-     * 제조사에서 지원 해상도 리스트를 getSupportedPictureSize()로 얻었을때 1280 * 720 같은 크기는 제외를 시켜야되는데...그렇게 하고 있지를 않더군요... ㅠㅠ
+     * 그러나 갤럭시 노트에서 확인해 본 결과 촬영 해상도를 1280 * 720으로 설정하고 위 getCameraPreviewSize()통해 얻은 프리뷰 해상도 1280 *
+     * 800으로 설정하여 촬영할 경우 프리뷰 화면과 촬영 화면의 비율이 서로 다르게되어 사용자가 화면에서본 이미지 그대로 영상이 촬영되지 않는 문제가 있었습니다.
+     * getCameraPreviewSize() 알고리즘 상에 문제는 없습니다. 한 마디로 촬영 해상도인 1280 * 720와 비율이 맞는 프리뷰 해상도가 없다는 것이
+     * 문제였습니다. 갤럭시 노트의 경우에는 촬영 비율이 틀어지면서 촬영은 되었지만 다른 단말에서는 앱이 죽을 수도 있는 문제 입니다. 제조사에서 지원 해상도 리스트를
+     * getSupportedPictureSize()로 얻었을때 1280 * 720 같은 크기는 제외를 시켜야되는데...그렇게 하고 있지를 않더군요... ㅠㅠ
      * @변경이력
      */
     public static List<Size> checkSupportedPictureSizeAtPreviewSize(
-            Camera.Parameters parameters) {
+        Camera.Parameters parameters) {
         QcLog.e("checkSupportedPictureSizeAtPreviewSize == ");
 
         List<Size> pictureSizes = parameters.getSupportedPictureSizes();
@@ -366,7 +362,8 @@ public class QcCameraUtils {
 
             isUsablePicture = false;
 
-            for (int indexOfPreview = previewSizes.size() - 1; indexOfPreview >= 0; --indexOfPreview) {
+            for (int indexOfPreview = previewSizes.size() - 1; indexOfPreview >= 0;
+                --indexOfPreview) {
                 previewSize = previewSizes.get(indexOfPreview);
                 previewRatio = (double) previewSize.width / (double) previewSize.height;
 
@@ -390,7 +387,6 @@ public class QcCameraUtils {
         Collections.sort(pictureSizes, Collections.reverseOrder(new SizeComparator()));
         return pictureSizes;
     }
-
 
     /**
      *
@@ -505,6 +501,7 @@ public class QcCameraUtils {
      * @변경이력
      */
     private static class SizeComparator implements Comparator<Size> {
+
         @Override
         public int compare(Size lhs, Size rhs) {
             int left = lhs.width * lhs.height;

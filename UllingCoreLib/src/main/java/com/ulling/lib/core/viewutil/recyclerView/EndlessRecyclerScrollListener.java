@@ -4,13 +4,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
 import com.ulling.lib.core.utils.QcLog;
 
 /**
  * Created by P100651 on 2017-04-27.
  */
 public abstract class EndlessRecyclerScrollListener extends RecyclerView.OnScrollListener {
+
     private RecyclerView.LayoutManager mLayoutManager;
     /**
      * mLayoutManager 에서 가져오는 값들정리
@@ -26,15 +26,11 @@ public abstract class EndlessRecyclerScrollListener extends RecyclerView.OnScrol
      */
 
     /**
-     * Sets the starting page index
-     * 변하지 않는 시작 페이지
-     * 리스너를 리셋하는 경우에도 불변
+     * Sets the starting page index 변하지 않는 시작 페이지 리스너를 리셋하는 경우에도 불변
      */
     private int startingPageIndex = 1;
     /**
-     * The current offset index of data you have loaded
-     * 리스트가 마지막으로 도달하는 경우 다음로딩하는 페이지
-     * 증가함
+     * The current offset index of data you have loaded 리스트가 마지막으로 도달하는 경우 다음로딩하는 페이지 증가함
      */
     private int currentPage = 1;
     // True if we are still waiting for the last set of data to load.
@@ -65,16 +61,14 @@ public abstract class EndlessRecyclerScrollListener extends RecyclerView.OnScrol
 
 
     /**
-     * 필요이유
-     * 1. 초기셋팅문제 (시작페이지를 몇으로 할것인지 로컬인경우 처리가 필요한지등)
-     *
+     * 필요이유 1. 초기셋팅문제 (시작페이지를 몇으로 할것인지 로컬인경우 처리가 필요한지등)
+     * <p>
      * 2. 네트워크 로딩 실패 유무에 따른 처리를 위해서
-     *
+     * <p>
      * 2. 데이터 로딩 실패인경우 처리하기 위해서
-     *
-     *
-     * 리사이클뷰를 가진 프레그먼트(액티비티)에서
-     * 다음 페이지를 가져올때 상태값을 리스너에 저장
+     * <p>
+     * <p>
+     * 리사이클뷰를 가진 프레그먼트(액티비티)에서 다음 페이지를 가져올때 상태값을 리스너에 저장
      */
     public void onStartingPageIndex(int viewStartingPageIndex_) {
         QcLog.e("onStartingPageIndex =====" + viewStartingPageIndex_);
@@ -146,8 +140,9 @@ public abstract class EndlessRecyclerScrollListener extends RecyclerView.OnScrol
     // but first we check if we are waiting for the previous load to finish.
     @Override
     public void onScrolled(RecyclerView view, int dx, int dy) {
-        if (mLayoutManager == null)
+        if (mLayoutManager == null) {
             return;
+        }
         /**
          * 화면에서 아래쪽에 보이는 포지션뷰
          * 0부터 시작
@@ -155,17 +150,23 @@ public abstract class EndlessRecyclerScrollListener extends RecyclerView.OnScrol
         int lastVisibleItemPosition = 0;
         int firstVisibleItemPosition = 0;
         if (mLayoutManager instanceof StaggeredGridLayoutManager) {
-            int[] lastVisibleItemPositions = ((StaggeredGridLayoutManager) mLayoutManager).findLastVisibleItemPositions(null);
-            int[] firstVisibleItemPositions = ((StaggeredGridLayoutManager) mLayoutManager).findFirstVisibleItemPositions(null);
+            int[] lastVisibleItemPositions = ((StaggeredGridLayoutManager) mLayoutManager)
+                .findLastVisibleItemPositions(null);
+            int[] firstVisibleItemPositions = ((StaggeredGridLayoutManager) mLayoutManager)
+                .findFirstVisibleItemPositions(null);
             // get maximum element within the list
             lastVisibleItemPosition = getStaggeredLastVisibleItem(lastVisibleItemPositions);
             firstVisibleItemPosition = getStaggeredFirstVisibleItem(firstVisibleItemPositions);
         } else if (mLayoutManager instanceof GridLayoutManager) {
-            lastVisibleItemPosition = ((GridLayoutManager) mLayoutManager).findLastVisibleItemPosition();
-            firstVisibleItemPosition = ((GridLayoutManager) mLayoutManager).findFirstVisibleItemPosition();
+            lastVisibleItemPosition = ((GridLayoutManager) mLayoutManager)
+                .findLastVisibleItemPosition();
+            firstVisibleItemPosition = ((GridLayoutManager) mLayoutManager)
+                .findFirstVisibleItemPosition();
         } else if (mLayoutManager instanceof LinearLayoutManager) {
-            lastVisibleItemPosition = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
-            firstVisibleItemPosition = ((LinearLayoutManager) mLayoutManager).findFirstVisibleItemPosition();
+            lastVisibleItemPosition = ((LinearLayoutManager) mLayoutManager)
+                .findLastVisibleItemPosition();
+            firstVisibleItemPosition = ((LinearLayoutManager) mLayoutManager)
+                .findFirstVisibleItemPosition();
         } else {
             return;
         }
@@ -197,7 +198,8 @@ public abstract class EndlessRecyclerScrollListener extends RecyclerView.OnScrol
          * 즉, 화면에 보이는 갯수가 적은 경우는 패스한다
          *
          */
-        if (visibleItemCount == totalItemCount && (lastVisibleItemPosition + 1) <= visibleItemCount) {
+        if (visibleItemCount == totalItemCount
+            && (lastVisibleItemPosition + 1) <= visibleItemCount) {
             QcLog.e("총갯수와 화면에 보이는 갯수가 같고, 화면에 보이는 갯수가 화면 마지막 포지션보다 큰경우 Pass =====");
             return;
         }
@@ -257,9 +259,11 @@ public abstract class EndlessRecyclerScrollListener extends RecyclerView.OnScrol
 //        if (hasNextPage && !networkError && !loading
 //                && (totalItemCount - visibleItemCount) <= (lastVisibleItemPosition + visibleThreshold)) {
 
-        if (!loading && (totalItemCount - visibleItemCount) <= (lastVisibleItemPosition + visibleThreshold)) {
-            if (pageSize > 1)
+        if (!loading && (totalItemCount - visibleItemCount) <= (lastVisibleItemPosition
+            + visibleThreshold)) {
+            if (pageSize > 1) {
                 currentPage = (totalItemCount / pageSize);
+            }
             currentPage++;
             loading = true;
             QcLog.e("onLoadMore  마지막, 더보기 호출  == " + currentPage);
@@ -273,7 +277,8 @@ public abstract class EndlessRecyclerScrollListener extends RecyclerView.OnScrol
          *
          * lastVisibleItemPosition =====29 , visibleThreshold= 5 , totalItemCount= 30
          */
-        if (lastVisibleItemPosition > visibleItemCount && lastVisibleItemPosition >= (totalItemCount - 1)) {
+        if (lastVisibleItemPosition > visibleItemCount && lastVisibleItemPosition >= (totalItemCount
+            - 1)) {
             QcLog.e("로딩중이 아닌경우, 마지막일때 == ");
             isEdgetype = EDGE_TYPE_BOTTOM;
             return;
@@ -299,7 +304,6 @@ public abstract class EndlessRecyclerScrollListener extends RecyclerView.OnScrol
     }
 
 
-
     private int getStaggeredLastVisibleItem(int[] lastVisibleItemPositions) {
         int maxSize = 0;
         for (int i = 0; i < lastVisibleItemPositions.length; i++) {
@@ -323,8 +327,6 @@ public abstract class EndlessRecyclerScrollListener extends RecyclerView.OnScrol
         }
         return minSize;
     }
-
-
 
 //    private LinearLayoutManager mLayoutManager;
 //    //    RecyclerView.LayoutManager mLayoutManager;

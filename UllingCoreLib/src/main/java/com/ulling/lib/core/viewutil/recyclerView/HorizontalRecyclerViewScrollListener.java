@@ -4,6 +4,7 @@ package com.ulling.lib.core.viewutil.recyclerView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class HorizontalRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
+
     private static final int OFFSET_RANGE = 50;
     private static final double COVER_FACTOR = 0.7;
 
@@ -17,18 +18,25 @@ public class HorizontalRecyclerViewScrollListener extends RecyclerView.OnScrollL
     @Override
     public void onScrolled(final RecyclerView recyclerView, final int dx, final int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        if (itemBounds == null)
+        if (itemBounds == null) {
             fillItemBounds(recyclerView.getAdapter().getItemCount(), recyclerView);
-        if (itemBounds != null && itemBounds.length > 0)
+        }
+        if (itemBounds != null && itemBounds.length > 0) {
             for (int i = 0; i < itemBounds.length; i++) {
-                if (isInChildItemsRange(recyclerView.computeHorizontalScrollOffset(), itemBounds[i], OFFSET_RANGE))
+                if (isInChildItemsRange(recyclerView.computeHorizontalScrollOffset(), itemBounds[i],
+                    OFFSET_RANGE)) {
                     listener.onItemVisiable(i);
+                }
             }
+        }
     }
 
     private void fillItemBounds(final int placesCount, final RecyclerView recyclerView) {
         itemBounds = new int[placesCount];
-        int childWidth = (recyclerView.computeHorizontalScrollRange() - recyclerView.computeHorizontalScrollExtent()) / placesCount;
+        int childWidth =
+            (recyclerView.computeHorizontalScrollRange() - recyclerView
+                .computeHorizontalScrollExtent())
+                / placesCount;
         for (int i = 0; i < placesCount; i++) {
             itemBounds[i] = (int) (((childWidth * i + childWidth * (i + 1)) / 2) * COVER_FACTOR);
         }
@@ -41,6 +49,7 @@ public class HorizontalRecyclerViewScrollListener extends RecyclerView.OnScrollL
     }
 
     public interface OnItemVisiableListener {
+
         void onItemVisiable(final int position);
     }
 }
