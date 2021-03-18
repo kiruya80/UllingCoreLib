@@ -1,15 +1,8 @@
 package com.ulling.lib.core.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import com.ulling.lib.core.base.QcBaseApplication
+import androidx.fragment.app.Fragment
 import com.ulling.lib.core.utils.QcLog
 import com.ulling.lib.core.utils.QcUtils
 
@@ -25,84 +18,15 @@ import com.ulling.lib.core.utils.QcUtils
  *
  *
  **/
-abstract class QcBaseFragment : QcSimpleFragment(), QcInNeed, QcInOption {
-    val TAG: String = javaClass.simpleName
-    var APP_NAME: String? = null
+abstract class QcSimpleFragment : Fragment() {
 
-    var qCon: Context? = null
-//    var start = false
-
-    var baseActivity: QcBaseActivity? = null
-    var sectionPosition = 0
-    val ARG_SECTION_POSITION = "ARG_SECTION_POSITION"
-
-    /**
-     * 레이아웃 내 설정한 아이디들을 바인딩하는 클래스
-     *
-     *
-     * 프레그먼트와 맞는 뷰데이터바인딩 클래스로 형변환 해야함
-     */
-    protected var rootViewBinding: ViewDataBinding? = null
-
-    protected abstract fun optGetArgument(arguments: Bundle?, savedInstanceState: Bundle?)
-
-    /**
-     * Lifecycle
-     *
-     * onAttach() > onCreateView() > onStart() > onStop() > onResume() > onPause() > onDestroyView() > onDetach()
-     */
-    /**
-     * Lifecycle
-     *
-     * onAttach() > onCreateView() > onStart() > onStop() > onResume() > onPause() > onDestroyView() > onDetach()
-     */
-    /**
-     * Fragment가 생성된 시점에 호출됩니다.
-     * Activity의 onCreate메소드가 아직 완료된 시점이 아니라서 유저 인터페이스와 관련있는 것을 제외한 Fragment에서 사용되는 리소스들이 초기화됩니다.
-     * ui관련 작업은 할 수 없다.
-     * 유저 인터페이스와 관련된 처리는 onActivityCreated 메소드에서 해주어야 합니다.!!
-     *
-     *
-     *
-     *
-     * Fragment가 paused 또는 stop되었다가
-     * 다시 resume되었을 때 유지하고 싶은 Fragment의 컴포넌트들를 여기서 초기화 해주어야 합니다.
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         QcLog.i("onCreate")
 
-        if (activity != null)
-            qCon = activity?.applicationContext
-
-        needInitToOnCreate()
         arguments?.let {
             QcUtils.getArgumentsAll(it)
-            optGetArgument(it, savedInstanceState)
         }
-
-        needResetData()
-    }
-
-
-    /**
-     * Layout을 inflater을하여 View작업을 하는곳이다.
-     *
-     *
-     * onStop / onDestroyView 에서 돌아오는 경우 호출됨
-     *
-     *
-     * Fragment의 유저 인터페이스가 화면에 그려지는 시점에 호출됩니다. (사용자 UI를 처음 그리는 시점에서 호출)
-     * XML 레이아웃을 inflate하여 Fragment를 위한 View를 생성하고 Fragment 레이아웃의 root에 해당되는 View를 Activity에게 리턴해야 합니다.
-     * inflate란 XML 레이아웃에 정의된 뷰나 레이아웃을 읽어서 메모리상의 view 객체를 생성해주는 겁니다.
-     * 여기서 view를 리턴했다면, view가 release될때 onDestroyView()가 호출됩니다.
-     * 유저 인터페이스 없는 Fragment의 경우에는 null을 리턴하면 됩니다.
-     */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        QcLog.i("onCreateView == ")
-        if (rootViewBinding == null)
-            rootViewBinding = DataBindingUtil.inflate<ViewDataBinding>(inflater!!, needGetLayoutId(), container, false)
-        return rootViewBinding?.getRoot()
     }
 
 
@@ -128,13 +52,6 @@ abstract class QcBaseFragment : QcSimpleFragment(), QcInNeed, QcInOption {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         QcLog.e("onActivityCreated == ")
-        //        optGetArgument();
-        if (rootViewBinding != null) {
-            baseActivity = activity as QcBaseActivity?
-            needUIBinding()
-            needUIEventListener()
-            needSubscribeUiFromViewModel()
-        }
     }
 
     /**
@@ -148,6 +65,7 @@ abstract class QcBaseFragment : QcSimpleFragment(), QcInNeed, QcInOption {
      */
     override fun onStart() {
         super.onStart()
+        QcLog.i("onStart == ")
     }
 
     /**
@@ -161,7 +79,7 @@ abstract class QcBaseFragment : QcSimpleFragment(), QcInNeed, QcInOption {
      */
     override fun onResume() {
         super.onResume()
-        QcBaseApplication.CLICK_LAST_RUN_TIME = 0
+        QcLog.i("onResume == ")
     }
 
     /**
@@ -173,6 +91,7 @@ abstract class QcBaseFragment : QcSimpleFragment(), QcInNeed, QcInOption {
      */
     override fun onPause() {
         super.onPause()
+        QcLog.i("onPause == ")
     }
 
     /**
@@ -184,6 +103,7 @@ abstract class QcBaseFragment : QcSimpleFragment(), QcInNeed, QcInOption {
      */
     override fun onStop() {
         super.onStop()
+        QcLog.i("onStop == ")
     }
 
     /**
@@ -192,6 +112,7 @@ abstract class QcBaseFragment : QcSimpleFragment(), QcInNeed, QcInOption {
      */
     override fun onDestroyView() {
         super.onDestroyView()
+        QcLog.i("onDestroyView == ")
     }
 
     /**
@@ -203,8 +124,7 @@ abstract class QcBaseFragment : QcSimpleFragment(), QcInNeed, QcInOption {
      */
     override fun onDestroy() {
         super.onDestroy()
-        needResetData()
-        needSubscribeUiClear()
+        QcLog.i("onDestroy == ")
     }
 
     /**
@@ -216,14 +136,11 @@ abstract class QcBaseFragment : QcSimpleFragment(), QcInNeed, QcInOption {
      */
     override fun onDetach() {
         super.onDetach()
+        QcLog.i("onDetach == ")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == AppCompatActivity.RESULT_OK) {
-            optOnActivityResultOk(requestCode, data)
-        } else {
-            optOnActivityResultCancle()
-        }
+        QcLog.i("onActivityResult == ")
     }
 }

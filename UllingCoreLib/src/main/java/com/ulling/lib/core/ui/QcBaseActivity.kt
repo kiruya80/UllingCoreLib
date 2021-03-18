@@ -5,11 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.ulling.lib.core.base.QcBaseApplication
-import com.ulling.lib.core.utils.QcLog
 
 /**
  *
@@ -24,7 +22,7 @@ import com.ulling.lib.core.utils.QcLog
  * 베이스 액티비티
  *
  **/
-abstract class QcBaseActivity : AppCompatActivity(), QcInNeed, QcInOption {
+abstract class QcBaseActivity : QcSimpleActivity(), QcInNeed, QcInOption {
     val TAG: String = javaClass.simpleName
     var APP_NAME: String? = null
 
@@ -47,7 +45,10 @@ abstract class QcBaseActivity : AppCompatActivity(), QcInNeed, QcInOption {
 
         savedInstanceState?.let { optGetSavedInstanceState(it) }
 
-        intent?.let { optGetIntent(it) }
+        intent?.let {
+//            QcUtils.getIntentAll(it)
+            optGetIntent(it)
+        }
 
         needResetData()
 
@@ -78,21 +79,12 @@ abstract class QcBaseActivity : AppCompatActivity(), QcInNeed, QcInOption {
     }
 
     /**
-     *
-     */
-    override fun onRestart() {
-        super.onRestart()
-        QcLog.i("onRestart == ")
-    }
-
-    /**
      * 액티비티가 사용자에게 표시되기 직전에 호출
      * 액티비티가 전경으로 나오면 onResume()
      * 액티비티가 숨겨지면 onStop()
      */
     override fun onStart() {
         super.onStart()
-        QcLog.i("onStart == ")
         needOnShowToUser()
     }
 
@@ -101,7 +93,6 @@ abstract class QcBaseActivity : AppCompatActivity(), QcInNeed, QcInOption {
      */
     override fun onResume() {
         super.onResume()
-        QcLog.i("onResume == ")
         QcBaseApplication.CLICK_LAST_RUN_TIME = 0
     }
 
@@ -112,7 +103,6 @@ abstract class QcBaseActivity : AppCompatActivity(), QcInNeed, QcInOption {
      */
     override fun onPause() {
         super.onPause()
-        QcLog.i("onPause == ")
     }
 
     /**
@@ -121,7 +111,6 @@ abstract class QcBaseActivity : AppCompatActivity(), QcInNeed, QcInOption {
      */
     override fun onStop() {
         super.onStop()
-        QcLog.i("onStop == ")
     }
 
     /**
@@ -129,7 +118,6 @@ abstract class QcBaseActivity : AppCompatActivity(), QcInNeed, QcInOption {
      */
     override fun onDestroy() {
         super.onDestroy()
-        QcLog.i("onDestroy == ")
         needResetData()
         needSubscribeUiClear()
     }

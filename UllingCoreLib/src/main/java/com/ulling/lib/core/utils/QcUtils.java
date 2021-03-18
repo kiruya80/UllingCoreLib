@@ -11,6 +11,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -28,6 +29,8 @@ import androidx.core.content.ContextCompat;
 import com.ulling.lib.core.base.QcBaseApplication;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 
 public class QcUtils {
 
@@ -485,5 +488,55 @@ public class QcUtils {
         String getTime = sdf.format(date);
 
         return getTime;
+    }
+
+    /**
+     * intent 값 가져오기
+     *
+     * @param intent
+     */
+    public static void getIntentAll(Intent intent) {
+        if (intent == null) {
+            QcLog.e("Intent is null");
+            return;
+        }
+
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            Set<String> keys = bundle.keySet();
+            Iterator<String> it = keys.iterator();
+
+            QcLog.e("    ┌──── ■ Get Intent Extra ■ ────┐\n");
+            QcLog.e("    ┌──────────────────────────────────────────────────────────────────────────────────────────────────────\n");
+
+            while (it.hasNext()) {
+                String key = it.next();
+                QcLog.e("[" + key + "=" + bundle.get(key) + "]");
+            }
+            QcLog.e("    └──────────────────────────────────────────────────────────────────────────────────────────────────────");
+
+        }
+    }
+
+    public static void getArgumentsAll(Bundle bundle) {
+        if (bundle == null) {
+            QcLog.e("bundle is null");
+            return;
+        }
+
+        if (bundle != null) {
+            Set<String> keys = bundle.keySet();
+            Iterator<String> it = keys.iterator();
+
+            QcLog.e("    ┌──── ■ Get Intent Extra ■ ────┐\n");
+            QcLog.e("    ┌──────────────────────────────────────────────────────────────────────────────────────────────────────\n");
+
+            while (it.hasNext()) {
+                String key = it.next();
+                QcLog.e("[" + key + "=" + bundle.get(key) + "]");
+            }
+            QcLog.e("    └──────────────────────────────────────────────────────────────────────────────────────────────────────");
+
+        }
     }
 }
