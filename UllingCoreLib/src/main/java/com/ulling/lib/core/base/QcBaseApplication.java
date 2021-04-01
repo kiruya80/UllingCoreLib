@@ -8,12 +8,14 @@ import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.util.Base64;
+import android.view.View;
 import androidx.core.content.ContextCompat;
 import com.ulling.lib.core.common.QcDefine;
 import com.ulling.lib.core.exception.QcCrashExceptionHandler;
 import com.ulling.lib.core.utils.QcLog;
 import com.ulling.lib.core.utils.QcPreferences;
 import com.ulling.lib.core.utils.QcToast;
+import io.reactivex.subjects.PublishSubject;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -45,6 +47,7 @@ public class QcBaseApplication extends Application {
     private static QcBaseApplication SINGLE_U;
     public static String APP_NAME = "";
     private AppExecutors appExecutors;
+    PublishSubject<View> publishSubject = PublishSubject.create();
 
     /**
      * 중복클릭방지 시간
@@ -59,6 +62,9 @@ public class QcBaseApplication extends Application {
      */
     public static boolean IS_CLICK_ALL = true;
 
+    public PublishSubject<View> getPublishSubject() {
+        return publishSubject;
+    }
 
     public static synchronized QcBaseApplication getInstance() {
         return SINGLE_U;

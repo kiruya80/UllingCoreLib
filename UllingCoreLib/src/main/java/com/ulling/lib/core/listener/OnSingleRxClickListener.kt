@@ -2,8 +2,10 @@ package com.ulling.lib.core.listener
 
 import android.annotation.SuppressLint
 import android.view.View
+import com.ulling.lib.core.base.QcBaseApplication
 import com.ulling.lib.core.utils.QcLog
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.internal.observers.BlockingBaseObserver
 import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
@@ -41,26 +43,41 @@ val position:Int = v.getTag() as Int
 }
 }
  **/
-@SuppressLint("CheckResult")
 abstract class OnSingleRxClickListener : View.OnClickListener {
     private val publishSubject: PublishSubject<View> = PublishSubject.create()
-    private val THRESHOLD_MILLIS: Long = 600L
+    private val THRESHOLD_MILLIS: Long = 500L
 
     abstract fun onClicked(v: View)
 
-    override fun onClick(p0: View?) {
-        if (p0 != null) {
-            QcLog.e("Clicked occurred")
-            publishSubject.onNext(p0)
+    override fun onClick(v: View?) {
+        if (v != null) {
+            publishSubject.onNext(v)
         }
     }
 
     init {
+        QcLog.e("init =============== ")
+        // todo 이렇게 사용하는 경우 뷰 id를 다 다르게 해야한다 중복불가 다른 방법이 있나???
+//        publishSubject = QcBaseApplication.getInstance().getPublishSubject()
+
+//        publishSubject.throttleFirst(THRESHOLD_MILLIS, TimeUnit.MILLISECONDS)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe { v ->
+//                    onClicked(v)
+//                }
+
         publishSubject.throttleFirst(THRESHOLD_MILLIS, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { v ->
-                    onClicked(v)
-                }
+                .subscribe(object : BlockingBaseObserver<View?>() {
+                    override fun onNext(v: View) {
+                        QcLog.i("onNext ===================== ")
+                        onClicked(v)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        QcLog.i("onError =========== $e")
+                    }
+                })
     }
 }
 
