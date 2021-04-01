@@ -71,35 +71,30 @@ abstract class OnSingleRxClickListener : View.OnClickListener {
 //import io.reactivex.subjects.PublishSubject;
 //import java.util.concurrent.TimeUnit;
 //
-//public abstract  class SingleRxClickListener implements View.OnClickListener {
+//public abstract class SingleRxClickListener implements View.OnClickListener {
+//
 //    private static final long THRESHOLD_MILLIS = 2000L;
 //    private final PublishSubject<View> viewPublishSubject = PublishSubject.<View>create();
 //
 //    public SingleRxClickListener() {
 //        viewPublishSubject.throttleFirst(THRESHOLD_MILLIS, TimeUnit.MILLISECONDS)
 //                .observeOn(AndroidSchedulers.mainThread())
-////            .subscribe(new Action1<View>() {
-////                @Override
-////                public void call(View view) {
-////                    onClicked(view);
-////                }
-////            }
 //                .subscribe(new BlockingBaseObserver<View>() {
 //                    @Override
-//                    public void onNext(@NonNull View view) {
+//                    public void onNext(@NonNull View v) {
 //                        QcLog.e("onNext ===================== ");
+//                        onClicked(v);
 //                    }
 //
 //                    @Override
 //                    public void onError(@NonNull Throwable e) {
 //                        QcLog.e("onError =========== ");
 //                    }
-//                } );
+//                });
 //    }
 //
 //    @Override
 //    public void onClick(View v) {
-//        QcLog.e("onClick ===================== ");
 //        viewPublishSubject.onNext(v);
 //    }
 //
