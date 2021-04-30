@@ -7,6 +7,7 @@ package com.ulling.lib.core.common;
 
 import android.Manifest;
 import android.os.Environment;
+import com.ulling.lib.core.BuildConfig;
 import com.ulling.lib.core.base.QcBaseApplication;
 import java.io.File;
 
@@ -15,7 +16,7 @@ public class QcDefine {
     /**
      * 상용/ 테스트용
      */
-    public static final boolean DEBUG_FLAG = true;
+    public static final boolean DEBUG_FLAG = BuildConfig.DEBUG;
 
     //    public final static boolean IS_REAL = true;// true 상용, false 개발
 //    protected static final String URL = (IS_REAL ? REAL_CONN : DEV_CONN);

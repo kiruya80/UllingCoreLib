@@ -3,19 +3,15 @@ package com.ulling.sample.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ulling.lib.core.listener.OnSingleClickListener
+import com.ulling.lib.core.listener.setOnHasTermClickListener
 import com.ulling.lib.core.ui.QcBaseFragment
 import com.ulling.lib.core.utils.QcLog
-import com.ulling.lib.core.utils.QcToast
 import com.ulling.sample.R
-import com.ulling.sample.data.LoginRepository
-import com.ulling.sample.data.LoginResponseParser
-import com.ulling.sample.data.User
 import com.ulling.sample.databinding.MainFragmentBinding
 
-class MainFragment : QcBaseFragment() {
+class MainFragment : QcBaseFragment(), OnSingleClickListener.OnOneClickListener {
     var viewBinding : MainFragmentBinding ?= null
 //    companion object {
 //        fun newInstance() = MainFragment()
@@ -50,8 +46,8 @@ class MainFragment : QcBaseFragment() {
                 QcLog.e("onSingleClick == =")
                 viewModel.login("", "")
             }
-
         })
+        viewBinding?.btn1?.setOnClickListener(this)
 
         viewBinding!!.btn2.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
@@ -99,6 +95,10 @@ class MainFragment : QcBaseFragment() {
     }
 
     override fun optGetIntent(intent: Intent?) {
+    }
+
+    override fun onClick(v: View?) {
+        TODO("Not yet implemented")
     }
 
 }

@@ -9,18 +9,18 @@ import java.util.ArrayList;
  *
  * @author kiruya80@gmail.com
  */
-public class QactivityManager {
+public class QcActivityManager {
 
-    private static QactivityManager activityManager = null;
+    private static QcActivityManager activityManager = null;
     private ArrayList<AppCompatActivity> activityList = null;
 
-    private QactivityManager() {
+    private QcActivityManager() {
         activityList = new ArrayList<AppCompatActivity>();
     }
 
-    public static QactivityManager getInstance() {
-        if (QactivityManager.activityManager == null) {
-            activityManager = new QactivityManager();
+    public static QcActivityManager getInstance() {
+        if (QcActivityManager.activityManager == null) {
+            activityManager = new QcActivityManager();
         }
         return activityManager;
     }

@@ -28,6 +28,10 @@ import java.util.concurrent.TimeUnit
  *  ㄴ 마지막 이벤트 이후
  *
  *
+ *  작업시 RxJava 참고
+ *  https://hyperconnect.github.io/2019/11/18/common-misuse-subject.html
+ *
+ *
  *
  * https://answer-id.com/ko/56003895
  *

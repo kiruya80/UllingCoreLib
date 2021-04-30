@@ -1,0 +1,20 @@
+Coroutine
+
+디벨롭 문서
+https://developer.android.com/kotlin/coroutines?hl=ko
+
+코루틴 공식 가이드 한글 번역 문서
+https://kotlinlang.org/docs/coroutines-basics.html
+https://myungpyo.medium.com/reading-coroutine-official-guide-thoroughly-part-0-20176d431e9d
+
+
+코루틴 설명
+https://thdev.tech/kotlin/2019/04/05/Init-Coroutines/
+코루틴 액티비티,프레그먼트 등등
+https://github.com/taehwandev/CoroutinesUIExtensions
+
+
+
+
+코루틴 실행 순서
+https://eso0609.tistory.com/82

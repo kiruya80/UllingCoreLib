@@ -79,10 +79,10 @@ public class QcBaseApplication extends Application {
      */
     @Override
     public void onCreate() {
-        try {
-            Class.forName("android.os.AsyncTask");
-        } catch (ClassNotFoundException e) {
-        }
+//        try {
+//            Class.forName("android.os.AsyncTask");
+//        } catch (ClassNotFoundException e) {
+//        }
         super.onCreate();
         init();
     }

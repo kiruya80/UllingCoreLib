@@ -3,6 +3,7 @@ package com.ulling.sample.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ulling.lib.core.listener.OnSingleClickListener
 import com.ulling.lib.core.ui.QcBaseActivity
 import com.ulling.lib.core.utils.QcFragmentUtils
 import com.ulling.sample.R

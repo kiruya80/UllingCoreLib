@@ -56,6 +56,9 @@ public class MainActivity extends QcBaseActivity {
                 QcToast.getInstance().show("버튼 1");
             }
         });
+//        viewBinding.btn1.setOnClickListener((OnSingleClickListener) v->
+//                QcToast.getInstance().show("버튼 1");
+//        });
         viewBinding.btn2.setOnClickListener(new OnSingleClickListener() {
             @Override
             public void onSingleClick(View v) {

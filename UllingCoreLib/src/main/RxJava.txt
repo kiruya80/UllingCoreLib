@@ -1,0 +1,35 @@
+Rxjava
+
+https://poiemaweb.com/angular-rxjs-observable
+Cold observable은 유니캐스트하고 Hot observable은 멀티캐스트하다.
+1. Cold observable
+
+옵저버블은 구독(subscribe)되기 전까지 동작하지 않는다고 하였다. 이러한 특성을 갖는 옵저버블을 Cold observable이라 한다.
+RxJS의 옵저버블은 기본적으로 Cold observable이다.
+Cold observable은 구독되기 이전에는 데이터 스트림을 방출(emit)하지 않으며 Cold observable을 옵저버가 구독하면 처음부터 동작하기 시작한다.
+따라서 옵저버는 옵저버블이 방출하는 모든 데이터 스트림을 빠짐없이 처음부터 받을 수 있다.
+
+옵저버블을 구독하는 옵저버는 하나 이상일 수 있는데 Cold observable을 구독하는 모든 옵저버들은 구독하는 시점과 상관없이 Cold observable이 방출하는 모든 데이터를 처음부터 빠짐없이 모두 받을 수 있다.
+이것은 Cold observable을 구독하는 모든 옵저버는 자신만을 위해 독립적으로 실행하는 옵저버블을 갖게 된다고 볼 수 있는데 이러한 특징을 가리켜 유니캐스트(unicast)라 한다.
+
+2. Hot observable
+Hot observable은 옵저버블을 생성하자마자 구독과 상관없이 바로 데이터 스트림을 방출(emit)하기 시작한다.
+따라서 일정 시간이 경과한 시점에 옵저버블을 구독하면 데이터 스트림의 앞부분은 구독할 수 없고 중간 부분부터 구독하게 된다.
+ Hot observable은 구독 시점부터 방출되는 데이터를 받는 것을 기본으로 한다.
+
+RxJS의 옵저버블은 기본적으로 Cold observable이다. Cold observable을 Hot observable로 만들려면 publish, share 오퍼레이터를 사용할 수도 있으나 Subject를 사용하면 편리하다.
+ Subject는 옵저버블이면서 옵저버이다. 따라서 옵저버블을 구독할 수도 있으며 옵저버처럼 next, complete 메소드를 직접 호출할 수 있다.
+이처럼 next 메소드를 호출할 수 있으므로 Subject를 사용하면 데이터를 방출할 수도 있다.
+ 이것은 Cold observable의 유니캐스트한 특성과는 달리 Hot observable을 구독하고 있는 모든 옵저버에게 부수 효과(side-effect)가 있다는 의미이다.
+ 이러한 특징을 가리켜 멀티캐스트(multicast)라 한다.
+
+
+throttleFirst
+ㄴ 최초 이벤트 이후 THRESHOLD_MILLIS동안 다른 이벤트 무시
+
+throttleLast
+ㄴ 마지막 이벤트 이후
+
+
+https://hyperconnect.github.io/2019/11/18/common-misuse-subject.html
+observable

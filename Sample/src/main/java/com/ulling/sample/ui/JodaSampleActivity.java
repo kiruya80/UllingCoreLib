@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.ulling.lib.core.common.QcDefine;
+import com.ulling.lib.core.listener.OnHasTermClickListener;
+import com.ulling.lib.core.listener.OnHasTermClickListenerKt;
 import com.ulling.lib.core.utils.QcJodaTimeUtils;
 import com.ulling.lib.core.utils.QcLog;
 import com.ulling.sample.R;
@@ -49,12 +52,15 @@ public class JodaSampleActivity extends AppCompatActivity {
 
         mContent = (ViewGroup) findViewById(R.id.content);
         Button btnBack = (Button) findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+//        btnBack.setOnClickListener(new OnHasTermClickListenerKt());
+        btnBack.setOnHasTermClickListener();
 
         // 전체 타임존 변경
 //        DateTimeZone.setDefault(DateTimeZone.UTC);

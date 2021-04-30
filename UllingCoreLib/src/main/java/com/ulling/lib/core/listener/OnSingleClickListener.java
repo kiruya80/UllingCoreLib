@@ -19,9 +19,17 @@ import com.ulling.lib.core.base.QcBaseApplication;
  */
 public abstract class OnSingleClickListener implements View.OnClickListener {
 
-    //    private static long MIN_CLICK_INTERVAL = 300;
     private long clickLastRunTime = 0;
     private long interval;
+
+    public interface OnOneClickListener {
+        /**
+         * Called when a view has been clicked.
+         *
+         * @param v The view that was clicked.
+         */
+        void onClick(View v);
+    }
 
     public abstract void onSingleClick(View v);
 
@@ -83,4 +91,27 @@ public abstract class OnSingleClickListener implements View.OnClickListener {
 //
 //        return (false);
 //    }
+
+//    class OnHasTermClickListener(private val click: (view: View) -> Unit) : View.OnClickListener {
+//
+//        override fun onClick(v: View) {
+//            QcLog.e("onClick ============= " + v.tag)
+//            val current = Calendar.getInstance().timeInMillis
+//            val clickTerm = current - App.get().LAST_CLICK_EVENT_TIME
+//            QcLog.e("clickTerm LAST_CLICK_EVENT_TIME ============ " + clickTerm + " ," + App.get().MIDDLE_EVENT_TERM
+//                + " === " + App.get().LAST_CLICK_EVENT_TIME )
+//
+//            if (clickTerm < App.get().MIDDLE_EVENT_TERM) {
+//                return
+//            }
+//
+//            App.get().LAST_CLICK_EVENT_TIME = current
+//            click(v)
+//        }
+//    }
+//
+//    fun View.setOnHasTermClickListener(block: (view: View) -> Unit) {
+//        setOnClickListener(OnHasTermClickListener(block))
+//    }
+
 }
