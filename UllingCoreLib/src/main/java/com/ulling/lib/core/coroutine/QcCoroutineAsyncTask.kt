@@ -5,14 +5,8 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 
-//abstract class QcCoroutineAsyncTask<T1, T2> {
-abstract class QcCoroutineAsyncTask {
-
-
+abstract class QcCoroutineAsyncTask<Params, Result> {
     lateinit var scope: CoroutineScope
-
-    //    lateinit var job: Job
-    lateinit var job2: Job
 
     // Job을 등록할 수 있도록 초기화
     // CoroutineScope의 동작을 제어할 객체
@@ -23,27 +17,25 @@ abstract class QcCoroutineAsyncTask {
     protected abstract fun onPreExecute()
 
     // doInBackground
-//    protected abstract fun doInBackground(arg: T1?): T2?
-    protected abstract fun doInBackground()
+    protected abstract fun doInBackground(params: Params?): Result?
 
     // onPostExecute
-//    protected abstract fun onPostExecute(result: T2?)
-    protected abstract fun onPostExecute()
+    protected abstract fun onPostExecute(result: Result?)
 
-    // Execute
-//    fun execute(arg: T1?) {
+    fun cancel() {
+        job?.cancel()
+    }
+
     fun execute() {
-        QcLog.e("CoroutineAsyncTask execute ====================================== ")
+        execute(null)
+    }
 
-//        test1()
-        test11()
-//        test2()
-//        test3()
-
+    fun execute(params: Params?) {
         runBlocking {
-            QcLog.e("onPreExecute ====================================== ")
             onPreExecute()
         }
+
+        var result: Result? = null
 
         job = Job()
         scope = CoroutineScope(job + Dispatchers.Default)
@@ -51,30 +43,25 @@ abstract class QcCoroutineAsyncTask {
         scope.launch {
 
             try {
-//                Thread.sleep(2000L)
-                QcLog.e("doInBackground ====================================== ")
-                doInBackground()
+                result = doInBackground(params)
             } catch (ex: Exception) {
                 QcLog.e("CoroutineAsyncTask Exception : $ex")
 
                 withContext(job + Dispatchers.Main) {
-                    QcLog.e("onPostExecute ====================================== ")
-                    onPostExecute()
+                    onPostExecute(result)
                 }
                 return@launch
             }
+
             withContext(job + Dispatchers.Main) {
-//                Thread.sleep(2000L)
-                QcLog.e("onPostExecute ====================================== ")
-                onPostExecute()
+                onPostExecute(result)
             }
         }
     }
 
-    fun cancel() {
-        job?.cancel()
-    }
-
+    /**
+     * 이하 샘플 테스트용
+     */
     // coroutine의 스레드를 어떠한 형태로 사용할지 지정할 수 있다.
     val coroutineContext: CoroutineContext
         get() = Dispatchers.Default + job
@@ -140,14 +127,15 @@ abstract class QcCoroutineAsyncTask {
         QcLog.e("End test2 ==========================")
     }
 
+
     fun test3() {
         QcLog.e("test3 ====================================== ")
         runBlocking {
-            job2 = GlobalScope.launch {
+            val job = GlobalScope.launch {
                 delay(500L)
                 QcLog.e("World!")
             }
-            job2.join()
+            job.join()
             QcLog.e("Hello,")
         }
 

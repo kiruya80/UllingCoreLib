@@ -9,7 +9,7 @@ allprojects {
     }
 }
 
-ConstraintLayout
+ConstraintLayout =================
 좌우 전체 잡기
 app:layout_constraintLeft_toLeftOf="parent"
 app:layout_constraintRight_toRightOf="parent"
@@ -21,6 +21,25 @@ app:layout_constraintEnd_toEndOf="parent"
 app:layout_constraintStart_toStartOf="parent"
 중심에서 벗어나는
 app:layout_constraintVertical_bias="0.5"
+
+// 0 좌측 / 1 우측으로
+app:layout_constraintHorizontal_bias="0"
+
+// packed 두개 아이템을 붙이는 경우 사용
+app:layout_constraintHorizontal_chainStyle="packed"
+
+// 텍스트가 레이아웃 밖으로 안나오게
+app:layout_constrainedWidth="true"
+app:layout_constrainedHeight="true"
+
+layout_constraintWidth_min and layout_constraintHeight_min : WRAP_CONTENT처럼 동작하나 최소값을 가짐
+layout_constraintWidth_max and layout_constraintHeight_max : WRAP_CONTENT처럼 동작하나 최대값을 가짐
+layout_constraintWidth_percent and layout_constraintHeight_percent : 0에서 1까지 float 값을 입력하여 비율적으로 길이를 결정
+
+layout_constraintDimensionRatio
+
+
+
 
 
 영역에 따라 텍스트 사이즈 조절
@@ -34,6 +53,7 @@ autofit
     android:autoSizeMinTextSize="12sp"
     android:autoSizeMaxTextSize="100sp"
     android:autoSizeStepGranularity="2sp" />
+
 
 
 
